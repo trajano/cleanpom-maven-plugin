@@ -83,12 +83,12 @@
 											<li ><a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a></li>
 											<li ><a href="xref/index.html" title="Source Xref">Source Xref</a></li>
 											<li ><a href="xref-test/index.html" title="Test Source Xref">Test Source Xref</a></li>
+											<li ><a href="plugin-info.html" title="Plugin Documentation">Plugin Documentation</a></li>
 											<li ><a href="cpd.html" title="CPD Report">CPD Report</a></li>
 											<li ><a href="pmd.html" title="PMD Report">PMD Report</a></li>
 											<li ><a href="surefire-report.html" title="Surefire Report">Surefire Report</a></li>
-											<li ><a href="cobertura/index.html" title="Cobertura Test Coverage">Cobertura Test Coverage</a></li>
 											<li ><a href="findbugs.html" title="FindBugs Report">FindBugs Report</a></li>
-											<li ><a href="plugin-info.html" title="Plugin Documentation">Plugin Documentation</a></li>
+											<li ><a href="jacoco/index.html" title="JaCoCo Test">JaCoCo Test</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -139,7 +139,7 @@
    <tr class="a"> 
     <td><i class="icon-ok"></i></td> 
     <td># of plugins using the latest version available</td> 
-    <td>23</td> 
+    <td>24</td> 
    </tr> 
    <tr class="b"> 
     <td><i class="icon-warning-sign"></i></td> 
@@ -432,17 +432,6 @@
     <tr class="a"> 
      <td><i class="icon-ok"></i></td> 
      <td>org.codehaus.mojo</td> 
-     <td>cobertura-maven-plugin</td> 
-     <td><b>2.6</b></td> 
-     <td></td> 
-     <td></td> 
-     <td></td> 
-     <td></td> 
-     <td><i class="icon-ok"></i></td> 
-    </tr> 
-    <tr class="b"> 
-     <td><i class="icon-ok"></i></td> 
-     <td>org.codehaus.mojo</td> 
      <td>findbugs-maven-plugin</td> 
      <td><b>2.5.3</b></td> 
      <td></td> 
@@ -451,11 +440,22 @@
      <td></td> 
      <td><i class="icon-ok"></i></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="icon-ok"></i></td> 
      <td>org.eclipse.m2e</td> 
      <td>lifecycle-mapping</td> 
      <td><b>1.0.0</b></td> 
+     <td></td> 
+     <td></td> 
+     <td></td> 
+     <td></td> 
+     <td><i class="icon-ok"></i></td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>org.jacoco</td> 
+     <td>jacoco-maven-plugin</td> 
+     <td><b>0.6.4.201312101107</b></td> 
      <td></td> 
      <td></td> 
      <td></td> 
@@ -469,7 +469,7 @@
   <h3 id="Plugins">Plugins</h3> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <thead> 
-    <tr class="a"> 
+    <tr class="b"> 
      <th>Status</th> 
      <th>Group Id</th> 
      <th>Artifact Id</th> 
@@ -497,6 +497,17 @@
    <tbody> 
     <tr class="b"> 
      <td><i class="icon-ok"></i></td> 
+     <td>net.trajano.mojo</td> 
+     <td>cleanpom-maven-plugin</td> 
+     <td><b>1.0.0-SNAPSHOT</b></td> 
+     <td></td> 
+     <td></td> 
+     <td></td> 
+     <td></td> 
+     <td><i class="icon-ok"></i></td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
      <td>org.apache.maven.plugins</td> 
      <td>maven-plugin-plugin</td> 
      <td><b>3.2</b></td> 
@@ -514,28 +525,59 @@
  <h2 id="Plugin_Updates">Plugin Updates</h2> 
  <p></p> 
  <div class="section"> 
+  <h3 id="Plugin_net.trajano.mojo:cleanpom-maven-plugin">Plugin net.trajano.mojo:cleanpom-maven-plugin</h3> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="b"> 
+     <th width="80%">Current Version</th> 
+     <td>1.0.0-SNAPSHOT</td> 
+    </tr> 
+   </thead> 
+   <thead> 
+    <tr class="a"> 
+     <th width="80%">Artifact Id</th> 
+     <td>cleanpom-maven-plugin</td> 
+    </tr> 
+   </thead> 
+   <thead> 
+    <tr class="b"> 
+     <th width="80%">Group Id</th> 
+     <td>net.trajano.mojo</td> 
+    </tr> 
+   </thead> 
+   <thead> 
+    <tr class="a"> 
+     <th width="80%">Status</th> 
+     <td><i class="icon-ok"></i>&nbsp;No newer versions available.</td> 
+    </tr> 
+   </thead> 
+   <tbody> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
   <h3 id="Plugin_org.apache.felix:maven-bundle-plugin">Plugin org.apache.felix:maven-bundle-plugin</h3> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <thead> 
-    <tr class="a"> 
+    <tr class="b"> 
      <th width="80%">Current Version</th> 
      <td>2.4.0</td> 
     </tr> 
    </thead> 
    <thead> 
-    <tr class="b"> 
+    <tr class="a"> 
      <th width="80%">Artifact Id</th> 
      <td>maven-bundle-plugin</td> 
     </tr> 
    </thead> 
    <thead> 
-    <tr class="a"> 
+    <tr class="b"> 
      <th width="80%">Group Id</th> 
      <td>org.apache.felix</td> 
     </tr> 
    </thead> 
    <thead> 
-    <tr class="b"> 
+    <tr class="a"> 
      <th width="80%">Status</th> 
      <td><i class="icon-ok"></i>&nbsp;No newer versions available.</td> 
     </tr> 
@@ -1698,37 +1740,6 @@
   </table> 
  </div> 
  <div class="section"> 
-  <h3 id="Plugin_org.codehaus.mojo:cobertura-maven-plugin">Plugin org.codehaus.mojo:cobertura-maven-plugin</h3> 
-  <table border="0" class="bodyTable table table-striped table-hover"> 
-   <thead> 
-    <tr class="b"> 
-     <th width="80%">Current Version</th> 
-     <td>2.6</td> 
-    </tr> 
-   </thead> 
-   <thead> 
-    <tr class="a"> 
-     <th width="80%">Artifact Id</th> 
-     <td>cobertura-maven-plugin</td> 
-    </tr> 
-   </thead> 
-   <thead> 
-    <tr class="b"> 
-     <th width="80%">Group Id</th> 
-     <td>org.codehaus.mojo</td> 
-    </tr> 
-   </thead> 
-   <thead> 
-    <tr class="a"> 
-     <th width="80%">Status</th> 
-     <td><i class="icon-ok"></i>&nbsp;No newer versions available.</td> 
-    </tr> 
-   </thead> 
-   <tbody> 
-   </tbody> 
-  </table> 
- </div> 
- <div class="section"> 
   <h3 id="Plugin_org.codehaus.mojo:findbugs-maven-plugin">Plugin org.codehaus.mojo:findbugs-maven-plugin</h3> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <thead> 
@@ -1880,6 +1891,37 @@
    </tbody> 
   </table> 
  </div> 
+ <div class="section"> 
+  <h3 id="Plugin_org.jacoco:jacoco-maven-plugin">Plugin org.jacoco:jacoco-maven-plugin</h3> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="b"> 
+     <th width="80%">Current Version</th> 
+     <td>0.6.4.201312101107</td> 
+    </tr> 
+   </thead> 
+   <thead> 
+    <tr class="a"> 
+     <th width="80%">Artifact Id</th> 
+     <td>jacoco-maven-plugin</td> 
+    </tr> 
+   </thead> 
+   <thead> 
+    <tr class="b"> 
+     <th width="80%">Group Id</th> 
+     <td>org.jacoco</td> 
+    </tr> 
+   </thead> 
+   <thead> 
+    <tr class="a"> 
+     <th width="80%">Status</th> 
+     <td><i class="icon-ok"></i>&nbsp;No newer versions available.</td> 
+    </tr> 
+   </thead> 
+   <tbody> 
+   </tbody> 
+  </table> 
+ </div> 
 </div>
 			</div>
 		</div>
@@ -1924,6 +1966,9 @@
 							<a href="xref-test/index.html" title="Test Source Xref">Test Source Xref</a>
 						</li>
 						<li >
+							<a href="plugin-info.html" title="Plugin Documentation">Plugin Documentation</a>
+						</li>
+						<li >
 							<a href="cpd.html" title="CPD Report">CPD Report</a>
 						</li>
 						<li >
@@ -1933,13 +1978,10 @@
 							<a href="surefire-report.html" title="Surefire Report">Surefire Report</a>
 						</li>
 						<li >
-							<a href="cobertura/index.html" title="Cobertura Test Coverage">Cobertura Test Coverage</a>
-						</li>
-						<li >
 							<a href="findbugs.html" title="FindBugs Report">FindBugs Report</a>
 						</li>
 						<li >
-							<a href="plugin-info.html" title="Plugin Documentation">Plugin Documentation</a>
+							<a href="jacoco/index.html" title="JaCoCo Test">JaCoCo Test</a>
 						</li>
 							</ul>
 						</li>

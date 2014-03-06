@@ -83,12 +83,12 @@
 											<li ><a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a></li>
 											<li ><a href="xref/index.html" title="Source Xref">Source Xref</a></li>
 											<li ><a href="xref-test/index.html" title="Test Source Xref">Test Source Xref</a></li>
+											<li ><a href="plugin-info.html" title="Plugin Documentation">Plugin Documentation</a></li>
 											<li ><a href="cpd.html" title="CPD Report">CPD Report</a></li>
 											<li ><a href="pmd.html" title="PMD Report">PMD Report</a></li>
 											<li ><a href="surefire-report.html" title="Surefire Report">Surefire Report</a></li>
-											<li ><a href="cobertura/index.html" title="Cobertura Test Coverage">Cobertura Test Coverage</a></li>
 											<li ><a href="findbugs.html" title="FindBugs Report">FindBugs Report</a></li>
-											<li ><a href="plugin-info.html" title="Plugin Documentation">Plugin Documentation</a></li>
+											<li ><a href="jacoco/index.html" title="JaCoCo Test">JaCoCo Test</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -675,165 +675,73 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.apache.maven.plugin-testing:maven-plugin-testing-harness:jar:3.0.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep14"><i class="icon-info-sign"></i></button> 
+     <li>net.trajano.commons:commons-testing:jar:1.0.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep14"><i class="icon-info-sign"></i></button> 
       <div id="_dep14" style="" class=" collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
-          <th>Maven Plugin Testing Mechanism</th> 
+          <th>Commons Testing</th> 
          </tr> 
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>The Maven Plugin Testing Harness provides mechanisms to manage tests on Mojo.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/plugin-testing/maven-plugin-testing-harness/">http://maven.apache.org/plugin-testing/maven-plugin-testing-harness/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+          <td> <p><b>Description: </b>This provides the common unit testing code.</p> <p><b>URL: </b><a class="externalLink" href="http://site.trajano.net/commons-testing/">http://site.trajano.net/commons-testing/</a></p> <p><b>Project License: </b><a href="LICENSE">Eclipse Public License 1.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
       </div> 
       <ul> 
-       <li>commons-io:commons-io:jar:2.2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep16"><i class="icon-info-sign"></i></button> 
+       <li>junit:junit:jar:4.11 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep16"><i class="icon-info-sign"></i></button> 
         <div id="_dep16" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
-            <th>Commons IO</th> 
+            <th>JUnit</th> 
            </tr> 
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>The Commons IO library contains utility classes, stream implementations, file filters, file comparators, endian transformation classes, and much more.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-       <li>org.codehaus.plexus:plexus-archiver:jar:2.2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep18"><i class="icon-info-sign"></i></button> 
-        <div id="_dep18" style="" class=" collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>Plexus Archiver Component</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>The Plexus project provides a full software stack for creating and executing software projects.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-components/plexus-archiver">http://plexus.codehaus.org/plexus-components/plexus-archiver</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>JUnit is a regression testing framework written by Erich Gamma and Kent Beck. It is used by the developer who implements unit tests in Java.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
         </div> 
         <ul> 
-         <li>org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep20"><i class="icon-info-sign"></i></button> 
-          <div id="_dep20" style="" class=" collapse"> 
+         <li>org.hamcrest:hamcrest-core:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep18"><i class="icon-info-sign"></i></button> 
+          <div id="_dep18" style="" class=" collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
-              <th>Default Plexus Container</th> 
+              <th>Hamcrest Core</th> 
              </tr> 
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>Project License: </b>No license is defined for this project.</p></td> 
-             </tr> 
-            </tbody> 
-           </table> 
-          </div> 
-          <ul> 
-           <li>classworlds:classworlds:jar:1.1-alpha-2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep22"><i class="icon-info-sign"></i></button> 
-            <div id="_dep22" style="" class=" collapse"> 
-             <table border="0" class="bodyTable table table-striped table-hover"> 
-              <thead> 
-               <tr class="a"> 
-                <th>classworlds</th> 
-               </tr> 
-              </thead> 
-              <tbody> 
-               <tr class="b"> 
-                <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="http://classworlds.codehaus.org/">http://classworlds.codehaus.org/</a></p> <p><b>Project License: </b>No license is defined for this project.</p></td> 
-               </tr> 
-              </tbody> 
-             </table> 
-            </div></li> 
-          </ul></li> 
-         <li>org.codehaus.plexus:plexus-io:jar:2.0.4 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep24"><i class="icon-info-sign"></i></button> 
-          <div id="_dep24" style="" class=" collapse"> 
-           <table border="0" class="bodyTable table table-striped table-hover"> 
-            <thead> 
-             <tr class="a"> 
-              <th>Plexus IO Components</th> 
-             </tr> 
-            </thead> 
-            <tbody> 
-             <tr class="b"> 
-              <td> <p><b>Description: </b>The Plexus project provides a full software stack for creating and executing software projects.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-components/plexus-io">http://plexus.codehaus.org/plexus-components/plexus-io</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">https://github.com/hamcrest/JavaHamcrest/hamcrest-core</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
           </div></li> 
         </ul></li> 
       </ul></li> 
-     <li>org.apache.maven:maven-core:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep26"><i class="icon-info-sign"></i></button> 
-      <div id="_dep26" style="" class=" collapse"> 
+     <li>org.apache.maven:maven-compat:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep20"><i class="icon-info-sign"></i></button> 
+      <div id="_dep20" style="" class=" collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
-          <th>Maven Core</th> 
+          <th>Maven Compat</th> 
          </tr> 
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>Maven Core classes.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-core">http://maven.apache.org/ref/3.1.1/maven-core</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+          <td> <p><b>Description: </b>Maven2 classes maintained as compatibility layer.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-compat">http://maven.apache.org/ref/3.1.1/maven-compat</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
       </div> 
       <ul> 
-       <li>org.apache.maven:maven-settings:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep28"><i class="icon-info-sign"></i></button> 
-        <div id="_dep28" style="" class=" collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>Maven Settings</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>Maven Settings model.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-settings">http://maven.apache.org/ref/3.1.1/maven-settings</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-       <li>org.apache.maven:maven-settings-builder:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep30"><i class="icon-info-sign"></i></button> 
-        <div id="_dep30" style="" class=" collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>Maven Settings Builder</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>The effective settings builder, with inheritance and password decryption.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-settings-builder">http://maven.apache.org/ref/3.1.1/maven-settings-builder</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-       <li>org.apache.maven:maven-repository-metadata:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep32"><i class="icon-info-sign"></i></button> 
-        <div id="_dep32" style="" class=" collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>Maven Repository Metadata Model</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>Per-directory local and remote repository metadata.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-repository-metadata">http://maven.apache.org/ref/3.1.1/maven-repository-metadata</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-       <li>org.apache.maven:maven-model-builder:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep34"><i class="icon-info-sign"></i></button> 
-        <div id="_dep34" style="" class=" collapse"> 
+       <li>org.apache.maven:maven-model-builder:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep22"><i class="icon-info-sign"></i></button> 
+        <div id="_dep22" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -847,85 +755,53 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.apache.maven:maven-aether-provider:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep36"><i class="icon-info-sign"></i></button> 
-        <div id="_dep36" style="" class=" collapse"> 
+       <li>org.apache.maven:maven-settings:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep24"><i class="icon-info-sign"></i></button> 
+        <div id="_dep24" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
-            <th>Maven Aether Provider</th> 
+            <th>Maven Settings</th> 
            </tr> 
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>Extensions to Aether for utilizing Maven POM and repository metadata.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-aether-provider">http://maven.apache.org/ref/3.1.1/maven-aether-provider</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div> 
-        <ul> 
-         <li>org.eclipse.aether:aether-spi:jar:0.9.0.M2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep38"><i class="icon-info-sign"></i></button> 
-          <div id="_dep38" style="" class=" collapse"> 
-           <table border="0" class="bodyTable table table-striped table-hover"> 
-            <thead> 
-             <tr class="a"> 
-              <th>Aether SPI</th> 
-             </tr> 
-            </thead> 
-            <tbody> 
-             <tr class="b"> 
-              <td> <p><b>Description: </b>The service provider interface for repository system implementations and repository connectors.</p> <p><b>URL: </b><a class="externalLink" href="http://www.eclipse.org/aether/aether-spi/">http://www.eclipse.org/aether/aether-spi/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License, Version 1.0</a></p></td> 
-             </tr> 
-            </tbody> 
-           </table> 
-          </div></li> 
-        </ul></li> 
-       <li>org.eclipse.aether:aether-impl:jar:0.9.0.M2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep40"><i class="icon-info-sign"></i></button> 
-        <div id="_dep40" style="" class=" collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>Aether Implementation</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>An implementation of the repository system.</p> <p><b>URL: </b><a class="externalLink" href="http://www.eclipse.org/aether/aether-impl/">http://www.eclipse.org/aether/aether-impl/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License, Version 1.0</a></p></td> 
+            <td> <p><b>Description: </b>Maven Settings model.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-settings">http://maven.apache.org/ref/3.1.1/maven-settings</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.eclipse.aether:aether-api:jar:0.9.0.M2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep42"><i class="icon-info-sign"></i></button> 
-        <div id="_dep42" style="" class=" collapse"> 
+       <li>org.codehaus.plexus:plexus-utils:jar:3.0.15 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep26"><i class="icon-info-sign"></i></button> 
+        <div id="_dep26" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
-            <th>Aether API</th> 
+            <th>Plexus Common Utilities</th> 
            </tr> 
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>The application programming interface for the repository system.</p> <p><b>URL: </b><a class="externalLink" href="http://www.eclipse.org/aether/aether-api/">http://www.eclipse.org/aether/aether-api/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License, Version 1.0</a></p></td> 
+            <td> <p><b>Description: </b>A collection of various utility classes to ease working with strings, files, command lines, XML and more.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-utils">http://plexus.codehaus.org/plexus-utils</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.eclipse.aether:aether-util:jar:0.9.0.M2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep44"><i class="icon-info-sign"></i></button> 
-        <div id="_dep44" style="" class=" collapse"> 
+       <li>org.codehaus.plexus:plexus-interpolation:jar:1.19 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep28"><i class="icon-info-sign"></i></button> 
+        <div id="_dep28" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
-            <th>Aether Utilities</th> 
+            <th>Plexus Interpolation API</th> 
            </tr> 
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>A collection of utility classes to ease usage of the repository system.</p> <p><b>URL: </b><a class="externalLink" href="http://www.eclipse.org/aether/aether-util/">http://www.eclipse.org/aether/aether-util/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License, Version 1.0</a></p></td> 
+            <td> <p><b>Description: </b>The Plexus project provides a full software stack for creating and executing software projects.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-components/plexus-interpolation">http://plexus.codehaus.org/plexus-components/plexus-interpolation</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.eclipse.sisu:org.eclipse.sisu.plexus:jar:0.0.0.M5 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep46"><i class="icon-info-sign"></i></button> 
-        <div id="_dep46" style="" class=" collapse"> 
+       <li>org.eclipse.sisu:org.eclipse.sisu.plexus:jar:0.0.0.M5 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep30"><i class="icon-info-sign"></i></button> 
+        <div id="_dep30" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -940,8 +816,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>javax.enterprise:cdi-api:jar:1.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep48"><i class="icon-info-sign"></i></button> 
-          <div id="_dep48" style="" class=" collapse"> 
+         <li>javax.enterprise:cdi-api:jar:1.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep32"><i class="icon-info-sign"></i></button> 
+          <div id="_dep32" style="" class=" collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -956,8 +832,8 @@
            </table> 
           </div> 
           <ul> 
-           <li>javax.annotation:jsr250-api:jar:1.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep50"><i class="icon-info-sign"></i></button> 
-            <div id="_dep50" style="" class=" collapse"> 
+           <li>javax.annotation:jsr250-api:jar:1.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep34"><i class="icon-info-sign"></i></button> 
+            <div id="_dep34" style="" class=" collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -971,8 +847,8 @@
               </tbody> 
              </table> 
             </div></li> 
-           <li>javax.inject:javax.inject:jar:1 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep52"><i class="icon-info-sign"></i></button> 
-            <div id="_dep52" style="" class=" collapse"> 
+           <li>javax.inject:javax.inject:jar:1 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep36"><i class="icon-info-sign"></i></button> 
+            <div id="_dep36" style="" class=" collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -987,8 +863,8 @@
              </table> 
             </div></li> 
           </ul></li> 
-         <li>com.google.guava:guava:jar:10.0.1 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep54"><i class="icon-info-sign"></i></button> 
-          <div id="_dep54" style="" class=" collapse"> 
+         <li>com.google.guava:guava:jar:10.0.1 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep38"><i class="icon-info-sign"></i></button> 
+          <div id="_dep38" style="" class=" collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1003,8 +879,8 @@
            </table> 
           </div> 
           <ul> 
-           <li>com.google.code.findbugs:jsr305:jar:1.3.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep56"><i class="icon-info-sign"></i></button> 
-            <div id="_dep56" style="" class=" collapse"> 
+           <li>com.google.code.findbugs:jsr305:jar:1.3.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep40"><i class="icon-info-sign"></i></button> 
+            <div id="_dep40" style="" class=" collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1019,8 +895,8 @@
              </table> 
             </div></li> 
           </ul></li> 
-         <li>org.sonatype.sisu:sisu-guice:jar:no_aop:3.1.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep58"><i class="icon-info-sign"></i></button> 
-          <div id="_dep58" style="" class=" collapse"> 
+         <li>org.sonatype.sisu:sisu-guice:jar:no_aop:3.1.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep42"><i class="icon-info-sign"></i></button> 
+          <div id="_dep42" style="" class=" collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1035,8 +911,8 @@
            </table> 
           </div> 
           <ul> 
-           <li>aopalliance:aopalliance:jar:1.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep60"><i class="icon-info-sign"></i></button> 
-            <div id="_dep60" style="" class=" collapse"> 
+           <li>aopalliance:aopalliance:jar:1.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep44"><i class="icon-info-sign"></i></button> 
+            <div id="_dep44" style="" class=" collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1051,8 +927,8 @@
              </table> 
             </div></li> 
           </ul></li> 
-         <li>org.eclipse.sisu:org.eclipse.sisu.inject:jar:0.0.0.M5 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep62"><i class="icon-info-sign"></i></button> 
-          <div id="_dep62" style="" class=" collapse"> 
+         <li>org.eclipse.sisu:org.eclipse.sisu.inject:jar:0.0.0.M5 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep46"><i class="icon-info-sign"></i></button> 
+          <div id="_dep46" style="" class=" collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1067,32 +943,156 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>org.codehaus.plexus:plexus-interpolation:jar:1.19 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep64"><i class="icon-info-sign"></i></button> 
-        <div id="_dep64" style="" class=" collapse"> 
+       <li>org.codehaus.plexus:plexus-component-annotations:jar:1.5.5 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep48"><i class="icon-info-sign"></i></button> 
+        <div id="_dep48" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
-            <th>Plexus Interpolation API</th> 
+            <th>Plexus :: Component Annotations</th> 
            </tr> 
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>The Plexus project provides a full software stack for creating and executing software projects.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-components/plexus-interpolation">http://plexus.codehaus.org/plexus-components/plexus-interpolation</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>Plexus Component &quot;Java 5&quot; Annotations, to describe plexus components properties in java sources with standard annotations instead of javadoc annotations.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-containers/plexus-component-annotations/">http://plexus.codehaus.org/plexus-containers/plexus-component-annotations/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.codehaus.plexus:plexus-utils:jar:3.0.15 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep66"><i class="icon-info-sign"></i></button> 
-        <div id="_dep66" style="" class=" collapse"> 
+       <li>org.apache.maven.wagon:wagon-provider-api:jar:2.4 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep50"><i class="icon-info-sign"></i></button> 
+        <div id="_dep50" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
-            <th>Plexus Common Utilities</th> 
+            <th>Apache Maven Wagon :: API</th> 
            </tr> 
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>A collection of various utility classes to ease working with strings, files, command lines, XML and more.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-utils">http://plexus.codehaus.org/plexus-utils</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>Maven Wagon API that defines the contract between different Wagon implementations</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/wagon/wagon-provider-api">http://maven.apache.org/wagon/wagon-provider-api</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+      </ul></li> 
+     <li>org.apache.maven:maven-core:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep52"><i class="icon-info-sign"></i></button> 
+      <div id="_dep52" style="" class=" collapse"> 
+       <table border="0" class="bodyTable table table-striped table-hover"> 
+        <thead> 
+         <tr class="a"> 
+          <th>Maven Core</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr class="b"> 
+          <td> <p><b>Description: </b>Maven Core classes.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-core">http://maven.apache.org/ref/3.1.1/maven-core</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </div> 
+      <ul> 
+       <li>org.apache.maven:maven-settings-builder:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep54"><i class="icon-info-sign"></i></button> 
+        <div id="_dep54" style="" class=" collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>Maven Settings Builder</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>The effective settings builder, with inheritance and password decryption.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-settings-builder">http://maven.apache.org/ref/3.1.1/maven-settings-builder</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+       <li>org.apache.maven:maven-repository-metadata:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep56"><i class="icon-info-sign"></i></button> 
+        <div id="_dep56" style="" class=" collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>Maven Repository Metadata Model</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>Per-directory local and remote repository metadata.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-repository-metadata">http://maven.apache.org/ref/3.1.1/maven-repository-metadata</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+       <li>org.apache.maven:maven-aether-provider:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep58"><i class="icon-info-sign"></i></button> 
+        <div id="_dep58" style="" class=" collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>Maven Aether Provider</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>Extensions to Aether for utilizing Maven POM and repository metadata.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-aether-provider">http://maven.apache.org/ref/3.1.1/maven-aether-provider</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div> 
+        <ul> 
+         <li>org.eclipse.aether:aether-spi:jar:0.9.0.M2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep60"><i class="icon-info-sign"></i></button> 
+          <div id="_dep60" style="" class=" collapse"> 
+           <table border="0" class="bodyTable table table-striped table-hover"> 
+            <thead> 
+             <tr class="a"> 
+              <th>Aether SPI</th> 
+             </tr> 
+            </thead> 
+            <tbody> 
+             <tr class="b"> 
+              <td> <p><b>Description: </b>The service provider interface for repository system implementations and repository connectors.</p> <p><b>URL: </b><a class="externalLink" href="http://www.eclipse.org/aether/aether-spi/">http://www.eclipse.org/aether/aether-spi/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License, Version 1.0</a></p></td> 
+             </tr> 
+            </tbody> 
+           </table> 
+          </div></li> 
+        </ul></li> 
+       <li>org.eclipse.aether:aether-impl:jar:0.9.0.M2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep62"><i class="icon-info-sign"></i></button> 
+        <div id="_dep62" style="" class=" collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>Aether Implementation</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>An implementation of the repository system.</p> <p><b>URL: </b><a class="externalLink" href="http://www.eclipse.org/aether/aether-impl/">http://www.eclipse.org/aether/aether-impl/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License, Version 1.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+       <li>org.eclipse.aether:aether-api:jar:0.9.0.M2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep64"><i class="icon-info-sign"></i></button> 
+        <div id="_dep64" style="" class=" collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>Aether API</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>The application programming interface for the repository system.</p> <p><b>URL: </b><a class="externalLink" href="http://www.eclipse.org/aether/aether-api/">http://www.eclipse.org/aether/aether-api/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License, Version 1.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+       <li>org.eclipse.aether:aether-util:jar:0.9.0.M2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep66"><i class="icon-info-sign"></i></button> 
+        <div id="_dep66" style="" class=" collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>Aether Utilities</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>A collection of utility classes to ease usage of the repository system.</p> <p><b>URL: </b><a class="externalLink" href="http://www.eclipse.org/aether/aether-util/">http://www.eclipse.org/aether/aether-util/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License, Version 1.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1112,23 +1112,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.codehaus.plexus:plexus-component-annotations:jar:1.5.5 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep70"><i class="icon-info-sign"></i></button> 
+       <li>org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep70"><i class="icon-info-sign"></i></button> 
         <div id="_dep70" style="" class=" collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>Plexus :: Component Annotations</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>Plexus Component &quot;Java 5&quot; Annotations, to describe plexus components properties in java sources with standard annotations instead of javadoc annotations.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-containers/plexus-component-annotations/">http://plexus.codehaus.org/plexus-containers/plexus-component-annotations/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-       <li>org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep72"><i class="icon-info-sign"></i></button> 
-        <div id="_dep72" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1143,8 +1128,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>org.sonatype.plexus:plexus-cipher:jar:1.4 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep74"><i class="icon-info-sign"></i></button> 
-          <div id="_dep74" style="" class=" collapse"> 
+         <li>org.sonatype.plexus:plexus-cipher:jar:1.4 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep72"><i class="icon-info-sign"></i></button> 
+          <div id="_dep72" style="" class=" collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1160,81 +1145,96 @@
           </div></li> 
         </ul></li> 
       </ul></li> 
-     <li>org.apache.maven:maven-compat:jar:3.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep76"><i class="icon-info-sign"></i></button> 
-      <div id="_dep76" style="" class=" collapse"> 
+     <li>org.apache.maven.plugin-testing:maven-plugin-testing-harness:jar:3.0.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep74"><i class="icon-info-sign"></i></button> 
+      <div id="_dep74" style="" class=" collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
-          <th>Maven Compat</th> 
+          <th>Maven Plugin Testing Mechanism</th> 
          </tr> 
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>Maven2 classes maintained as compatibility layer.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.1.1/maven-compat">http://maven.apache.org/ref/3.1.1/maven-compat</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+          <td> <p><b>Description: </b>The Maven Plugin Testing Harness provides mechanisms to manage tests on Mojo.</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/plugin-testing/maven-plugin-testing-harness/">http://maven.apache.org/plugin-testing/maven-plugin-testing-harness/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
       </div> 
       <ul> 
-       <li>org.apache.maven.wagon:wagon-provider-api:jar:2.4 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep78"><i class="icon-info-sign"></i></button> 
-        <div id="_dep78" style="" class=" collapse"> 
+       <li>commons-io:commons-io:jar:2.2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep76"><i class="icon-info-sign"></i></button> 
+        <div id="_dep76" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
-            <th>Apache Maven Wagon :: API</th> 
+            <th>Commons IO</th> 
            </tr> 
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>Maven Wagon API that defines the contract between different Wagon implementations</p> <p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/wagon/wagon-provider-api">http://maven.apache.org/wagon/wagon-provider-api</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>The Commons IO library contains utility classes, stream implementations, file filters, file comparators, endian transformation classes, and much more.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
         </div></li> 
-      </ul></li> 
-     <li>net.trajano.commons:commons-testing:jar:1.0.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep80"><i class="icon-info-sign"></i></button> 
-      <div id="_dep80" style="" class=" collapse"> 
-       <table border="0" class="bodyTable table table-striped table-hover"> 
-        <thead> 
-         <tr class="a"> 
-          <th>Commons Testing</th> 
-         </tr> 
-        </thead> 
-        <tbody> 
-         <tr class="b"> 
-          <td> <p><b>Description: </b>This provides the common unit testing code.</p> <p><b>URL: </b><a class="externalLink" href="http://site.trajano.net/commons-testing/">http://site.trajano.net/commons-testing/</a></p> <p><b>Project License: </b><a href="LICENSE">Eclipse Public License 1.0</a></p></td> 
-         </tr> 
-        </tbody> 
-       </table> 
-      </div> 
-      <ul> 
-       <li>junit:junit:jar:4.11 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep82"><i class="icon-info-sign"></i></button> 
-        <div id="_dep82" style="" class=" collapse"> 
+       <li>org.codehaus.plexus:plexus-archiver:jar:2.2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep78"><i class="icon-info-sign"></i></button> 
+        <div id="_dep78" style="" class=" collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
-            <th>JUnit</th> 
+            <th>Plexus Archiver Component</th> 
            </tr> 
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>JUnit is a regression testing framework written by Erich Gamma and Kent Beck. It is used by the developer who implements unit tests in Java.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></p></td> 
+            <td> <p><b>Description: </b>The Plexus project provides a full software stack for creating and executing software projects.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-components/plexus-archiver">http://plexus.codehaus.org/plexus-components/plexus-archiver</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
         </div> 
         <ul> 
-         <li>org.hamcrest:hamcrest-core:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep84"><i class="icon-info-sign"></i></button> 
-          <div id="_dep84" style="" class=" collapse"> 
+         <li>org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep80"><i class="icon-info-sign"></i></button> 
+          <div id="_dep80" style="" class=" collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
-              <th>Hamcrest Core</th> 
+              <th>Default Plexus Container</th> 
              </tr> 
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">https://github.com/hamcrest/JavaHamcrest/hamcrest-core</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td> 
+              <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>Project License: </b>No license is defined for this project.</p></td> 
+             </tr> 
+            </tbody> 
+           </table> 
+          </div> 
+          <ul> 
+           <li>classworlds:classworlds:jar:1.1-alpha-2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep82"><i class="icon-info-sign"></i></button> 
+            <div id="_dep82" style="" class=" collapse"> 
+             <table border="0" class="bodyTable table table-striped table-hover"> 
+              <thead> 
+               <tr class="a"> 
+                <th>classworlds</th> 
+               </tr> 
+              </thead> 
+              <tbody> 
+               <tr class="b"> 
+                <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="http://classworlds.codehaus.org/">http://classworlds.codehaus.org/</a></p> <p><b>Project License: </b>No license is defined for this project.</p></td> 
+               </tr> 
+              </tbody> 
+             </table> 
+            </div></li> 
+          </ul></li> 
+         <li>org.codehaus.plexus:plexus-io:jar:2.0.4 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep84"><i class="icon-info-sign"></i></button> 
+          <div id="_dep84" style="" class=" collapse"> 
+           <table border="0" class="bodyTable table table-striped table-hover"> 
+            <thead> 
+             <tr class="a"> 
+              <th>Plexus IO Components</th> 
+             </tr> 
+            </thead> 
+            <tbody> 
+             <tr class="b"> 
+              <td> <p><b>Description: </b>The Plexus project provides a full software stack for creating and executing software projects.</p> <p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-components/plexus-io">http://plexus.codehaus.org/plexus-components/plexus-io</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1255,8 +1255,8 @@
  <p><b>Apache License, Version 2.0: </b>CDI APIs</p> 
  <p><b>Eclipse Public License 1.0: </b>Commons Testing, Sort POM Maven Plugin</p> 
  <p><b>Eclipse Public License, Version 1.0: </b>Aether API, Aether Implementation, Aether SPI, Aether Utilities, Sisu-Inject-Bean : Aggregate OSGi bundle, Sisu-Inject-Plexus : Aggregate OSGi bundle, org.eclipse.sisu.inject, org.eclipse.sisu.plexus</p> 
- <p><b>Common Public License Version 1.0: </b>JUnit</p> 
  <p><b>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0: </b>JSR-250 Common Annotations for the JavaTM Platform</p> 
+ <p><b>Common Public License Version 1.0: </b>JUnit</p> 
  <p><b>The Apache Software License, Version 2.0: </b>Apache Maven Wagon :: API, Commons IO, FindBugs-jsr305, Guava: Google Core Libraries for Java, Maven Aether Provider, Maven Artifact, Maven Compat, Maven Core, Maven Model, Maven Model Builder, Maven Plugin API, Maven Plugin Java 5 Annotations, Maven Plugin Testing Mechanism, Maven Repository Metadata Model, Maven Settings, Maven Settings Builder, Plexus :: Component Annotations, Plexus Archiver Component, Plexus Classworlds, Plexus Common Utilities, Plexus IO Components, Plexus Interpolation API, Sisu Guice - Core Library, Sisu-Inject-Bean : Aggregate OSGi bundle, javax.inject</p> 
 </div>
 			</div>
