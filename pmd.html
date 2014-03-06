@@ -60,17 +60,19 @@
 										<a href="project-info.html" title="Project Information">Project Information</a>
 										<ul class="dropdown-menu">
 											<li ><a href="index.html" title="About">About</a></li>
-											<li ><a href="project-summary.html" title="Project Summary">Project Summary</a></li>
-											<li ><a href="team-list.html" title="Project Team">Project Team</a></li>
-											<li ><a href="dependencies.html" title="Dependencies">Dependencies</a></li>
-											<li ><a href="dependency-management.html" title="Dependency Management">Dependency Management</a></li>
-											<li ><a href="plugins.html" title="Project Plugins">Project Plugins</a></li>
 											<li ><a href="plugin-management.html" title="Plugin Management">Plugin Management</a></li>
 											<li ><a href="distribution-management.html" title="Distribution Management">Distribution Management</a></li>
-											<li ><a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a></li>
-											<li ><a href="license.html" title="Project License">Project License</a></li>
+											<li ><a href="dependency-info.html" title="Dependency Information">Dependency Information</a></li>
 											<li ><a href="source-repository.html" title="Source Repository">Source Repository</a></li>
+											<li ><a href="mail-lists.html" title="Mailing Lists">Mailing Lists</a></li>
+											<li ><a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a></li>
 											<li ><a href="integration.html" title="Continuous Integration">Continuous Integration</a></li>
+											<li ><a href="plugins.html" title="Project Plugins">Project Plugins</a></li>
+											<li ><a href="license.html" title="Project License">Project License</a></li>
+											<li ><a href="dependency-management.html" title="Dependency Management">Dependency Management</a></li>
+											<li ><a href="team-list.html" title="Project Team">Project Team</a></li>
+											<li ><a href="project-summary.html" title="Project Summary">Project Summary</a></li>
+											<li ><a href="dependencies.html" title="Dependencies">Dependencies</a></li>
 										</ul>
 									</li>
 									<li class="dropdown-submenu ">
@@ -79,8 +81,8 @@
 											<li ><a href="dependency-updates-report.html" title="Dependency Updates Report">Dependency Updates Report</a></li>
 											<li ><a href="plugin-updates-report.html" title="Plugin Updates Report">Plugin Updates Report</a></li>
 											<li ><a href="checkstyle.html" title="Checkstyle">Checkstyle</a></li>
-											<li ><a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a></li>
 											<li ><a href="apidocs/index.html" title="JavaDocs">JavaDocs</a></li>
+											<li ><a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a></li>
 											<li ><a href="xref/index.html" title="Source Xref">Source Xref</a></li>
 											<li ><a href="xref-test/index.html" title="Test Source Xref">Test Source Xref</a></li>
 											<li ><a href="plugin-info.html" title="Plugin Documentation">Plugin Documentation</a></li>
@@ -118,7 +120,7 @@
 	</div>
 		<div>
 			<ul class="breadcrumb">
-				<li class="projectVersion version-date">Version: 1.0.0</li>
+				<li class="projectVersion version-date">Version: 1.0.1-SNAPSHOT</li>
 				<li class="divider">|</li>
 				<li class="publishDate version-date">Last Published: 2014-03-06</li>
 			</ul>
@@ -137,23 +139,6 @@
 </div> 
 <div class="section"> 
  <h2 id="Files">Files</h2> 
- <div class="section"> 
-  <h3 id="nettrajanomojocleanpomCleanMojo.java">net/trajano/mojo/cleanpom/CleanMojo.java</h3> 
-  <table border="0" class="bodyTable table table-striped table-hover"> 
-   <thead> 
-    <tr class="a"> 
-     <th>Violation</th> 
-     <th>Line</th> 
-    </tr> 
-   </thead> 
-   <tbody> 
-    <tr class="b"> 
-     <td>Avoid using final local variables, turn them into fields</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/CleanMojo.html#43">43</a></td> 
-    </tr> 
-   </tbody> 
-  </table> 
- </div> 
  <div class="section"> 
   <h3 id="nettrajanomojocleanpomHelpMojo.java">net/trajano/mojo/cleanpom/HelpMojo.java</h3> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
@@ -179,14 +164,6 @@
     <tr class="a"> 
      <td>Local variable 'dBuilder' could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#72">72</a></td> 
-    </tr> 
-    <tr class="b"> 
-     <td>Avoid using Literals in Conditional Statements</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#95">95</a></td> 
-    </tr> 
-    <tr class="a"> 
-     <td>Avoid using Literals in Conditional Statements</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#100">100</a></td> 
     </tr> 
     <tr class="b"> 
      <td>Local variable 'doc' could be declared final</td> 
@@ -241,11 +218,11 @@
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#163">163</a></td> 
     </tr> 
     <tr class="a"> 
-     <td>Parameter 'node' is not assigned and could be declared final</td> 
+     <td>Parameter 'elementName' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#169">169</a></td> 
     </tr> 
     <tr class="b"> 
-     <td>Parameter 'elementName' is not assigned and could be declared final</td> 
+     <td>Parameter 'node' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#169">169</a></td> 
     </tr> 
     <tr class="a"> 
@@ -253,55 +230,47 @@
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#172">172</a></td> 
     </tr> 
     <tr class="b"> 
-     <td>Avoid using Literals in Conditional Statements</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#177">177</a></td> 
-    </tr> 
-    <tr class="a"> 
      <td>Parameter 'node' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#184">184</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>Parameter 'elementName' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#184">184</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>Local variable 'result' could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#186">186</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>Local variable 'childNodes' could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#187">187</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>Local variable 'item' could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#190">190</a></td> 
-    </tr> 
-    <tr class="b"> 
-     <td>Parameter 'node' is not assigned and could be declared final</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#199">199</a></td> 
     </tr> 
     <tr class="a"> 
      <td>Parameter 'elementName' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#199">199</a></td> 
     </tr> 
     <tr class="b"> 
-     <td>Local variable 'elementsByTagName' could be declared final</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#202">202</a></td> 
+     <td>Parameter 'node' is not assigned and could be declared final</td> 
+     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#199">199</a></td> 
     </tr> 
     <tr class="a"> 
-     <td>Avoid using Literals in Conditional Statements</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#207">207</a></td> 
+     <td>Local variable 'elementsByTagName' could be declared final</td> 
+     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#202">202</a></td> 
     </tr> 
     <tr class="b"> 
      <td>Parameter 'sb' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#214">214</a></td> 
     </tr> 
     <tr class="a"> 
-     <td>Parameter 'goalPrefix' is not assigned and could be declared final</td> 
+     <td>Parameter 'mojo' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#214">214</a></td> 
     </tr> 
     <tr class="b"> 
-     <td>Parameter 'mojo' is not assigned and could be declared final</td> 
+     <td>Parameter 'goalPrefix' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#214">214</a></td> 
     </tr> 
     <tr class="a"> 
@@ -333,7 +302,7 @@
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#246">246</a></td> 
     </tr> 
     <tr class="b"> 
-     <td>Parameter 'configurationElement' is not assigned and could be declared final</td> 
+     <td>Parameter 'sb' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#254">254</a></td> 
     </tr> 
     <tr class="a"> 
@@ -341,7 +310,7 @@
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#254">254</a></td> 
     </tr> 
     <tr class="b"> 
-     <td>Parameter 'sb' is not assigned and could be declared final</td> 
+     <td>Parameter 'configurationElement' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#254">254</a></td> 
     </tr> 
     <tr class="a"> 
@@ -369,11 +338,11 @@
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#282">282</a></td> 
     </tr> 
     <tr class="a"> 
-     <td>Parameter 'repeat' is not assigned and could be declared final</td> 
+     <td>Parameter 'str' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#298">298</a></td> 
     </tr> 
     <tr class="b"> 
-     <td>Parameter 'str' is not assigned and could be declared final</td> 
+     <td>Parameter 'repeat' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#298">298</a></td> 
     </tr> 
     <tr class="a"> 
@@ -381,11 +350,11 @@
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#300">300</a></td> 
     </tr> 
     <tr class="b"> 
-     <td>Parameter 'indent' is not assigned and could be declared final</td> 
+     <td>Parameter 'sb' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#318">318</a></td> 
     </tr> 
     <tr class="a"> 
-     <td>Parameter 'sb' is not assigned and could be declared final</td> 
+     <td>Parameter 'indent' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#318">318</a></td> 
     </tr> 
     <tr class="b"> 
@@ -397,19 +366,19 @@
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#320">320</a></td> 
     </tr> 
     <tr class="b"> 
+     <td>Parameter 'text' is not assigned and could be declared final</td> 
+     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#336">336</a></td> 
+    </tr> 
+    <tr class="a"> 
+     <td>Parameter 'indentSize' is not assigned and could be declared final</td> 
+     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#336">336</a></td> 
+    </tr> 
+    <tr class="b"> 
      <td>Parameter 'indent' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#336">336</a></td> 
     </tr> 
     <tr class="a"> 
      <td>Parameter 'lineLength' is not assigned and could be declared final</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#336">336</a></td> 
-    </tr> 
-    <tr class="b"> 
-     <td>Parameter 'indentSize' is not assigned and could be declared final</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#336">336</a></td> 
-    </tr> 
-    <tr class="a"> 
-     <td>Parameter 'text' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#336">336</a></td> 
     </tr> 
     <tr class="b"> 
@@ -429,19 +398,19 @@
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#344">344</a></td> 
     </tr> 
     <tr class="b"> 
+     <td>Parameter 'lineLength' is not assigned and could be declared final</td> 
+     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#360">360</a></td> 
+    </tr> 
+    <tr class="a"> 
      <td>Parameter 'indentSize' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#360">360</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>Parameter 'line' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#360">360</a></td> 
     </tr> 
-    <tr class="b"> 
-     <td>Parameter 'lines' is not assigned and could be declared final</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#360">360</a></td> 
-    </tr> 
     <tr class="a"> 
-     <td>Parameter 'lineLength' is not assigned and could be declared final</td> 
+     <td>Parameter 'lines' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#360">360</a></td> 
     </tr> 
     <tr class="b"> 
@@ -461,28 +430,12 @@
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#367">367</a></td> 
     </tr> 
     <tr class="b"> 
-     <td>Avoid using Literals in Conditional Statements</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#369">369</a></td> 
-    </tr> 
-    <tr class="a"> 
      <td>Local variable 'c' could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#385">385</a></td> 
     </tr> 
-    <tr class="b"> 
-     <td>Avoid using Literals in Conditional Statements</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#386">386</a></td> 
-    </tr> 
     <tr class="a"> 
-     <td>Avoid using Literals in Conditional Statements</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#390">390</a></td> 
-    </tr> 
-    <tr class="b"> 
      <td>Parameter 'line' is not assigned and could be declared final</td> 
      <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#409">409</a></td> 
-    </tr> 
-    <tr class="a"> 
-     <td>Avoid using Literals in Conditional Statements</td> 
-     <td><a href="./xref/net/trajano/mojo/cleanpom/HelpMojo.html#418">418</a></td> 
     </tr> 
     <tr class="b"> 
      <td>Parameter 'expression' is not assigned and could be declared final</td> 
@@ -523,10 +476,10 @@
 							<a href="checkstyle.html" title="Checkstyle">Checkstyle</a>
 						</li>
 						<li >
-							<a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a>
+							<a href="apidocs/index.html" title="JavaDocs">JavaDocs</a>
 						</li>
 						<li >
-							<a href="apidocs/index.html" title="JavaDocs">JavaDocs</a>
+							<a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a>
 						</li>
 						<li >
 							<a href="xref/index.html" title="Source Xref">Source Xref</a>

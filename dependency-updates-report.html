@@ -60,17 +60,19 @@
 										<a href="project-info.html" title="Project Information">Project Information</a>
 										<ul class="dropdown-menu">
 											<li ><a href="index.html" title="About">About</a></li>
-											<li ><a href="project-summary.html" title="Project Summary">Project Summary</a></li>
-											<li ><a href="team-list.html" title="Project Team">Project Team</a></li>
-											<li ><a href="dependencies.html" title="Dependencies">Dependencies</a></li>
-											<li ><a href="dependency-management.html" title="Dependency Management">Dependency Management</a></li>
-											<li ><a href="plugins.html" title="Project Plugins">Project Plugins</a></li>
 											<li ><a href="plugin-management.html" title="Plugin Management">Plugin Management</a></li>
 											<li ><a href="distribution-management.html" title="Distribution Management">Distribution Management</a></li>
-											<li ><a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a></li>
-											<li ><a href="license.html" title="Project License">Project License</a></li>
+											<li ><a href="dependency-info.html" title="Dependency Information">Dependency Information</a></li>
 											<li ><a href="source-repository.html" title="Source Repository">Source Repository</a></li>
+											<li ><a href="mail-lists.html" title="Mailing Lists">Mailing Lists</a></li>
+											<li ><a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a></li>
 											<li ><a href="integration.html" title="Continuous Integration">Continuous Integration</a></li>
+											<li ><a href="plugins.html" title="Project Plugins">Project Plugins</a></li>
+											<li ><a href="license.html" title="Project License">Project License</a></li>
+											<li ><a href="dependency-management.html" title="Dependency Management">Dependency Management</a></li>
+											<li ><a href="team-list.html" title="Project Team">Project Team</a></li>
+											<li ><a href="project-summary.html" title="Project Summary">Project Summary</a></li>
+											<li ><a href="dependencies.html" title="Dependencies">Dependencies</a></li>
 										</ul>
 									</li>
 									<li class="dropdown-submenu ">
@@ -79,8 +81,8 @@
 											<li class="active"><a href="" title="Dependency Updates Report">Dependency Updates Report</a></li>
 											<li ><a href="plugin-updates-report.html" title="Plugin Updates Report">Plugin Updates Report</a></li>
 											<li ><a href="checkstyle.html" title="Checkstyle">Checkstyle</a></li>
-											<li ><a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a></li>
 											<li ><a href="apidocs/index.html" title="JavaDocs">JavaDocs</a></li>
+											<li ><a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a></li>
 											<li ><a href="xref/index.html" title="Source Xref">Source Xref</a></li>
 											<li ><a href="xref-test/index.html" title="Test Source Xref">Test Source Xref</a></li>
 											<li ><a href="plugin-info.html" title="Plugin Documentation">Plugin Documentation</a></li>
@@ -118,7 +120,7 @@
 	</div>
 		<div>
 			<ul class="breadcrumb">
-				<li class="projectVersion version-date">Version: 1.0.0</li>
+				<li class="projectVersion version-date">Version: 1.0.1-SNAPSHOT</li>
 				<li class="divider">|</li>
 				<li class="publishDate version-date">Last Published: 2014-03-06</li>
 			</ul>
@@ -139,7 +141,7 @@
    <tr class="a"> 
     <td><i class="icon-ok"></i></td> 
     <td># of dependencies using the latest version available</td> 
-    <td>3</td> 
+    <td>2</td> 
    </tr> 
    <tr class="b"> 
     <td><i class="icon-warning-sign"></i></td> 
@@ -149,7 +151,7 @@
    <tr class="a"> 
     <td><i class="icon-warning-sign"></i></td> 
     <td># of dependencies where the next version available is an incremental version update</td> 
-    <td>1</td> 
+    <td>2</td> 
    </tr> 
    <tr class="b"> 
     <td><i class="icon-warning-sign"></i></td> 
@@ -198,7 +200,7 @@
    </thead> 
    <tbody> 
     <tr class="a"> 
-     <td><i class="icon-ok"></i></td> 
+     <td><i class="icon-warning-sign"></i></td> 
      <td>net.trajano</td> 
      <td>coding-standards</td> 
      <td>1.1.0</td> 
@@ -206,7 +208,7 @@
      <td></td> 
      <td>jar</td> 
      <td></td> 
-     <td></td> 
+     <td><b>1.1.1</b></td> 
      <td></td> 
      <td></td> 
     </tr> 
@@ -336,6 +338,12 @@
   <h3 id="net.trajano:coding-standards">net.trajano:coding-standards</h3> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <thead> 
+    <tr class="b"> 
+     <th width="80%">Newer versions</th> 
+     <td><b>1.1.1</b>&nbsp;<i>Next Incremental</i></td> 
+    </tr> 
+   </thead> 
+   <thead> 
     <tr class="a"> 
      <th width="80%">Type</th> 
      <td>jar</td> 
@@ -374,7 +382,7 @@
    <thead> 
     <tr class="a"> 
      <th width="80%">Status</th> 
-     <td><i class="icon-ok"></i>&nbsp;No newer versions available.</td> 
+     <td><i class="icon-warning-sign"></i>&nbsp;There is at least one newer incremental version available. Incremental updates are typically passive.</td> 
     </tr> 
    </thead> 
    <tbody> 
@@ -731,10 +739,10 @@
 							<a href="checkstyle.html" title="Checkstyle">Checkstyle</a>
 						</li>
 						<li >
-							<a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a>
+							<a href="apidocs/index.html" title="JavaDocs">JavaDocs</a>
 						</li>
 						<li >
-							<a href="apidocs/index.html" title="JavaDocs">JavaDocs</a>
+							<a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a>
 						</li>
 						<li >
 							<a href="xref/index.html" title="Source Xref">Source Xref</a>
