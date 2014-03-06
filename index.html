@@ -142,7 +142,21 @@
  <li> <p><tt>groupId</tt> should be before <tt>artifactId</tt>.</p></li> 
  <li> <p><tt>dependencies</tt>, <tt>plugins</tt>, <tt>extensions</tt> should also be ordered by <tt>scope</tt>, <tt>groupId</tt>, and <tt>artifactId</tt>.</p></li> 
 </ul> 
-<p>The <tt>clean</tt> goal will be bound to the <tt>verify</tt> phase of the project and will replace the <tt>pom.xml</tt> file.</p>
+<p>The <tt>clean</tt> goal will be bound to the <tt>verify</tt> phase of the project and will replace the <tt>pom.xml</tt> file. The typical usage is:</p> 
+<div class="source"> 
+ <pre>&lt;plugin&gt;
+    &lt;groupId&gt;net.trajano.mojo&lt;/groupId&gt;
+    &lt;artifactId&gt;cleanpom-maven-plugin&lt;/artifactId&gt;
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;clean&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;
+</pre>
+</div>
 			</div>
 		</div>
 	</div>
