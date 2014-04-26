@@ -36,9 +36,8 @@ public class CleanMojo extends AbstractMojo {
     private File pomFile;
 
     /**
-     * {@inheritDoc}
+     * Performs the cleanup.
      */
-    @Override
     public void execute() throws MojoExecutionException {
         final File tempFile;
         try {

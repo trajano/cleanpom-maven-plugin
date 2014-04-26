@@ -17,6 +17,10 @@
 
 	<xsl:template match="/">
 		<xsl:text>&#xa;</xsl:text>
+		<xsl:if test="comment()">
+			<xsl:apply-templates select="comment()" />
+			<xsl:text>&#xa;</xsl:text>
+		</xsl:if>
 		<xsl:apply-templates select="m:project" />
 	</xsl:template>
 
