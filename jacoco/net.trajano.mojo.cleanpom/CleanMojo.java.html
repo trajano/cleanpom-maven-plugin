@@ -36,38 +36,37 @@ import org.codehaus.plexus.util.FileUtils;
     private File pomFile;
 
     /**
-     * {@inheritDoc}
+     * Performs the cleanup.
      */
-    @Override
     public void execute() throws MojoExecutionException {
         final File tempFile;
         try {
-<span class="fc" id="L45">            tempFile = File.createTempFile(&quot;pom&quot;, &quot;xml&quot;);</span>
-<span class="fc" id="L46">            tempFile.delete();</span>
-<span class="nc" id="L47">        } catch (final IOException e) {</span>
-<span class="nc" id="L48">            throw new MojoExecutionException(e.getMessage(), e);</span>
-<span class="fc" id="L49">        }</span>
+<span class="fc" id="L44">            tempFile = File.createTempFile(&quot;pom&quot;, &quot;xml&quot;);</span>
+<span class="fc" id="L45">            tempFile.delete();</span>
+<span class="nc" id="L46">        } catch (final IOException e) {</span>
+<span class="nc" id="L47">            throw new MojoExecutionException(e.getMessage(), e);</span>
+<span class="fc" id="L48">        }</span>
         try {
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">            if (pomFile == null) {</span>
-<span class="nc" id="L52">                pomFile = new File(&quot;pom.xml&quot;);</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">            if (pomFile == null) {</span>
+<span class="nc" id="L51">                pomFile = new File(&quot;pom.xml&quot;);</span>
             }
-<span class="fc" id="L54">            FileUtils.copyFile(pomFile, tempFile);</span>
-<span class="nc" id="L55">        } catch (final IOException e) {</span>
-<span class="nc" id="L56">            throw new MojoExecutionException(format(R.getString(&quot;copyfail&quot;),</span>
+<span class="fc" id="L53">            FileUtils.copyFile(pomFile, tempFile);</span>
+<span class="nc" id="L54">        } catch (final IOException e) {</span>
+<span class="nc" id="L55">            throw new MojoExecutionException(format(R.getString(&quot;copyfail&quot;),</span>
                     pomFile, tempFile), e);
-<span class="fc" id="L58">        }</span>
+<span class="fc" id="L57">        }</span>
         try {
-<span class="fc" id="L60">            final Transformer t = TransformerFactory.newInstance()</span>
+<span class="fc" id="L59">            final Transformer t = TransformerFactory.newInstance()</span>
                     .newTransformer(
                             new StreamSource(getClass().getResourceAsStream(
                                     &quot;/META-INF/pom-clean.xslt&quot;)));
-<span class="fc" id="L64">            t.transform(new StreamSource(tempFile), new StreamResult(pomFile));</span>
-<span class="fc" id="L65">            getLog().debug(format(R.getString(&quot;donecleaning&quot;), pomFile));</span>
-<span class="fc" id="L66">            tempFile.delete();</span>
-<span class="nc" id="L67">        } catch (final TransformerException e) {</span>
-<span class="nc" id="L68">            throw new MojoExecutionException(format(</span>
+<span class="fc" id="L63">            t.transform(new StreamSource(tempFile), new StreamResult(pomFile));</span>
+<span class="fc" id="L64">            getLog().debug(format(R.getString(&quot;donecleaning&quot;), pomFile));</span>
+<span class="fc" id="L65">            tempFile.delete();</span>
+<span class="fc" id="L66">        } catch (final TransformerException e) {</span>
+<span class="fc" id="L67">            throw new MojoExecutionException(format(</span>
                     R.getString(&quot;transformfail&quot;), tempFile), e);
-<span class="fc" id="L70">        }</span>
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L69">        }</span>
+<span class="fc" id="L70">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.4.201312101107</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>
