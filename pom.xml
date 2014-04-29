@@ -8,14 +8,14 @@
     </parent>
     <groupId>net.trajano.mojo</groupId>
     <artifactId>cleanpom-maven-plugin</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <packaging>maven-plugin</packaging>
     <name>Clean POM Maven Plugin</name>
     <description>Cleans the POM based on XSLT.</description>
     <scm>
         <connection>scm:git:https://github.com/trajano/${project.artifactId}</connection>
         <developerConnection>scm:git:ssh://git@github.com/trajano/${project.artifactId}.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>cleanpom-maven-plugin-1.0.1</tag>
         <url>https://github.com/trajano/${project.artifactId}</url>
     </scm>
     <distributionManagement>
