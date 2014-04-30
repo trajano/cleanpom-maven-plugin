@@ -1,6 +1,7 @@
 package net.trajano.mojo.cleanpom.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -42,6 +43,11 @@ public class CleanMojoTest {
         final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", tempPom);
         assertNotNull(mojo);
         mojo.execute();
+        final FileInputStream fileInputStream = new FileInputStream(tempPom);
+        final String data = IOUtils.toString(fileInputStream);
+        assertTrue(data.contains("<pomFile>target/test-pom.xml</pomFile>"));
+        assertTrue(data.contains("<!-- Configuration comment -->"));
+        fileInputStream.close();
     }
 
     /**
@@ -69,6 +75,31 @@ public class CleanMojoTest {
     }
 
     /**
+     * Makes sure empty configuration blocks are removed.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testPomWithEmptyConfiguration() throws Exception {
+        final File defaultPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
+        final File testPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/no-configuration-pom.xml");
+        final File tempPom = new File("target/test-pom.xml");
+        FileUtils.copyFile(testPom, tempPom);
+        assertTrue(tempPom.exists());
+
+        final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", defaultPom);
+        assertNotNull(mojo);
+        mojo.execute();
+
+        final FileInputStream fileInputStream = new FileInputStream(tempPom);
+        final String string = IOUtils.toString(fileInputStream);
+        assertFalse(string.contains("<configuration"));
+        fileInputStream.close();
+    }
+
+    /**
      * Makes sure license is preserved.
      *
      * @throws Exception
@@ -91,4 +122,31 @@ public class CleanMojoTest {
         fileInputStream.close();
     }
 
+    /**
+     * Makes sure plugin order is preserved.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testPomWithPlugins() throws Exception {
+        final File defaultPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
+        final File testPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/plugins-pom.xml");
+        final File tempPom = new File("target/test-pom.xml");
+        FileUtils.copyFile(testPom, tempPom);
+        assertTrue(tempPom.exists());
+
+        final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", defaultPom);
+        assertNotNull(mojo);
+        mojo.execute();
+
+        final FileInputStream fileInputStream = new FileInputStream(tempPom);
+        final String data = IOUtils.toString(fileInputStream);
+        fileInputStream.close();
+        assertTrue(data.indexOf("cleanpom-maven-plugin") < data
+                .indexOf("jaxws-maven-plugin"));
+        assertTrue(data.indexOf("cleanpom-maven-plugin") < data
+                .indexOf("batik-maven-plugin"));
+    }
 }

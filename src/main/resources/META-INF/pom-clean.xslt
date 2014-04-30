@@ -211,7 +211,7 @@
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="m:plugins">
+	<xsl:template match="m:pluginManagement/m:plugins">
 		<xsl:copy>
 			<xsl:copy-of select="@*" />
 			<xsl:apply-templates select="m:plugin">
@@ -235,6 +235,14 @@
 			<xsl:apply-templates select="m:inherited" />
 			<xsl:apply-templates select="m:configuration" />
 		</xsl:copy>
+	</xsl:template>
+
+	<xsl:template match="m:configuration">
+		<xsl:if test="*">
+			<xsl:copy>
+				<xsl:copy-of select="@*|node()" />
+			</xsl:copy>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="m:build">

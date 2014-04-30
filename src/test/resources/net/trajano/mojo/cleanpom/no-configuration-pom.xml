@@ -11,10 +11,7 @@
 			<plugin>
 				<groupId>net.trajano.mojo</groupId>
 				<artifactId>cleanpom-maven-plugin</artifactId>
-				<configuration>
-					<!-- Configuration comment -->
-					<pomFile>target/test-pom.xml</pomFile>
-				</configuration>
+				<configuration />
 			</plugin>
 		</plugins>
 	</build>
