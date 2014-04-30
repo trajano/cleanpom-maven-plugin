@@ -89,7 +89,7 @@
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="m:organization">
+	<xsl:template match="m:project/m:organization">
 		<xsl:copy>
 			<xsl:copy-of select="@*" />
 			<xsl:apply-templates select="m:name" />

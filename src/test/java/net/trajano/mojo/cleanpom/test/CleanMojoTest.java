@@ -123,6 +123,32 @@ public class CleanMojoTest {
     }
 
     /**
+     * Makes sure organization and developer details are is preserved.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testPomWithOrganization() throws Exception {
+        final File defaultPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
+        final File testPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/organization-pom.xml");
+        final File tempPom = new File("target/test-pom.xml");
+        FileUtils.copyFile(testPom, tempPom);
+        assertTrue(tempPom.exists());
+
+        final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", defaultPom);
+        assertNotNull(mojo);
+        mojo.execute();
+
+        final FileInputStream fileInputStream = new FileInputStream(tempPom);
+        final String data = IOUtils.toString(fileInputStream);
+        fileInputStream.close();
+        assertTrue(data.contains("<organization>Trajano</organization>"));
+        assertTrue(data.contains("<url>http://www.trajano.net/</url>"));
+    }
+
+    /**
      * Makes sure plugin order is preserved.
      *
      * @throws Exception
