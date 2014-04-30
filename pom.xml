@@ -74,7 +74,10 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>2.12</version>
                     <configuration>
+                        <linkXRef>true</linkXRef>
                         <configLocation>config/checkstyle-configuration.xml</configLocation>
+                        <includes>**/*.java,**/*.properties</includes>
+                        <excludes>target/**,src/test/**</excludes>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -153,9 +156,16 @@
                     <artifactId>maven-pmd-plugin</artifactId>
                     <version>3.1</version>
                     <configuration>
+                        <linkXref>true</linkXref>
+                        <sourceEncoding>utf-8</sourceEncoding>
+                        <minimumTokens>100</minimumTokens>
+                        <targetJdk>1.6</targetJdk>
                         <rulesets>
                             <ruleset>/config/pmd-rules.xml</ruleset>
                         </rulesets>
+                        <includes>
+                            <include>**/src/main/**/*.java</include>
+                        </includes>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -193,9 +203,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
                     <version>2.5.3</version>
-                    <configuration>
-                        <excludeFilterFile>config/findbugs-exclude-filter.xml</excludeFilterFile>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -207,10 +214,6 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -220,7 +223,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.2</version>
                 <executions>
                     <execution>
                         <id>default-descriptor</id>
@@ -270,35 +272,12 @@
         <plugins>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <linkXRef>true</linkXRef>
-                    <configLocation>config/checkstyle-configuration.xml</configLocation>
-                    <includes>**/*.java,**/*.properties</includes>
-                    <excludes>target/**,src/test/**</excludes>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <detectJavaApiLink>true</detectJavaApiLink>
-                    <detectLinks>false</detectLinks>
-                    <detectOfflineLinks>false</detectOfflineLinks>
-                    <quiet>true</quiet>
-                    <useStandardDocletOptions>true</useStandardDocletOptions>
-                    <show>private</show>
-                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-                    <docletArtifact>
-                        <groupId>org.umlgraph</groupId>
-                        <artifactId>umlgraph</artifactId>
-                        <version>5.6.6</version>
-                    </docletArtifact>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <configuration>
-                    <linkJavadoc>true</linkJavadoc>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-plugin-plugin</artifactId>
@@ -306,26 +285,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <configuration>
-                    <linkXref>true</linkXref>
-                    <sourceEncoding>utf-8</sourceEncoding>
-                    <minimumTokens>100</minimumTokens>
-                    <targetJdk>1.5</targetJdk>
-                    <rulesets>
-                        <ruleset>/config/pmd-rules.xml</ruleset>
-                    </rulesets>
-                    <excluderoots>
-                        <excluderoot>src/test</excluderoot>
-                        <excluderoot>target</excluderoot>
-                    </excluderoots>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <configuration>
-                    <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-report-plugin</artifactId>
@@ -333,9 +292,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <configuration>
-                    <excludeFilterFile>config/findbugs-exclude-filter.xml</excludeFilterFile>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
