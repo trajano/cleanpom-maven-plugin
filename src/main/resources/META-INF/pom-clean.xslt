@@ -336,4 +336,12 @@
 			<xsl:apply-templates select="m:file" />
 		</xsl:copy>
 	</xsl:template>
+
+	<xsl:template match="m:artifactId|m:groupId|m:id|m:module|m:name|m:url|m:version">
+		<xsl:copy>
+			<xsl:copy-of select="@*" />
+			<xsl:value-of select="normalize-space(.)" />
+		</xsl:copy>
+	</xsl:template>
+
 </xsl:stylesheet>

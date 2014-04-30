@@ -146,6 +146,11 @@ public class CleanMojoTest {
         fileInputStream.close();
         assertTrue(data.contains("<organization>Trajano</organization>"));
         assertTrue(data.contains("<url>http://www.trajano.net/</url>"));
+        assertTrue(data.contains("<module>foo</module>"));
+        assertTrue(data.contains("<module>bar</module>"));
+        assertTrue(data.indexOf("<module>foo</module>") > data
+                .indexOf("<module>bar</module>"));
+        assertTrue(data.contains("<url>http://www.trajano.net/</url>"));
     }
 
     /**

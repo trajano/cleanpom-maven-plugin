@@ -7,7 +7,9 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<organization>
 		<name>Trajano</name>
-		<url>http://www.trajano.net/</url>
+		<url>
+http://www.trajano.net/
+</url>
 	</organization>
 	<developers>
 		<developer>
@@ -22,6 +24,9 @@
 			</roles>
 		</developer>
 	</developers>
+	<modules><module>
+foo</module><module>
+bar</module></modules>
 	<build>
 		<plugins>
 			<plugin>
