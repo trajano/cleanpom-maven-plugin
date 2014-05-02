@@ -74,6 +74,7 @@ public class CleanMojo extends AbstractMojo {
      *
      * @return temporary file
      * @throws MojoExecutionException
+     *             wraps {@link IOException}
      */
     private File buildTempFile() throws MojoExecutionException {
         final File tempFile;
