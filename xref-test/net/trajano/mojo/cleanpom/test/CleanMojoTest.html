@@ -133,16 +133,16 @@
 <a class="jxr_linenumber" name="123" href="#123">123</a>     }
 <a class="jxr_linenumber" name="124" href="#124">124</a> 
 <a class="jxr_linenumber" name="125" href="#125">125</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="126" href="#126">126</a> <em class="jxr_javadoccomment">     * Makes sure plugin order is preserved.</em>
+<a class="jxr_linenumber" name="126" href="#126">126</a> <em class="jxr_javadoccomment">     * Makes sure organization and developer details are is preserved.</em>
 <a class="jxr_linenumber" name="127" href="#127">127</a> <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="128" href="#128">128</a> <em class="jxr_javadoccomment">     * @throws Exception</em>
 <a class="jxr_linenumber" name="129" href="#129">129</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="130" href="#130">130</a>     @Test
-<a class="jxr_linenumber" name="131" href="#131">131</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testPomWithPlugins() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="131" href="#131">131</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testPomWithOrganization() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="132" href="#132">132</a>         <strong class="jxr_keyword">final</strong> File defaultPom = <strong class="jxr_keyword">new</strong> File(
 <a class="jxr_linenumber" name="133" href="#133">133</a>                 <span class="jxr_string">"src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml"</span>);
 <a class="jxr_linenumber" name="134" href="#134">134</a>         <strong class="jxr_keyword">final</strong> File testPom = <strong class="jxr_keyword">new</strong> File(
-<a class="jxr_linenumber" name="135" href="#135">135</a>                 <span class="jxr_string">"src/test/resources/net/trajano/mojo/cleanpom/plugins-pom.xml"</span>);
+<a class="jxr_linenumber" name="135" href="#135">135</a>                 <span class="jxr_string">"src/test/resources/net/trajano/mojo/cleanpom/organization-pom.xml"</span>);
 <a class="jxr_linenumber" name="136" href="#136">136</a>         <strong class="jxr_keyword">final</strong> File tempPom = <strong class="jxr_keyword">new</strong> File(<span class="jxr_string">"target/test-pom.xml"</span>);
 <a class="jxr_linenumber" name="137" href="#137">137</a>         FileUtils.copyFile(testPom, tempPom);
 <a class="jxr_linenumber" name="138" href="#138">138</a>         assertTrue(tempPom.exists());
@@ -154,12 +154,43 @@
 <a class="jxr_linenumber" name="144" href="#144">144</a>         <strong class="jxr_keyword">final</strong> FileInputStream fileInputStream = <strong class="jxr_keyword">new</strong> FileInputStream(tempPom);
 <a class="jxr_linenumber" name="145" href="#145">145</a>         <strong class="jxr_keyword">final</strong> String data = IOUtils.toString(fileInputStream);
 <a class="jxr_linenumber" name="146" href="#146">146</a>         fileInputStream.close();
-<a class="jxr_linenumber" name="147" href="#147">147</a>         assertTrue(data.indexOf(<span class="jxr_string">"cleanpom-maven-plugin"</span>) &lt; data
-<a class="jxr_linenumber" name="148" href="#148">148</a>                 .indexOf(<span class="jxr_string">"jaxws-maven-plugin"</span>));
-<a class="jxr_linenumber" name="149" href="#149">149</a>         assertTrue(data.indexOf(<span class="jxr_string">"cleanpom-maven-plugin"</span>) &lt; data
-<a class="jxr_linenumber" name="150" href="#150">150</a>                 .indexOf(<span class="jxr_string">"batik-maven-plugin"</span>));
-<a class="jxr_linenumber" name="151" href="#151">151</a>     }
-<a class="jxr_linenumber" name="152" href="#152">152</a> }
+<a class="jxr_linenumber" name="147" href="#147">147</a>         assertTrue(data.contains(<span class="jxr_string">"&lt;organization&gt;Trajano&lt;/organization&gt;"</span>));
+<a class="jxr_linenumber" name="148" href="#148">148</a>         assertTrue(data.contains(<span class="jxr_string">"&lt;url&gt;http://www.trajano.net/&lt;/url&gt;"</span>));
+<a class="jxr_linenumber" name="149" href="#149">149</a>         assertTrue(data.contains(<span class="jxr_string">"&lt;module&gt;foo&lt;/module&gt;"</span>));
+<a class="jxr_linenumber" name="150" href="#150">150</a>         assertTrue(data.contains(<span class="jxr_string">"&lt;module&gt;bar&lt;/module&gt;"</span>));
+<a class="jxr_linenumber" name="151" href="#151">151</a>         assertTrue(data.indexOf(<span class="jxr_string">"&lt;module&gt;foo&lt;/module&gt;"</span>) &gt; data
+<a class="jxr_linenumber" name="152" href="#152">152</a>                 .indexOf(<span class="jxr_string">"&lt;module&gt;bar&lt;/module&gt;"</span>));
+<a class="jxr_linenumber" name="153" href="#153">153</a>         assertTrue(data.contains(<span class="jxr_string">"&lt;url&gt;http://www.trajano.net/&lt;/url&gt;"</span>));
+<a class="jxr_linenumber" name="154" href="#154">154</a>     }
+<a class="jxr_linenumber" name="155" href="#155">155</a> 
+<a class="jxr_linenumber" name="156" href="#156">156</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="157" href="#157">157</a> <em class="jxr_javadoccomment">     * Makes sure plugin order is preserved.</em>
+<a class="jxr_linenumber" name="158" href="#158">158</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="159" href="#159">159</a> <em class="jxr_javadoccomment">     * @throws Exception</em>
+<a class="jxr_linenumber" name="160" href="#160">160</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="161" href="#161">161</a>     @Test
+<a class="jxr_linenumber" name="162" href="#162">162</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testPomWithPlugins() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="163" href="#163">163</a>         <strong class="jxr_keyword">final</strong> File defaultPom = <strong class="jxr_keyword">new</strong> File(
+<a class="jxr_linenumber" name="164" href="#164">164</a>                 <span class="jxr_string">"src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml"</span>);
+<a class="jxr_linenumber" name="165" href="#165">165</a>         <strong class="jxr_keyword">final</strong> File testPom = <strong class="jxr_keyword">new</strong> File(
+<a class="jxr_linenumber" name="166" href="#166">166</a>                 <span class="jxr_string">"src/test/resources/net/trajano/mojo/cleanpom/plugins-pom.xml"</span>);
+<a class="jxr_linenumber" name="167" href="#167">167</a>         <strong class="jxr_keyword">final</strong> File tempPom = <strong class="jxr_keyword">new</strong> File(<span class="jxr_string">"target/test-pom.xml"</span>);
+<a class="jxr_linenumber" name="168" href="#168">168</a>         FileUtils.copyFile(testPom, tempPom);
+<a class="jxr_linenumber" name="169" href="#169">169</a>         assertTrue(tempPom.exists());
+<a class="jxr_linenumber" name="170" href="#170">170</a> 
+<a class="jxr_linenumber" name="171" href="#171">171</a>         <strong class="jxr_keyword">final</strong> CleanMojo mojo = (CleanMojo) rule.lookupMojo(<span class="jxr_string">"clean"</span>, defaultPom);
+<a class="jxr_linenumber" name="172" href="#172">172</a>         assertNotNull(mojo);
+<a class="jxr_linenumber" name="173" href="#173">173</a>         mojo.execute();
+<a class="jxr_linenumber" name="174" href="#174">174</a> 
+<a class="jxr_linenumber" name="175" href="#175">175</a>         <strong class="jxr_keyword">final</strong> FileInputStream fileInputStream = <strong class="jxr_keyword">new</strong> FileInputStream(tempPom);
+<a class="jxr_linenumber" name="176" href="#176">176</a>         <strong class="jxr_keyword">final</strong> String data = IOUtils.toString(fileInputStream);
+<a class="jxr_linenumber" name="177" href="#177">177</a>         fileInputStream.close();
+<a class="jxr_linenumber" name="178" href="#178">178</a>         assertTrue(data.indexOf(<span class="jxr_string">"cleanpom-maven-plugin"</span>) &lt; data
+<a class="jxr_linenumber" name="179" href="#179">179</a>                 .indexOf(<span class="jxr_string">"jaxws-maven-plugin"</span>));
+<a class="jxr_linenumber" name="180" href="#180">180</a>         assertTrue(data.indexOf(<span class="jxr_string">"cleanpom-maven-plugin"</span>) &lt; data
+<a class="jxr_linenumber" name="181" href="#181">181</a>                 .indexOf(<span class="jxr_string">"batik-maven-plugin"</span>));
+<a class="jxr_linenumber" name="182" href="#182">182</a>     }
+<a class="jxr_linenumber" name="183" href="#183">183</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>
