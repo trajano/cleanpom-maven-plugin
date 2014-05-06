@@ -9,9 +9,11 @@ import java.io.OutputStream;
 import java.util.ResourceBundle;
 
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -22,6 +24,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.plexus.build.incremental.BuildContext;
 
 /**
@@ -44,29 +47,57 @@ public class CleanMojo extends AbstractMojo {
     /**
      * The POM file to update.
      */
-    @Parameter(defaultValue = "${basedir}/pom.xml", required = false)
+    @Parameter(defaultValue = "${basedir}/pom.xml", property = "cleanpom.pomFile", required = false)
     private File pomFile;
 
     /**
-     * Transformer.
+     * List of XSLT files as a comma separated value. Only one of xsltFiles or
+     * xsltFileList is allowed.
      */
-    private final Transformer transformer;
+    @Parameter(defaultValue = "/META-INF/pom-clean.xslt", required = false, property = "cleanpom.xsltFileList")
+    private String xsltFileList;
 
     /**
-     * Initializes the transfomer.
+     * List of XSLT files.
      */
-    public CleanMojo() {
-        try {
+    @Parameter(required = false)
+    private String[] xsltFiles;
+
+    /**
+     * Builds the handler chain.
+     *
+     * @param tf
+     *            SAX transformer factory
+     * @param outputStream
+     *            output stream
+     * @return handler chain.
+     * @throws IOException
+     *             I/O error when reading the XSLT file.
+     * @throws TransformerException
+     *             problem building the templates.
+     */
+    private TransformerHandler buildHandlerChain(
+            final SAXTransformerFactory tf, final OutputStream outputStream)
+                    throws IOException, TransformerException {
+        TransformerHandler handler = null;
+        TransformerHandler lastHandler = null;
+
+        for (final String xsltFile : xsltFiles) {
             final InputStream xsltStream = getClass().getResourceAsStream(
-                    "/META-INF/pom-clean.xslt");
-            transformer = TransformerFactory.newInstance().newTransformer(
-                    new StreamSource(xsltStream));
+                    xsltFile);
+            final TransformerHandler currentHandler = tf
+                    .newTransformerHandler(new StreamSource(xsltStream));
             xsltStream.close();
-        } catch (final TransformerConfigurationException e) {
-            throw new IllegalStateException(e);
-        } catch (final IOException e) {
-            throw new IllegalStateException(e);
+            if (lastHandler != null) {
+                lastHandler.setResult(new SAXResult(currentHandler));
+                lastHandler = currentHandler;
+            } else {
+                lastHandler = currentHandler;
+                handler = currentHandler;
+            }
         }
+        lastHandler.setResult(new StreamResult(outputStream));
+        return handler;
     }
 
     /**
@@ -121,10 +152,23 @@ public class CleanMojo extends AbstractMojo {
     private void transform(final File sourceFile, final File targetFile)
             throws MojoExecutionException {
         try {
+            final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory
+                    .newInstance();
+
+            if (xsltFiles == null) {
+                if (xsltFileList != null) {
+                    xsltFiles = StringUtils.split(xsltFileList, ",");
+                } else {
+                    xsltFiles = new String[] { "/META-INF/pom-clean.xslt" };
+                }
+            }
             final OutputStream outputStream = buildContext
                     .newFileOutputStream(targetFile);
-            transformer.transform(new StreamSource(sourceFile),
-                    new StreamResult(outputStream));
+            final TransformerHandler handler = buildHandlerChain(tf,
+                    outputStream);
+            final Transformer transformer = tf.newTransformer();
+            transformer.transform(new StreamSource(sourceFile), new SAXResult(
+                    handler));
             getLog().debug(format(R.getString("donecleaning"), targetFile));
             sourceFile.delete();
             outputStream.close();

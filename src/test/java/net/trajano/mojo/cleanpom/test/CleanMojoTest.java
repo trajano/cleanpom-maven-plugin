@@ -180,4 +180,58 @@ public class CleanMojoTest {
         assertTrue(data.indexOf("cleanpom-maven-plugin") < data
                 .indexOf("batik-maven-plugin"));
     }
+
+    /**
+     * Tests the sync XSLT.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSync() throws Exception {
+        final File defaultPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/sync-pom.xml");
+        final File testPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/old-archetype-pom.xml");
+        final File tempPom = new File("target/test-pom.xml");
+        FileUtils.copyFile(testPom, tempPom);
+        assertTrue(tempPom.exists());
+
+        final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", defaultPom);
+        assertNotNull(mojo);
+        mojo.execute();
+
+        final FileInputStream fileInputStream = new FileInputStream(tempPom);
+        final String data = IOUtils.toString(fileInputStream);
+        fileInputStream.close();
+        assertTrue(data.contains("<jdk.version>1.6</jdk.version>"));
+        assertFalse(data.contains("coding-standards.version"));
+        assertFalse(data.contains("cobertura-maven-plugin"));
+    }
+
+    /**
+     * Tests the sync XSLT with list of xslts.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSyncList() throws Exception {
+        final File defaultPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/synclist-pom.xml");
+        final File testPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/old-archetype-pom.xml");
+        final File tempPom = new File("target/test-pom.xml");
+        FileUtils.copyFile(testPom, tempPom);
+        assertTrue(tempPom.exists());
+
+        final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", defaultPom);
+        assertNotNull(mojo);
+        mojo.execute();
+
+        final FileInputStream fileInputStream = new FileInputStream(tempPom);
+        final String data = IOUtils.toString(fileInputStream);
+        fileInputStream.close();
+        assertTrue(data.contains("<jdk.version>1.6</jdk.version>"));
+        assertFalse(data.contains("coding-standards.version"));
+        assertFalse(data.contains("cobertura-maven-plugin"));
+    }
 }
