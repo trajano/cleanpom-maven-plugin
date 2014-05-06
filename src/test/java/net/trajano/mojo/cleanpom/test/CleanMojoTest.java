@@ -17,6 +17,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.testing.MojoRule;
 import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.StringUtils;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -219,6 +220,35 @@ public class CleanMojoTest {
                 "src/test/resources/net/trajano/mojo/cleanpom/synclist-pom.xml");
         final File testPom = new File(
                 "src/test/resources/net/trajano/mojo/cleanpom/old-archetype-pom.xml");
+        final File tempPom = new File("target/test-pom.xml");
+        FileUtils.copyFile(testPom, tempPom);
+        assertTrue(tempPom.exists());
+
+        final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", defaultPom);
+        assertNotNull(mojo);
+        mojo.execute();
+
+        final FileInputStream fileInputStream = new FileInputStream(tempPom);
+        final String data = IOUtils.toString(fileInputStream);
+        fileInputStream.close();
+        assertTrue(data.contains("<jdk.version>1.6</jdk.version>"));
+        assertEquals(1, StringUtils.countMatches(data,
+                "<jdk.version>1.6</jdk.version>"));
+        assertFalse(data.contains("coding-standards.version"));
+        assertFalse(data.contains("cobertura-maven-plugin"));
+    }
+
+    /**
+     * Tests the sync XSLT with list of xslts and add properties block.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSyncListAddProperties() throws Exception {
+        final File defaultPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/synclist-pom.xml");
+        final File testPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/old-archetype-pom-no-properties.xml");
         final File tempPom = new File("target/test-pom.xml");
         FileUtils.copyFile(testPom, tempPom);
         assertTrue(tempPom.exists());

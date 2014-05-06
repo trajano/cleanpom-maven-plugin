@@ -14,7 +14,7 @@
 				<configuration>
 					<!-- Configuration comment -->
 					<pomFile>target/test-pom.xml</pomFile>
-					<xsltFileList>/META-INF/pom-sync.xslt,/META-INF/pom-clean.xslt</xsltFileList>
+					<xsltFileList>/META-INF/pom-sync.xslt,pom-clean.xslt</xsltFileList>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -84,7 +84,8 @@ public class CleanMojo extends AbstractMojo {
 
         for (final String xsltFile : xsltFiles) {
             final InputStream xsltStream = getClass().getResourceAsStream(
-                    xsltFile);
+                    xsltFile.startsWith("/") ? xsltFile : "/META-INF/"
+                            + xsltFile);
             final TransformerHandler currentHandler = tf
                     .newTransformerHandler(new StreamSource(xsltStream));
             xsltStream.close();

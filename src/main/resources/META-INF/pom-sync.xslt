@@ -26,6 +26,19 @@
 	</xsl:template>
 
 	<!-- Add default properties -->
+	<xsl:template match="m:project">
+		<xsl:copy>
+			<xsl:if test="not(m:properties)">
+				<properties>
+					<jdk.version>1.6</jdk.version>
+					<surefire.version>2.17</surefire.version>
+				</properties>
+			</xsl:if>
+
+			<xsl:apply-templates select="@*|node()" />
+		</xsl:copy>
+	</xsl:template>
+
 	<xsl:template match="m:project/m:properties">
 		<xsl:copy>
 			<xsl:if test="not(m:jdk.version)">
