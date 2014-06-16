@@ -78,7 +78,7 @@ import org.sonatype.plexus.build.incremental.BuildContext;
      */
     private TransformerHandler buildHandlerChain(
             final SAXTransformerFactory tf, final OutputStream outputStream)
-                    throws IOException, TransformerException {
+            throws IOException, TransformerException {
 <span class="fc" id="L82">        TransformerHandler handler = null;</span>
 <span class="fc" id="L83">        TransformerHandler lastHandler = null;</span>
 
@@ -178,7 +178,7 @@ import org.sonatype.plexus.build.incremental.BuildContext;
                     R.getString(&quot;transformfail&quot;), sourceFile), e);
 <span class="nc" id="L179">        } catch (final IOException e) {</span>
 <span class="nc" id="L180">            throw new MojoExecutionException(format(</span>
-                    R.getString(&quot;transformfail&quot;), sourceFile), e);
+                    R.getString(&quot;transformfailio&quot;), sourceFile), e);
 <span class="fc" id="L182">        }</span>
 <span class="fc" id="L183">    }</span>
 }
