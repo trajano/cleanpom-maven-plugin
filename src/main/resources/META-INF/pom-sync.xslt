@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This synchronizes projects based on changes to the archetype project -->
 <xsl:stylesheet version="1.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:m="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xalan="http://xml.apache.org/xslt"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xml="http://www.w3.org/XML/1998/namespace"
 	exclude-result-prefixes="m" extension-element-prefixes="xalan">
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"
 		xalan:indent-amount="4" />
 	<xsl:strip-space elements="*" />
+	<xsl:variable name="maven-checkstyle-plugin.version">2.12.1</xsl:variable>
+	<xsl:variable name="maven-jar-plugin.version">2.4</xsl:variable>
+	<xsl:variable name="maven-javadoc-plugin.version">2.9.1</xsl:variable>
+	<xsl:variable name="maven-jxr-plugin.version">2.4</xsl:variable>
+	<xsl:variable name="maven-pmd-plugin.version">3.1</xsl:variable>
 
 	<!-- default copy -->
 	<xsl:template match="@*|node()">
@@ -28,14 +34,14 @@
 	<!-- Add default properties -->
 	<xsl:template match="m:project">
 		<xsl:copy>
+			<xsl:copy-of select="@*" />
 			<xsl:if test="not(m:properties)">
 				<properties>
 					<jdk.version>1.6</jdk.version>
 					<surefire.version>2.17</surefire.version>
 				</properties>
 			</xsl:if>
-
-			<xsl:apply-templates select="@*|node()" />
+			<xsl:apply-templates />
 		</xsl:copy>
 	</xsl:template>
 
@@ -49,6 +55,23 @@
 			</xsl:if>
 			<xsl:apply-templates select="@*|node()" />
 		</xsl:copy>
+	</xsl:template>
+
+	<xsl:template match="m:distributionManagement/m:site/m:url">
+		<xsl:choose>
+			<xsl:when
+				test="starts-with(normalize-space(.), 'github:http://site.trajano.net/') ">
+				<url>
+					<xsl:value-of select="normalize-space(text())" />
+					<xsl:text>/</xsl:text>
+				</url>
+			</xsl:when>
+			<xsl:otherwise>
+				<url>
+					<xsl:value-of select="text()" />
+				</url>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<!-- Remove coding standards property -->
@@ -88,7 +111,7 @@
 		match="m:project/m:build/m:pluginManagement/m:plugins/m:plugin[m:artifactId = 'maven-checkstyle-plugin']">
 		<plugin>
 			<artifactId>maven-checkstyle-plugin</artifactId>
-			<version>2.12</version>
+			<version><xsl:value-of select="$maven-checkstyle-plugin.version" /></version>
 			<configuration>
 				<linkXRef>true</linkXRef>
 				<configLocation>config/checkstyle-configuration.xml</configLocation>
@@ -102,7 +125,7 @@
 		match="m:project/m:build/m:pluginManagement/m:plugins/m:plugin[m:artifactId = 'maven-jar-plugin']">
 		<plugin>
 			<artifactId>maven-jar-plugin</artifactId>
-			<version>2.4</version>
+			<version><xsl:value-of select="$maven-jar-plugin.version" /></version>
 			<executions>
 				<execution>
 					<id>attach-jar</id>
@@ -119,7 +142,7 @@
 		match="m:project/m:build/m:pluginManagement/m:plugins/m:plugin[m:artifactId = 'maven-javadoc-plugin']">
 		<plugin>
 			<artifactId>maven-javadoc-plugin</artifactId>
-			<version>2.9.1</version>
+			<version><xsl:value-of select="$maven-javadoc-plugin.version" /></version>
 			<executions>
 				<execution>
 					<id>attach-javadoc</id>
@@ -150,7 +173,7 @@
 		match="m:project/m:build/m:pluginManagement/m:plugins/m:plugin[m:artifactId = 'maven-jxr-plugin']">
 		<plugin>
 			<artifactId>maven-jxr-plugin</artifactId>
-			<version>2.4</version>
+			<version><xsl:value-of select="$maven-jxr-plugin.version" /></version>
 			<configuration>
 				<linkJavadoc>true</linkJavadoc>
 			</configuration>
@@ -160,7 +183,7 @@
 		match="m:project/m:build/m:pluginManagement/m:plugins/m:plugin[m:artifactId = 'maven-pmd-plugin']">
 		<plugin>
 			<artifactId>maven-pmd-plugin</artifactId>
-			<version>3.1</version>
+			<version><xsl:value-of select="$maven-pmd-plugin.version" /></version>
 			<configuration>
 				<rulesets>
 					<ruleset>/config/pmd-rules.xml</ruleset>
