@@ -46,9 +46,43 @@ public class CleanMojoTest {
         mojo.execute();
         final FileInputStream fileInputStream = new FileInputStream(tempPom);
         final String data = IOUtils.toString(fileInputStream);
+        assertTrue(
+                "Missing schema location",
+                data.contains("xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\""));
         assertTrue(data.contains("<pomFile>target/test-pom.xml</pomFile>"));
         assertTrue(data.contains("<!-- Configuration comment -->"));
         fileInputStream.close();
+    }
+
+    /**
+     * Tests POMs that have an import dependency.
+     *
+     * @throws Exception
+     * @see <a
+     *      href="https://github.com/trajano/cleanpom-maven-plugin/issues/1">trajano/cleanpom-maven-plugin#1</a>
+     */
+    @Test
+    public void testImportDependency() throws Exception {
+        final File defaultPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/synclist-pom.xml");
+        final File testPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/pom-with-import.xml");
+        final File tempPom = new File("target/test-pom.xml");
+        FileUtils.copyFile(testPom, tempPom);
+        assertTrue(tempPom.exists());
+
+        final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", defaultPom);
+        assertNotNull(mojo);
+        mojo.execute();
+
+        final FileInputStream fileInputStream = new FileInputStream(tempPom);
+        final String data = IOUtils.toString(fileInputStream);
+        fileInputStream.close();
+        assertEquals(2, StringUtils.countMatches(data, "<scope>import</scope>"));
+        assertTrue(data.indexOf("dependencyManagement-test") > data
+                .indexOf("dependencyManagement-import"));
+        assertTrue(data.indexOf("dependency-test") > data
+                .indexOf("dependency-import"));
     }
 
     /**
@@ -56,7 +90,7 @@ public class CleanMojoTest {
      *
      * @throws Exception
      */
-    @Test()
+    @Test
     public void testNonPom() throws Exception {
         final File defaultPom = new File(
                 "src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
@@ -147,6 +181,38 @@ public class CleanMojoTest {
         fileInputStream.close();
         assertTrue(data.contains("<organization>Trajano</organization>"));
         assertTrue(data.contains("<url>http://www.trajano.net/</url>"));
+        assertTrue(data.contains("<module>foo</module>"));
+        assertTrue(data.contains("<module>bar</module>"));
+        assertTrue(data.indexOf("<module>foo</module>") > data
+                .indexOf("<module>bar</module>"));
+        assertTrue(data.contains("<url>http://www.trajano.net/</url>"));
+    }
+
+    /**
+     * Makes sure organization and developer details are is preserved.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testPomWithOrganizationSite() throws Exception {
+        final File defaultPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/sync-pom.xml");
+        final File testPom = new File(
+                "src/test/resources/net/trajano/mojo/cleanpom/site-organization-pom.xml");
+        final File tempPom = new File("target/test-pom.xml");
+        FileUtils.copyFile(testPom, tempPom);
+        assertTrue(tempPom.exists());
+
+        final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", defaultPom);
+        assertNotNull(mojo);
+        mojo.execute();
+
+        final FileInputStream fileInputStream = new FileInputStream(tempPom);
+        final String data = IOUtils.toString(fileInputStream);
+        fileInputStream.close();
+        assertTrue(data.contains("<organization>Trajano</organization>"));
+        assertTrue(data
+                .contains("<url>github:http://site.trajano.net/trajano/</url>"));
         assertTrue(data.contains("<module>foo</module>"));
         assertTrue(data.contains("<module>bar</module>"));
         assertTrue(data.indexOf("<module>foo</module>") > data
@@ -260,6 +326,9 @@ public class CleanMojoTest {
         final FileInputStream fileInputStream = new FileInputStream(tempPom);
         final String data = IOUtils.toString(fileInputStream);
         fileInputStream.close();
+        assertTrue(
+                "Missing schema location",
+                data.contains("xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\""));
         assertTrue(data.contains("<jdk.version>1.6</jdk.version>"));
         assertFalse(data.contains("coding-standards.version"));
         assertFalse(data.contains("cobertura-maven-plugin"));

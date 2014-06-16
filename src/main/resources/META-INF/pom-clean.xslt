@@ -2,6 +2,7 @@
 <!-- This applies the order defined in https://maven.apache.org/developers/conventions/code.html 
 	and http://maven.apache.org/ref/3.2.1/maven-model/maven.html -->
 <xsl:stylesheet version="1.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns:m="http://maven.apache.org/POM/4.0.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xalan="http://xml.apache.org/xslt" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"
@@ -157,6 +158,10 @@
 	<xsl:template match="m:dependencies">
 		<xsl:copy>
 			<xsl:copy-of select="@*" />
+			<xsl:apply-templates select="m:dependency[m:scope='import']">
+				<xsl:sort select="m:groupId" />
+				<xsl:sort select="m:artifactId" />
+			</xsl:apply-templates>
 			<xsl:apply-templates
 				select="m:dependency[not(m:scope) or m:scope='compile' ]">
 				<xsl:sort select="m:groupId" />
@@ -337,7 +342,8 @@
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="m:artifactId|m:groupId|m:id|m:module|m:name|m:url|m:version">
+	<xsl:template
+		match="m:artifactId|m:groupId|m:id|m:module|m:name|m:url|m:version">
 		<xsl:copy>
 			<xsl:copy-of select="@*" />
 			<xsl:value-of select="normalize-space(.)" />
