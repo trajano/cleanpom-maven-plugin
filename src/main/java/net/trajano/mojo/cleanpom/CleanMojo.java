@@ -84,13 +84,15 @@ public class CleanMojo extends AbstractMojo {
 
         for (final String xsltFile : xsltFiles) {
             final InputStream xsltStream = getClass().getResourceAsStream(
-                    xsltFile.startsWith("/") ? xsltFile : "/META-INF/"
+                    xsltFile.charAt(0) == '/' ? xsltFile : "/META-INF/"
                             + xsltFile);
+            // The stream source needs to be defined here.
             final TransformerHandler currentHandler = tf
-                    .newTransformerHandler(new StreamSource(xsltStream));
+                    .newTransformerHandler(new StreamSource(xsltStream)); // NOPMD
             xsltStream.close();
             if (lastHandler != null) {
-                lastHandler.setResult(new SAXResult(currentHandler));
+                // The result object needs to be created here.
+                lastHandler.setResult(new SAXResult(currentHandler)); // NOPMD
                 lastHandler = currentHandler;
             } else {
                 lastHandler = currentHandler;
