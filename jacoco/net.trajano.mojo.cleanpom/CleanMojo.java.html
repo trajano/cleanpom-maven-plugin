@@ -30,7 +30,7 @@ import org.sonatype.plexus.build.incremental.BuildContext;
 /**
  * Cleans the POM.
  */
-@Mojo(name = &quot;clean&quot;, defaultPhase = LifecyclePhase.VERIFY, threadSafe = true)
+@Mojo(name = &quot;clean&quot;, defaultPhase = LifecyclePhase.PREPARE_PACKAGE, threadSafe = true)
 <span class="fc" id="L34">public class CleanMojo extends AbstractMojo {</span>
     /**
      * Resource bundle.
@@ -78,27 +78,29 @@ import org.sonatype.plexus.build.incremental.BuildContext;
      */
     private TransformerHandler buildHandlerChain(
             final SAXTransformerFactory tf, final OutputStream outputStream)
-            throws IOException, TransformerException {
+                    throws IOException, TransformerException {
 <span class="fc" id="L82">        TransformerHandler handler = null;</span>
 <span class="fc" id="L83">        TransformerHandler lastHandler = null;</span>
 
 <span class="fc bfc" id="L85" title="All 2 branches covered.">        for (final String xsltFile : xsltFiles) {</span>
 <span class="fc bfc" id="L86" title="All 2 branches covered.">            final InputStream xsltStream = getClass().getResourceAsStream(</span>
-                    xsltFile.startsWith(&quot;/&quot;) ? xsltFile : &quot;/META-INF/&quot;
+                    xsltFile.charAt(0) == '/' ? xsltFile : &quot;/META-INF/&quot;
                             + xsltFile);
-<span class="fc" id="L89">            final TransformerHandler currentHandler = tf</span>
-                    .newTransformerHandler(new StreamSource(xsltStream));
-<span class="fc" id="L91">            xsltStream.close();</span>
-<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (lastHandler != null) {</span>
-<span class="fc" id="L93">                lastHandler.setResult(new SAXResult(currentHandler));</span>
-<span class="fc" id="L94">                lastHandler = currentHandler;</span>
-            } else {
+            // The stream source needs to be defined here.
+<span class="fc" id="L90">            final TransformerHandler currentHandler = tf</span>
+                    .newTransformerHandler(new StreamSource(xsltStream)); // NOPMD
+<span class="fc" id="L92">            xsltStream.close();</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">            if (lastHandler != null) {</span>
+                // The result object needs to be created here.
+<span class="fc" id="L95">                lastHandler.setResult(new SAXResult(currentHandler)); // NOPMD</span>
 <span class="fc" id="L96">                lastHandler = currentHandler;</span>
-<span class="fc" id="L97">                handler = currentHandler;</span>
+            } else {
+<span class="fc" id="L98">                lastHandler = currentHandler;</span>
+<span class="fc" id="L99">                handler = currentHandler;</span>
             }
         }
-<span class="fc" id="L100">        lastHandler.setResult(new StreamResult(outputStream));</span>
-<span class="fc" id="L101">        return handler;</span>
+<span class="fc" id="L102">        lastHandler.setResult(new StreamResult(outputStream));</span>
+<span class="fc" id="L103">        return handler;</span>
     }
 
     /**
@@ -111,21 +113,21 @@ import org.sonatype.plexus.build.incremental.BuildContext;
     private File buildTempFile() throws MojoExecutionException {
         final File tempFile;
         try {
-<span class="fc" id="L114">            tempFile = File.createTempFile(&quot;pom&quot;, &quot;xml&quot;);</span>
-<span class="fc" id="L115">            tempFile.delete();</span>
-<span class="nc" id="L116">        } catch (final IOException e) {</span>
-<span class="nc" id="L117">            throw new MojoExecutionException(e.getMessage(), e);</span>
-<span class="fc" id="L118">        }</span>
+<span class="fc" id="L116">            tempFile = File.createTempFile(&quot;pom&quot;, &quot;xml&quot;);</span>
+<span class="fc" id="L117">            tempFile.delete();</span>
+<span class="nc" id="L118">        } catch (final IOException e) {</span>
+<span class="nc" id="L119">            throw new MojoExecutionException(e.getMessage(), e);</span>
+<span class="fc" id="L120">        }</span>
         try {
-<span class="pc bpc" id="L120" title="1 of 2 branches missed.">            if (pomFile == null) {</span>
-<span class="nc" id="L121">                pomFile = new File(&quot;pom.xml&quot;);</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">            if (pomFile == null) {</span>
+<span class="nc" id="L123">                pomFile = new File(&quot;pom.xml&quot;);</span>
             }
-<span class="fc" id="L123">            FileUtils.copyFile(pomFile, tempFile);</span>
-<span class="nc" id="L124">        } catch (final IOException e) {</span>
-<span class="nc" id="L125">            throw new MojoExecutionException(format(R.getString(&quot;copyfail&quot;),</span>
+<span class="fc" id="L125">            FileUtils.copyFile(pomFile, tempFile);</span>
+<span class="nc" id="L126">        } catch (final IOException e) {</span>
+<span class="nc" id="L127">            throw new MojoExecutionException(format(R.getString(&quot;copyfail&quot;),</span>
                     pomFile, tempFile), e);
-<span class="fc" id="L127">        }</span>
-<span class="fc" id="L128">        return tempFile;</span>
+<span class="fc" id="L129">        }</span>
+<span class="fc" id="L130">        return tempFile;</span>
     }
 
     /**
@@ -136,9 +138,9 @@ import org.sonatype.plexus.build.incremental.BuildContext;
      */
     @Override
     public void execute() throws MojoExecutionException {
-<span class="fc" id="L139">        final File tempFile = buildTempFile();</span>
-<span class="fc" id="L140">        transform(tempFile, pomFile);</span>
-<span class="fc" id="L141">    }</span>
+<span class="fc" id="L141">        final File tempFile = buildTempFile();</span>
+<span class="fc" id="L142">        transform(tempFile, pomFile);</span>
+<span class="fc" id="L143">    }</span>
 
     /**
      * Performs the transformation.
@@ -153,33 +155,33 @@ import org.sonatype.plexus.build.incremental.BuildContext;
     private void transform(final File sourceFile, final File targetFile)
             throws MojoExecutionException {
         try {
-<span class="fc" id="L156">            final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory</span>
+<span class="fc" id="L158">            final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory</span>
                     .newInstance();
 
-<span class="fc bfc" id="L159" title="All 2 branches covered.">            if (xsltFiles == null) {</span>
-<span class="fc bfc" id="L160" title="All 2 branches covered.">                if (xsltFileList != null) {</span>
-<span class="fc" id="L161">                    xsltFiles = StringUtils.split(xsltFileList, &quot;,&quot;);</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">            if (xsltFiles == null) {</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">                if (xsltFileList != null) {</span>
+<span class="fc" id="L163">                    xsltFiles = StringUtils.split(xsltFileList, &quot;,&quot;);</span>
                 } else {
-<span class="fc" id="L163">                    xsltFiles = new String[] { &quot;/META-INF/pom-clean.xslt&quot; };</span>
+<span class="fc" id="L165">                    xsltFiles = new String[] { &quot;/META-INF/pom-clean.xslt&quot; };</span>
                 }
             }
-<span class="fc" id="L166">            final OutputStream outputStream = buildContext</span>
+<span class="fc" id="L168">            final OutputStream outputStream = buildContext</span>
                     .newFileOutputStream(targetFile);
-<span class="fc" id="L168">            final TransformerHandler handler = buildHandlerChain(tf,</span>
+<span class="fc" id="L170">            final TransformerHandler handler = buildHandlerChain(tf,</span>
                     outputStream);
-<span class="fc" id="L170">            final Transformer transformer = tf.newTransformer();</span>
-<span class="fc" id="L171">            transformer.transform(new StreamSource(sourceFile), new SAXResult(</span>
+<span class="fc" id="L172">            final Transformer transformer = tf.newTransformer();</span>
+<span class="fc" id="L173">            transformer.transform(new StreamSource(sourceFile), new SAXResult(</span>
                     handler));
-<span class="fc" id="L173">            getLog().debug(format(R.getString(&quot;donecleaning&quot;), targetFile));</span>
-<span class="fc" id="L174">            sourceFile.delete();</span>
-<span class="fc" id="L175">            outputStream.close();</span>
-<span class="fc" id="L176">        } catch (final TransformerException e) {</span>
-<span class="fc" id="L177">            throw new MojoExecutionException(format(</span>
+<span class="fc" id="L175">            getLog().debug(format(R.getString(&quot;donecleaning&quot;), targetFile));</span>
+<span class="fc" id="L176">            sourceFile.delete();</span>
+<span class="fc" id="L177">            outputStream.close();</span>
+<span class="fc" id="L178">        } catch (final TransformerException e) {</span>
+<span class="fc" id="L179">            throw new MojoExecutionException(format(</span>
                     R.getString(&quot;transformfail&quot;), sourceFile), e);
-<span class="nc" id="L179">        } catch (final IOException e) {</span>
-<span class="nc" id="L180">            throw new MojoExecutionException(format(</span>
+<span class="nc" id="L181">        } catch (final IOException e) {</span>
+<span class="nc" id="L182">            throw new MojoExecutionException(format(</span>
                     R.getString(&quot;transformfailio&quot;), sourceFile), e);
-<span class="fc" id="L182">        }</span>
-<span class="fc" id="L183">    }</span>
+<span class="fc" id="L184">        }</span>
+<span class="fc" id="L185">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
