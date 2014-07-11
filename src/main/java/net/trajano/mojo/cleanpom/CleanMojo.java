@@ -30,7 +30,7 @@ import org.sonatype.plexus.build.incremental.BuildContext;
 /**
  * Cleans the POM.
  */
-@Mojo(name = "clean", defaultPhase = LifecyclePhase.VERIFY, threadSafe = true)
+@Mojo(name = "clean", defaultPhase = LifecyclePhase.PREPARE_PACKAGE, threadSafe = true)
 public class CleanMojo extends AbstractMojo {
     /**
      * Resource bundle.
@@ -78,7 +78,7 @@ public class CleanMojo extends AbstractMojo {
      */
     private TransformerHandler buildHandlerChain(
             final SAXTransformerFactory tf, final OutputStream outputStream)
-            throws IOException, TransformerException {
+                    throws IOException, TransformerException {
         TransformerHandler handler = null;
         TransformerHandler lastHandler = null;
 
