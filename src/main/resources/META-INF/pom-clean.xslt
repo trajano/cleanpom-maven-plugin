@@ -243,11 +243,18 @@
 	</xsl:template>
 
 	<xsl:template match="m:configuration">
-		<xsl:if test="*">
-			<xsl:copy>
-				<xsl:copy-of select="@*|node()" />
-			</xsl:copy>
-		</xsl:if>
+		<xsl:choose>
+			<xsl:when test="m:lifecycleMappingMetadata">
+				<xsl:copy>
+					<xsl:apply-templates select="node()" />
+				</xsl:copy>
+			</xsl:when>
+			<xsl:when test="*">
+				<xsl:copy>
+					<xsl:copy-of select="@*|node()" />
+				</xsl:copy>
+			</xsl:when>
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="m:build">
@@ -343,11 +350,20 @@
 	</xsl:template>
 
 	<xsl:template
-		match="m:artifactId|m:groupId|m:id|m:module|m:name|m:url|m:version">
+		match="m:artifactId|m:groupId|m:id|m:module|m:name|m:url|m:version|m:versionRange|m:goal">
 		<xsl:copy>
 			<xsl:copy-of select="@*" />
 			<xsl:value-of select="normalize-space(.)" />
 		</xsl:copy>
+	</xsl:template>
+
+	<xsl:template match="m:lifecycleMappingMetadata/m:pluginExecutionFilter">
+		<m:pluginExecutionFilter>
+			<xsl:apply-templates select="m:pluginExecutionFilter/m:groupId" />
+			<xsl:apply-templates select="m:pluginExecutionFilter/m:artifactId" />
+			<xsl:apply-templates select="m:pluginExecutionFilter/m:versionRange" />
+			<xsl:apply-templates select="m:pluginExecutionFilter/m:goals" />
+		</m:pluginExecutionFilter>
 	</xsl:template>
 
 </xsl:stylesheet>
