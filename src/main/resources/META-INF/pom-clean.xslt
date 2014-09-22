@@ -167,10 +167,6 @@
 				<xsl:sort select="m:groupId" />
 				<xsl:sort select="m:artifactId" />
 			</xsl:apply-templates>
-			<xsl:apply-templates select="m:dependency[m:scope='provided']">
-				<xsl:sort select="m:groupId" />
-				<xsl:sort select="m:artifactId" />
-			</xsl:apply-templates>
 			<xsl:apply-templates select="m:dependency[m:scope='system']">
 				<xsl:sort select="m:groupId" />
 				<xsl:sort select="m:artifactId" />
@@ -180,6 +176,10 @@
 				<xsl:sort select="m:artifactId" />
 			</xsl:apply-templates>
 			<xsl:apply-templates select="m:dependency[m:scope='test']">
+				<xsl:sort select="m:groupId" />
+				<xsl:sort select="m:artifactId" />
+			</xsl:apply-templates>
+			<xsl:apply-templates select="m:dependency[m:scope='provided']">
 				<xsl:sort select="m:groupId" />
 				<xsl:sort select="m:artifactId" />
 			</xsl:apply-templates>
