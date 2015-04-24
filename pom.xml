@@ -12,6 +12,7 @@
     <packaging>maven-plugin</packaging>
     <name>Clean POM Maven Plugin</name>
     <description>Cleans the POM based on XSLT.</description>
+    <url>http://site.trajano.net/cleanpom-maven-plugin</url>
     <scm>
         <connection>scm:git:https://github.com/trajano/${project.artifactId}
 		</connection>
@@ -391,7 +392,7 @@
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
-                                                <execute />
+                                                <execute/>
                                             </action>
                                         </pluginExecution>
                                     </pluginExecutions>
