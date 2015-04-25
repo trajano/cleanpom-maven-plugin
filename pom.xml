@@ -8,16 +8,14 @@
     </parent>
     <groupId>net.trajano.mojo</groupId>
     <artifactId>cleanpom-maven-plugin</artifactId>
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.0.6-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>Clean POM Maven Plugin</name>
     <description>Cleans the POM based on XSLT.</description>
     <url>http://site.trajano.net/cleanpom-maven-plugin</url>
     <scm>
-        <connection>scm:git:https://github.com/trajano/${project.artifactId}
-		</connection>
-        <developerConnection>scm:git:ssh://git@github.com/trajano/${project.artifactId}.git
-		</developerConnection>
+        <connection>scm:git:https://github.com/trajano/${project.artifactId}</connection>
+        <developerConnection>scm:git:ssh://git@github.com/trajano/${project.artifactId}.git</developerConnection>
         <tag>HEAD</tag>
         <url>https://github.com/trajano/${project.artifactId}</url>
     </scm>
@@ -44,12 +42,6 @@
             <version>0.0.7</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven.plugin-tools</groupId>
-            <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>net.trajano.commons</groupId>
             <artifactId>commons-testing</artifactId>
             <version>1.0.1</version>
@@ -72,6 +64,12 @@
             <artifactId>maven-plugin-testing-harness</artifactId>
             <version>3.2.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>3.3</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
