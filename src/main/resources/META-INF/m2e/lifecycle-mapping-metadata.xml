@@ -5,6 +5,7 @@
 			<pluginExecutionFilter>
 				<goals>
 					<goal>clean</goal>
+					<goal>clean-xml</goal>
 				</goals>
 			</pluginExecutionFilter>
 			<action>
