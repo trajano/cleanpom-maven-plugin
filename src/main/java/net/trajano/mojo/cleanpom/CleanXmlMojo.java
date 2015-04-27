@@ -115,7 +115,11 @@ public class CleanXmlMojo extends AbstractMojo {
             throw new MojoExecutionException(e.getMessage(), e);
         }
         for (final FileSet xmlFiles : xmlFileSets) {
-            final Scanner scanner = buildContext.newScanner(new File(xmlFiles.getDirectory()), false);
+            final File dir = new File(xmlFiles.getDirectory());
+            if (!dir.exists()) {
+                continue;
+            }
+            final Scanner scanner = buildContext.newScanner(dir, false);
             scanner.setIncludes(xmlFiles.getIncludes().toArray(new String[0]));
             scanner.scan();
             for (final String includedFile : scanner.getIncludedFiles()) {
