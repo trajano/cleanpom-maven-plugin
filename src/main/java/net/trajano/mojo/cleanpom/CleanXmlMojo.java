@@ -46,11 +46,11 @@ public class CleanXmlMojo extends AbstractMojo {
     private BuildContext buildContext;
 
     /**
-     * List of XML files to process. This defaults to
-     * <code>src/main/*.xml</code>.
+     * List of XML filesets to process. This defaults to
+     * <code>src/main/*.xml</code> and <code>src/site/*.xml</code> .
      */
     @Parameter(required = false)
-    private FileSet xmlFiles;
+    private FileSet[] xmlFileSets;
 
     /**
      * Builds the handler chain.
@@ -98,10 +98,14 @@ public class CleanXmlMojo extends AbstractMojo {
      */
     @Override
     public void execute() throws MojoExecutionException {
-        if (xmlFiles == null) {
-            xmlFiles = new FileSet();
-            xmlFiles.setDirectory("src/main");
-            xmlFiles.addInclude("**/*.xml");
+        if (xmlFileSets == null) {
+            xmlFileSets = new FileSet[2];
+            xmlFileSets[0] = new FileSet();
+            xmlFileSets[0].setDirectory("src/main");
+            xmlFileSets[0].addInclude("**/*.xml");
+            xmlFileSets[1] = new FileSet();
+            xmlFileSets[1].setDirectory("src/site");
+            xmlFileSets[1].addInclude("**/*.xml");
         }
 
         final File tempFile;
@@ -110,19 +114,21 @@ public class CleanXmlMojo extends AbstractMojo {
         } catch (final IOException e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
-        final Scanner scanner = buildContext.newScanner(new File(xmlFiles.getDirectory()), false);
-        scanner.setIncludes(xmlFiles.getIncludes().toArray(new String[0]));
-        scanner.scan();
-        for (final String includedFile : scanner.getIncludedFiles()) {
-            final File file = new File(scanner.getBasedir(), includedFile);
+        for (final FileSet xmlFiles : xmlFileSets) {
+            final Scanner scanner = buildContext.newScanner(new File(xmlFiles.getDirectory()), false);
+            scanner.setIncludes(xmlFiles.getIncludes().toArray(new String[0]));
+            scanner.scan();
+            for (final String includedFile : scanner.getIncludedFiles()) {
+                final File file = new File(scanner.getBasedir(), includedFile);
 
-            try {
-                FileUtils.copyFile(file, tempFile);
-                transform(tempFile, file);
-            } catch (final IOException e) {
-                throw new MojoExecutionException(format(R.getString("copyfail"), file, tempFile), e);
+                try {
+                    FileUtils.copyFile(file, tempFile);
+                    transform(tempFile, file);
+                } catch (final IOException e) {
+                    throw new MojoExecutionException(format(R.getString("copyfail"), file, tempFile), e);
+                }
+
             }
-
         }
         tempFile.delete();
     }

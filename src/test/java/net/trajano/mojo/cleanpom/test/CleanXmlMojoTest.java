@@ -46,7 +46,7 @@ public class CleanXmlMojoTest {
         final FileSet xmlFiles = new FileSet();
         xmlFiles.setDirectory(temp.getAbsolutePath());
         xmlFiles.addInclude("**/*.xml");
-        rule.setVariableValueToObject(mojo, "xmlFiles", xmlFiles);
+        rule.setVariableValueToObject(mojo, "xmlFileSets", new FileSet[] { xmlFiles });
         assertNotNull(mojo);
         mojo.execute();
         final String cleanData;
