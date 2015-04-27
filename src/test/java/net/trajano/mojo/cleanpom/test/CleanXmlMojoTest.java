@@ -14,11 +14,10 @@ import org.codehaus.plexus.util.FileUtils;
 import org.junit.Rule;
 import org.junit.Test;
 
-import net.trajano.mojo.cleanpom.CleanMojo;
 import net.trajano.mojo.cleanpom.CleanXmlMojo;
 
 /**
- * Tests the {@link CleanMojo}.
+ * Tests the {@link CleanXmlMojo}.
  */
 public class CleanXmlMojoTest {
     @Rule
@@ -54,7 +53,6 @@ public class CleanXmlMojoTest {
             final FileInputStream fileInputStream = new FileInputStream(cleanedXml);
             cleanData = IOUtils.toString(fileInputStream);
             fileInputStream.close();
-
         }
         {
             final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
@@ -73,6 +71,63 @@ public class CleanXmlMojoTest {
             final String data = IOUtils.toString(fileInputStream);
             fileInputStream.close();
             assertEquals(cleanData, data);
+        }
+        FileUtils.deleteDirectory(temp);
+    }
+
+    @Test
+    public void testNoProlog() throws Exception {
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
+        final File dirtyXml = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
+        final File temp = File.createTempFile("dirty", "");
+        temp.delete();
+        temp.mkdirs();
+        FileUtils.copyFile(dirtyXml, new File(temp, "dirty1.xml"));
+
+        final CleanXmlMojo mojo = (CleanXmlMojo) rule.lookupMojo("clean-xml", testPom);
+        final FileSet xmlFiles = new FileSet();
+        xmlFiles.setDirectory(temp.getAbsolutePath());
+        xmlFiles.addInclude("**/*.xml");
+        rule.setVariableValueToObject(mojo, "xmlFileSets", new FileSet[] { xmlFiles });
+        assertNotNull(mojo);
+        mojo.execute();
+        final String cleanData;
+        {
+            final FileInputStream fileInputStream = new FileInputStream(testPom);
+            cleanData = IOUtils.toString(fileInputStream);
+            fileInputStream.close();
+        }
+        {
+            final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
+            final String data = IOUtils.toString(fileInputStream);
+            fileInputStream.close();
+            assertEquals(cleanData, data);
+        }
+        FileUtils.deleteDirectory(temp);
+    }
+
+    @Test
+    public void testWithDTD() throws Exception {
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
+        final File dirtyXml = new File("src/test/resources/net/trajano/mojo/cleanpom/checkstyle-configuration.xml");
+        final File temp = File.createTempFile("dirty", "");
+        temp.delete();
+        temp.mkdirs();
+        FileUtils.copyFile(dirtyXml, new File(temp, "dirty1.xml"));
+
+        final CleanXmlMojo mojo = (CleanXmlMojo) rule.lookupMojo("clean-xml", testPom);
+        final FileSet xmlFiles = new FileSet();
+        xmlFiles.setDirectory(temp.getAbsolutePath());
+        xmlFiles.addInclude("**/*.xml");
+        rule.setVariableValueToObject(mojo, "xmlFileSets", new FileSet[] { xmlFiles });
+        assertNotNull(mojo);
+        mojo.execute();
+        {
+            final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
+            final String data = IOUtils.toString(fileInputStream);
+            fileInputStream.close();
+            assertTrue(data.contains(
+                    "<!DOCTYPE module PUBLIC \"-//Puppy Crawl//DTD Check Configuration 1.3//EN\" \"http://www.puppycrawl.com/dtds/configuration_1_3.dtd\">"));
         }
         FileUtils.deleteDirectory(temp);
     }

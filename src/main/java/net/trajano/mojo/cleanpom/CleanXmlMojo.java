@@ -3,11 +3,15 @@ package net.trajano.mojo.cleanpom;
 import static java.lang.String.format;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -27,6 +31,9 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.Scanner;
 import org.sonatype.plexus.build.incremental.BuildContext;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 /**
  * Cleans XML sources in general. Tied to the {@link LifecyclePhase#INITIALIZE}
@@ -149,19 +156,40 @@ public class CleanXmlMojo extends AbstractMojo {
      */
     private void transform(final File sourceFile, final File targetFile) throws MojoExecutionException {
         try {
-            final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
+            final SAXParserFactory spf = SAXParserFactory.newInstance();
+            spf.setNamespaceAware(true);
+            final XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+            final DtdResolver resolver = new DtdResolver();
+            xmlReader.setEntityResolver(resolver);
+            xmlReader.setContentHandler(resolver);
 
+            final FileInputStream source = new FileInputStream(sourceFile);
+            xmlReader.parse(new InputSource(source));
+            source.close();
+
+            final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
             final OutputStream outputStream = buildContext.newFileOutputStream(targetFile);
-            final TransformerHandler handler = buildHandlerChain(tf, outputStream);
-            final Transformer transformer = tf.newTransformer();
-            transformer.transform(new StreamSource(sourceFile), new SAXResult(handler));
+            // final TransformerHandler handler = buildHandlerChain(tf,
+            // outputStream);
+            final Transformer transformer = tf.newTransformer(new StreamSource(
+                    Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean.xslt")));
+
+            if (resolver.isDtdPresent()) {
+                transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, resolver.getPublicId());
+                transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, resolver.getSystemId());
+            }
+            transformer.transform(new StreamSource(sourceFile), new StreamResult(outputStream));
             getLog().debug(format(R.getString("donecleaning"), targetFile));
             sourceFile.delete();
             outputStream.close();
+        } catch (final SAXException e) {
+            throw new MojoExecutionException(format(R.getString("transformfail"), sourceFile), e);
         } catch (final TransformerException e) {
             throw new MojoExecutionException(format(R.getString("transformfail"), sourceFile), e);
         } catch (final IOException e) {
             throw new MojoExecutionException(format(R.getString("transformfailio"), sourceFile), e);
+        } catch (final ParserConfigurationException e) {
+            throw new MojoExecutionException(format(R.getString("transformfail"), sourceFile), e);
         }
     }
 }

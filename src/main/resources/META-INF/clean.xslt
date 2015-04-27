@@ -14,10 +14,12 @@
 	</xsl:template>
 	<xsl:template match="/">
 		<xsl:text>&#xa;</xsl:text>
-		<xsl:if test="comment()">
-			<xsl:apply-templates select="comment()" />
+		<xsl:for-each select="comment()">
+			<xsl:comment>
+				<xsl:value-of select="." />
+			</xsl:comment>
 			<xsl:text>&#xa;</xsl:text>
-		</xsl:if>
+		</xsl:for-each>
 		<xsl:apply-templates select="*" />
 	</xsl:template>
 </xsl:stylesheet>
