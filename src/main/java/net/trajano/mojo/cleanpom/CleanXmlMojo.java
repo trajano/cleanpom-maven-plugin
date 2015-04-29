@@ -5,7 +5,6 @@ import static java.lang.String.format;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ResourceBundle;
 
@@ -15,9 +14,7 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.sax.SAXTransformerFactory;
-import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -39,8 +36,11 @@ import org.xml.sax.XMLReader;
  * Cleans XML sources in general. Tied to the {@link LifecyclePhase#INITIALIZE}
  * so sources are cleaned up before doing anything else.
  */
-@Mojo(name = "clean-xml", defaultPhase = LifecyclePhase.INITIALIZE, threadSafe = true)
+@Mojo(name = "clean-xml",
+    defaultPhase = LifecyclePhase.INITIALIZE,
+    threadSafe = true)
 public class CleanXmlMojo extends AbstractMojo {
+
     /**
      * Resource bundle.
      */
@@ -54,48 +54,10 @@ public class CleanXmlMojo extends AbstractMojo {
 
     /**
      * List of XML filesets to process. This defaults to
-     * <code>src/main/*.xml</code> and <code>src/site/*.xml</code> .
+     * <code>src/main/*.[xml|xsd|xslt]</code> and <code>src/site/*.xml</code> .
      */
     @Parameter(required = false)
     private FileSet[] xmlFileSets;
-
-    /**
-     * Builds the handler chain.
-     *
-     * @param tf
-     *            SAX transformer factory
-     * @param outputStream
-     *            output stream
-     * @return handler chain.
-     * @throws IOException
-     *             I/O error when reading the XSLT file.
-     * @throws TransformerException
-     *             problem building the templates.
-     */
-    private TransformerHandler buildHandlerChain(final SAXTransformerFactory tf, final OutputStream outputStream)
-            throws IOException, TransformerException {
-        TransformerHandler handler = null;
-        TransformerHandler lastHandler = null;
-
-        final String[] xsltFiles = new String[] { "/META-INF/clean.xslt" };
-        for (final String xsltFile : xsltFiles) {
-            final InputStream xsltStream = getClass()
-                    .getResourceAsStream(xsltFile.charAt(0) == '/' ? xsltFile : "/META-INF/" + xsltFile);
-            // The stream source needs to be defined here.
-            final TransformerHandler currentHandler = tf.newTransformerHandler(new StreamSource(xsltStream)); // NOPMD
-            xsltStream.close();
-            if (lastHandler != null) {
-                // The result object needs to be created here.
-                lastHandler.setResult(new SAXResult(currentHandler)); // NOPMD
-                lastHandler = currentHandler;
-            } else {
-                lastHandler = currentHandler;
-                handler = currentHandler;
-            }
-        }
-        lastHandler.setResult(new StreamResult(outputStream));
-        return handler;
-    }
 
     /**
      * Performs the cleanup.
@@ -105,11 +67,14 @@ public class CleanXmlMojo extends AbstractMojo {
      */
     @Override
     public void execute() throws MojoExecutionException {
+
         if (xmlFileSets == null) {
             xmlFileSets = new FileSet[2];
             xmlFileSets[0] = new FileSet();
             xmlFileSets[0].setDirectory("src/main");
             xmlFileSets[0].addInclude("**/*.xml");
+            xmlFileSets[0].addInclude("**/*.xsd");
+            xmlFileSets[0].addInclude("**/*.xslt");
             xmlFileSets[1] = new FileSet();
             xmlFileSets[1].setDirectory("src/site");
             xmlFileSets[1].addInclude("**/*.xml");
@@ -117,7 +82,7 @@ public class CleanXmlMojo extends AbstractMojo {
 
         final File tempFile;
         try {
-            tempFile = File.createTempFile("pom", "xml");
+            tempFile = File.createTempFile("temp", "xml");
         } catch (final IOException e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
@@ -154,7 +119,9 @@ public class CleanXmlMojo extends AbstractMojo {
      * @throws MojoExecutionException
      *             problem with the execution.
      */
-    private void transform(final File sourceFile, final File targetFile) throws MojoExecutionException {
+    private void transform(final File sourceFile,
+        final File targetFile) throws MojoExecutionException {
+
         try {
             final SAXParserFactory spf = SAXParserFactory.newInstance();
             spf.setNamespaceAware(true);
@@ -169,27 +136,29 @@ public class CleanXmlMojo extends AbstractMojo {
 
             final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
             final OutputStream outputStream = buildContext.newFileOutputStream(targetFile);
-            // final TransformerHandler handler = buildHandlerChain(tf,
-            // outputStream);
-            final Transformer transformer = tf.newTransformer(new StreamSource(
-                    Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean.xslt")));
-
+            final Transformer transformer;
             if (resolver.isDtdPresent()) {
+                transformer = tf.newTransformer(new StreamSource(
+                    Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean-with-dtd.xslt")));
+                transformer.setOutputProperty("{http://xml.apache.org/xalan}line-separator", "\n");
                 transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, resolver.getPublicId());
                 transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, resolver.getSystemId());
+            } else {
+                transformer = tf.newTransformer(new StreamSource(
+                    Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean.xslt")));
             }
-            transformer.transform(new StreamSource(sourceFile), new StreamResult(outputStream));
+            transformer.transform(new StreamSource(sourceFile), new StreamResult(new EolNormalizingStream(outputStream)));
             getLog().debug(format(R.getString("donecleaning"), targetFile));
             sourceFile.delete();
             outputStream.close();
         } catch (final SAXException e) {
-            throw new MojoExecutionException(format(R.getString("transformfail"), sourceFile), e);
+            throw new MojoExecutionException(format(R.getString("transformfail"), targetFile), e);
         } catch (final TransformerException e) {
-            throw new MojoExecutionException(format(R.getString("transformfail"), sourceFile), e);
+            throw new MojoExecutionException(format(R.getString("transformfail"), targetFile), e);
         } catch (final IOException e) {
-            throw new MojoExecutionException(format(R.getString("transformfailio"), sourceFile), e);
+            throw new MojoExecutionException(format(R.getString("transformfailio"), targetFile), e);
         } catch (final ParserConfigurationException e) {
-            throw new MojoExecutionException(format(R.getString("transformfail"), sourceFile), e);
+            throw new MojoExecutionException(format(R.getString("transformfail"), targetFile), e);
         }
     }
 }

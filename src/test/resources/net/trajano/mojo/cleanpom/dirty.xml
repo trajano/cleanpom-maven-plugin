@@ -5,7 +5,7 @@ xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLS
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>	<groupId>net.trajano.mojo</groupId>	<artifactId>batik-maven-plugin-test</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<build>		<plugins>			<plugin>				<groupId>net.trajano.mojo</groupId>				<artifactId>cleanpom-maven-plugin</artifactId>				<configuration>
+	<build>		<plugins>	abd		<plugin>				<groupId>net.trajano.mojo</groupId>				<artifactId>cleanpom-maven-plugin</artifactId>				<configuration>
 					<!-- Configuration comment -->					<pomFile>target/test-pom.xml</pomFile>
 				</configuration>			</plugin>
 		</plugins>	</build>

@@ -165,6 +165,10 @@
                     <version>2.4</version>
                 </plugin>
                 <plugin>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>3.4</version>
+                </plugin>
+                <plugin>
                     <artifactId>maven-pmd-plugin</artifactId>
                     <version>3.4</version>
                     <configuration>
@@ -176,10 +180,6 @@
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>2.7</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.4</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
