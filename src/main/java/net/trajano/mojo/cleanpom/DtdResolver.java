@@ -33,7 +33,11 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      * Does nothing. {@inheritDoc}
      */
     @Override
-    public void characters(final char[] ch, final int start, final int length) throws SAXException {
+    public void characters(final char[] ch,
+        final int start,
+        final int length) throws SAXException {
+
+        // does nothing
     }
 
     /**
@@ -41,13 +45,19 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void endDocument() throws SAXException {
+
+        // does nothing
     }
 
     /**
      * Does nothing. {@inheritDoc}
      */
     @Override
-    public void endElement(final String uri, final String localName, final String qName) throws SAXException {
+    public void endElement(final String uri,
+        final String localName,
+        final String qName) throws SAXException {
+
+        // does nothing
     }
 
     /**
@@ -55,6 +65,8 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void endPrefixMapping(final String prefix) throws SAXException {
+
+        // does nothing
     }
 
     /**
@@ -63,6 +75,7 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      * @return local name of the first element
      */
     public String getName() {
+
         return name;
     }
 
@@ -72,6 +85,7 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      * @return public ID.
      */
     public String getPublicId() {
+
         return publicId;
     }
 
@@ -81,6 +95,7 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      * @return system ID.
      */
     public String getSystemId() {
+
         return systemId;
     }
 
@@ -88,13 +103,20 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      * Does nothing. {@inheritDoc}
      */
     @Override
-    public void ignorableWhitespace(final char[] ch, final int start, final int length) throws SAXException {
+    public void ignorableWhitespace(final char[] ch,
+        final int start,
+        final int length) throws SAXException {
+
+        // does nothing
     }
 
     /**
-     * Does nothing. {@inheritDoc}
+     * Checks if the DTD information is present.
+     *
+     * @return <code>true</code> if the DTD information is present.
      */
     public boolean isDtdPresent() {
+
         return name != null && publicId != null && systemId != null;
     }
 
@@ -102,22 +124,27 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      * Does nothing. {@inheritDoc}
      */
     @Override
-    public void processingInstruction(final String target, final String data) throws SAXException {
+    public void processingInstruction(final String target,
+        final String data) throws SAXException {
+
+        // does nothing
     }
 
     /**
      * Processes a DOCTYPE and extracts the data from it.
      *
-     * @param publicId
+     * @param doctypePublicId
      *            public ID
-     * @param systemId
+     * @param doctypeSystemId
      *            system ID
      * @return <code>null</code>
      */
     @Override
-    public InputSource resolveEntity(final String publicId, final String systemId) throws SAXException, IOException {
-        this.publicId = publicId;
-        this.systemId = systemId;
+    public InputSource resolveEntity(final String doctypePublicId,
+        final String doctypeSystemId) throws SAXException, IOException {
+
+        publicId = doctypePublicId;
+        systemId = doctypeSystemId;
         return null;
     }
 
@@ -126,13 +153,16 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void setDocumentLocator(final Locator locator) {
+
     }
 
     /**
      * Does nothing. {@inheritDoc}
      */
     @Override
-    public void skippedEntity(final String name) throws SAXException {
+    public void skippedEntity(final String localName) throws SAXException {
+
+        //does nothing
     }
 
     /**
@@ -140,6 +170,8 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void startDocument() throws SAXException {
+
+        //does nothing
     }
 
     /**
@@ -156,7 +188,10 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      *            attributes
      */
     @Override
-    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
+    public void startElement(final String uri,
+        final String localName,
+        final String qName,
+        final Attributes atts)
             throws SAXException {
 
         if (name == null) {
@@ -169,7 +204,10 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      * Does nothing. {@inheritDoc}
      */
     @Override
-    public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
+    public void startPrefixMapping(final String prefix,
+        final String uri) throws SAXException {
+
+        //does nothing
     }
 
 }

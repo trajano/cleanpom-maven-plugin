@@ -10,28 +10,54 @@ import java.io.OutputStream;
  * sequence. It simply strips out CR characters. This won't work correctly with
  * CR line endings, only CRLF or LF line endings will work correctly.
  *
- * @author Archimedes
+ * @author Archimedes Trajano
  */
 public class EolNormalizingStream extends FilterOutputStream {
 
-    public static final String UNIX_LF = "\012";
+    /**
+     * Line separator byte sequence.
+     */
+    private final byte[] lineSeparatorBytes;
 
-    private final String lineSeparator;
-
+    /**
+     * Creates the normalizing stream with the system default line separator.
+     *
+     * @param os
+     *            output stream to filter
+     */
     public EolNormalizingStream(final OutputStream os) {
         this(os, System.getProperty("line.separator"));
     }
 
+    /**
+     * Creates the normalizing stream with the specified line separator
+     * sequence.
+     *
+     * @param os
+     *            output stream to filter
+     * @param lineSeparator
+     *            line separator string
+     */
     public EolNormalizingStream(final OutputStream os, final String lineSeparator) {
         super(os);
-        this.lineSeparator = lineSeparator;
+        lineSeparatorBytes = lineSeparator.getBytes();
     }
 
+    /**
+     * Checks if the "LF" character is received if so it will write the line
+     * separator bytes, if it is CR it will ignore and other cases it will write
+     * the character as-is.
+     *
+     * @param b
+     *            character to write
+     * @throws IOException
+     *             I/O error
+     */
     @Override
     public void write(final int b) throws IOException {
 
         if (b == 10) {
-            for (final byte lb : lineSeparator.getBytes()) {
+            for (final byte lb : lineSeparatorBytes) {
                 super.write(lb);
             }
         } else if (b != 13) {
