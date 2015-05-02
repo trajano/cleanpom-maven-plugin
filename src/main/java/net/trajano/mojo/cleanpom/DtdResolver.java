@@ -34,8 +34,8 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void characters(final char[] ch,
-        final int start,
-        final int length) throws SAXException {
+            final int start,
+            final int length) throws SAXException {
 
         // does nothing
     }
@@ -54,8 +54,8 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void endElement(final String uri,
-        final String localName,
-        final String qName) throws SAXException {
+            final String localName,
+            final String qName) throws SAXException {
 
         // does nothing
     }
@@ -104,8 +104,8 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void ignorableWhitespace(final char[] ch,
-        final int start,
-        final int length) throws SAXException {
+            final int start,
+            final int length) throws SAXException {
 
         // does nothing
     }
@@ -125,7 +125,7 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void processingInstruction(final String target,
-        final String data) throws SAXException {
+            final String data) throws SAXException {
 
         // does nothing
     }
@@ -141,7 +141,7 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public InputSource resolveEntity(final String doctypePublicId,
-        final String doctypeSystemId) throws SAXException, IOException {
+            final String doctypeSystemId) throws SAXException, IOException {
 
         publicId = doctypePublicId;
         systemId = doctypeSystemId;
@@ -189,9 +189,9 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void startElement(final String uri,
-        final String localName,
-        final String qName,
-        final Attributes atts)
+            final String localName,
+            final String qName,
+            final Attributes atts)
             throws SAXException {
 
         if (name == null) {
@@ -205,7 +205,7 @@ public class DtdResolver implements EntityResolver, ContentHandler {
      */
     @Override
     public void startPrefixMapping(final String prefix,
-        final String uri) throws SAXException {
+            final String uri) throws SAXException {
 
         //does nothing
     }

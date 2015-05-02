@@ -25,6 +25,7 @@ import net.trajano.mojo.cleanpom.CleanMojo;
  * Tests the {@link CleanMojo}.
  */
 public class CleanMojoTest {
+
     @Rule
     public MojoRule rule = new MojoRule();
 
@@ -35,6 +36,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testDefault() throws Exception {
+
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
         final File tempPom = new File("target/test-pom.xml");
         FileUtils.copyFile(testPom, tempPom);
@@ -59,6 +61,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testGeneralCleaning() throws Exception {
+
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
         final File dirtyXml = new File("src/test/resources/net/trajano/mojo/cleanpom/dirty.xml");
         final File temp = File.createTempFile("dirty", ".xml");
@@ -85,6 +88,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testImportDependency() throws Exception {
+
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/synclist-pom.xml");
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/pom-with-import.xml");
         final File tempPom = new File("target/test-pom.xml");
@@ -110,6 +114,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testNonPom() throws Exception {
+
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
         final File testPom = new File("src/main/resources/META-INF/Messages.properties");
         final File tempPom = new File("target/test-pom.xml");
@@ -132,6 +137,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testPomWithEmptyConfiguration() throws Exception {
+
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/no-configuration-pom.xml");
         final File tempPom = new File("target/test-pom.xml");
@@ -155,6 +161,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testPomWithLicense() throws Exception {
+
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/default-pom-with-license.xml");
         final File tempPom = new File("target/test-pom.xml");
         FileUtils.copyFile(testPom, tempPom);
@@ -165,8 +172,7 @@ public class CleanMojoTest {
         mojo.execute();
 
         final FileInputStream fileInputStream = new FileInputStream(tempPom);
-        assertTrue(
-                IOUtils.toString(fileInputStream).contains("DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER."));
+        assertTrue(IOUtils.toString(fileInputStream).contains("DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER."));
         fileInputStream.close();
     }
 
@@ -177,6 +183,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testPomWithOrganization() throws Exception {
+
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/organization-pom.xml");
         final File tempPom = new File("target/test-pom.xml");
@@ -205,6 +212,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testPomWithOrganizationSite() throws Exception {
+
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/sync-pom.xml");
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/site-organization-pom.xml");
         final File tempPom = new File("target/test-pom.xml");
@@ -233,6 +241,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testPomWithPlugins() throws Exception {
+
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/plugins-pom.xml");
         final File tempPom = new File("target/test-pom.xml");
@@ -257,6 +266,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testSync() throws Exception {
+
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/sync-pom.xml");
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/old-archetype-pom.xml");
         final File tempPom = new File("target/test-pom.xml");
@@ -282,6 +292,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testSyncList() throws Exception {
+
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/synclist-pom.xml");
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/old-archetype-pom.xml");
         final File tempPom = new File("target/test-pom.xml");
@@ -308,6 +319,7 @@ public class CleanMojoTest {
      */
     @Test
     public void testSyncListAddProperties() throws Exception {
+
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/synclist-pom.xml");
         final File testPom = new File(
                 "src/test/resources/net/trajano/mojo/cleanpom/old-archetype-pom-no-properties.xml");

@@ -37,8 +37,8 @@ import org.xml.sax.XMLReader;
  * so sources are cleaned up before doing anything else.
  */
 @Mojo(name = "clean-xml",
-    defaultPhase = LifecyclePhase.INITIALIZE,
-    threadSafe = true)
+        defaultPhase = LifecyclePhase.INITIALIZE,
+        threadSafe = true)
 public class CleanXmlMojo extends AbstractMojo {
 
     /**
@@ -120,7 +120,7 @@ public class CleanXmlMojo extends AbstractMojo {
      *             problem with the execution.
      */
     private void transform(final File sourceFile,
-        final File targetFile) throws MojoExecutionException {
+            final File targetFile) throws MojoExecutionException {
 
         try {
             final SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -139,13 +139,13 @@ public class CleanXmlMojo extends AbstractMojo {
             final Transformer transformer;
             if (resolver.isDtdPresent()) {
                 transformer = tf.newTransformer(new StreamSource(
-                    Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean-with-dtd.xslt")));
+                        Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean-with-dtd.xslt")));
                 transformer.setOutputProperty("{http://xml.apache.org/xalan}line-separator", "\n");
                 transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, resolver.getPublicId());
                 transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, resolver.getSystemId());
             } else {
                 transformer = tf.newTransformer(new StreamSource(
-                    Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean.xslt")));
+                        Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean.xslt")));
             }
             transformer.transform(new StreamSource(sourceFile), new StreamResult(new EolNormalizingStream(outputStream)));
             getLog().debug(format(R.getString("donecleaning"), targetFile));

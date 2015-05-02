@@ -26,6 +26,7 @@ public class EolNormalizingStream extends FilterOutputStream {
      *            output stream to filter
      */
     public EolNormalizingStream(final OutputStream os) {
+
         this(os, System.getProperty("line.separator"));
     }
 
@@ -38,7 +39,9 @@ public class EolNormalizingStream extends FilterOutputStream {
      * @param lineSeparator
      *            line separator string
      */
-    public EolNormalizingStream(final OutputStream os, final String lineSeparator) {
+    public EolNormalizingStream(final OutputStream os,
+            final String lineSeparator) {
+
         super(os);
         lineSeparatorBytes = lineSeparator.getBytes();
     }

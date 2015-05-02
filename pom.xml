@@ -204,6 +204,20 @@
                     <version>${surefire.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>net.trajano.mojo</groupId>
+                    <artifactId>m2e-codestyle-maven-plugin</artifactId>
+                    <version>2.0.0-SNAPSHOT</version>
+                    <configuration>
+                        <codeStyleBaseUrl>codestyle/</codeStyleBaseUrl>
+                        <javaCleanupProfileXmlUrl>codestyle/eclipse/java-cleanup.xml</javaCleanupProfileXmlUrl>
+                        <javaFormatterProfileXmlUrl>codestyle/eclipse/java-code-formatter.xml</javaFormatterProfileXmlUrl>
+                        <javaTemplatesXmlUrl>codestyle/eclipse/java-templates.xml</javaTemplatesXmlUrl>
+                        <javaScriptCleanupProfileXmlUrl>codestyle/eclipse/javascript-cleanup.xml</javaScriptCleanupProfileXmlUrl>
+                        <javaScriptFormatterProfileXmlUrl>codestyle/eclipse/javascript-code-formatter.xml</javaScriptFormatterProfileXmlUrl>
+                        <javaScriptTemplatesXmlUrl>codestyle/eclipse/javascript-templates.xml</javaScriptTemplatesXmlUrl>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
                     <version>2.4.0</version>
@@ -267,6 +281,18 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>net.trajano.mojo</groupId>
+                <artifactId>m2e-codestyle-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>format</id>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <extensions>
@@ -438,15 +464,11 @@
                     <plugin>
                         <groupId>net.trajano.mojo</groupId>
                         <artifactId>m2e-codestyle-maven-plugin</artifactId>
-                        <version>1.1.0</version>
                         <executions>
                             <execution>
                                 <goals>
                                     <goal>configure</goal>
                                 </goals>
-                                <configuration>
-                                    <codeStyleBaseUrl>codestyle</codeStyleBaseUrl>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
