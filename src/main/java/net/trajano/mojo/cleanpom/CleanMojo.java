@@ -31,15 +31,14 @@ import org.sonatype.plexus.build.incremental.BuildContext;
  * Cleans the POM.
  */
 @Mojo(name = "clean",
-        defaultPhase = LifecyclePhase.PREPARE_PACKAGE,
-        threadSafe = true)
+    defaultPhase = LifecyclePhase.PREPARE_PACKAGE,
+    threadSafe = true)
 public class CleanMojo extends AbstractMojo {
 
     /**
      * Resource bundle.
      */
-    private static final ResourceBundle R = ResourceBundle
-            .getBundle("META-INF/Messages");
+    private static final ResourceBundle R = ResourceBundle.getBundle("META-INF/Messages");
 
     /**
      * Build context.
@@ -51,8 +50,8 @@ public class CleanMojo extends AbstractMojo {
      * The POM file to update.
      */
     @Parameter(defaultValue = "${basedir}/pom.xml",
-            property = "cleanpom.pomFile",
-            required = false)
+        property = "cleanpom.pomFile",
+        required = false)
     private File pomFile;
 
     /**
@@ -60,8 +59,8 @@ public class CleanMojo extends AbstractMojo {
      * xsltFileList is allowed.
      */
     @Parameter(defaultValue = "/META-INF/pom-clean.xslt",
-            required = false,
-            property = "cleanpom.xsltFileList")
+        required = false,
+        property = "cleanpom.xsltFileList")
     private String xsltFileList;
 
     /**
@@ -84,20 +83,19 @@ public class CleanMojo extends AbstractMojo {
      *             problem building the templates.
      */
     private TransformerHandler buildHandlerChain(
-            final SAXTransformerFactory tf,
-            final OutputStream outputStream)
-            throws IOException, TransformerException {
+        final SAXTransformerFactory tf,
+        final OutputStream outputStream)
+            throws IOException,
+            TransformerException {
 
         TransformerHandler handler = null;
         TransformerHandler lastHandler = null;
 
         for (final String xsltFile : xsltFiles) {
             final InputStream xsltStream = getClass().getResourceAsStream(
-                    xsltFile.charAt(0) == '/' ? xsltFile : "/META-INF/"
-                            + xsltFile);
+                xsltFile.charAt(0) == '/' ? xsltFile : "/META-INF/" + xsltFile);
             // The stream source needs to be defined here.
-            final TransformerHandler currentHandler = tf
-                    .newTransformerHandler(new StreamSource(xsltStream)); // NOPMD
+            final TransformerHandler currentHandler = tf.newTransformerHandler(new StreamSource(xsltStream)); // NOPMD
             xsltStream.close();
             if (lastHandler != null) {
                 // The result object needs to be created here.
@@ -119,7 +117,8 @@ public class CleanMojo extends AbstractMojo {
      * @throws MojoExecutionException
      *             wraps {@link IOException}
      */
-    private File buildTempFile() throws MojoExecutionException {
+    private File buildTempFile()
+        throws MojoExecutionException {
 
         final File tempFile;
         try {
@@ -134,8 +133,7 @@ public class CleanMojo extends AbstractMojo {
             }
             FileUtils.copyFile(pomFile, tempFile);
         } catch (final IOException e) {
-            throw new MojoExecutionException(format(R.getString("copyfail"),
-                    pomFile, tempFile), e);
+            throw new MojoExecutionException(format(R.getString("copyfail"), pomFile, tempFile), e);
         }
         return tempFile;
     }
@@ -147,7 +145,8 @@ public class CleanMojo extends AbstractMojo {
      *             problem with the execution.
      */
     @Override
-    public void execute() throws MojoExecutionException {
+    public void execute()
+        throws MojoExecutionException {
 
         final File tempFile = buildTempFile();
         transform(tempFile, pomFile);
@@ -164,12 +163,11 @@ public class CleanMojo extends AbstractMojo {
      *             problem with the execution.
      */
     private void transform(final File sourceFile,
-            final File targetFile)
+        final File targetFile)
             throws MojoExecutionException {
 
         try {
-            final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory
-                    .newInstance();
+            final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
 
             if (xsltFiles == null) {
                 if (xsltFileList != null) {
@@ -180,22 +178,19 @@ public class CleanMojo extends AbstractMojo {
                     };
                 }
             }
-            final OutputStream outputStream = buildContext
-                    .newFileOutputStream(targetFile);
-            final TransformerHandler handler = buildHandlerChain(tf,
-                    new EolNormalizingStream(outputStream));
+            final OutputStream outputStream = buildContext.newFileOutputStream(targetFile);
+            final TransformerHandler handler = buildHandlerChain(tf, new EolNormalizingStream(outputStream));
             final Transformer transformer = tf.newTransformer();
-            transformer.transform(new StreamSource(sourceFile), new SAXResult(
-                    handler));
+            transformer.transform(new StreamSource(sourceFile), new SAXResult(handler));
             getLog().debug(format(R.getString("donecleaning"), targetFile));
             sourceFile.delete();
             outputStream.close();
         } catch (final TransformerException e) {
             throw new MojoExecutionException(format(
-                    R.getString("transformfail"), sourceFile), e);
+                R.getString("transformfail"), sourceFile), e);
         } catch (final IOException e) {
             throw new MojoExecutionException(format(
-                    R.getString("transformfailio"), sourceFile), e);
+                R.getString("transformfailio"), sourceFile), e);
         }
     }
 }

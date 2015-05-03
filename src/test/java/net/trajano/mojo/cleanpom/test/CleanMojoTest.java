@@ -48,7 +48,7 @@ public class CleanMojoTest {
         final FileInputStream fileInputStream = new FileInputStream(tempPom);
         final String data = IOUtils.toString(fileInputStream);
         assertTrue("Missing schema location", data.contains(
-                "xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\""));
+            "xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\""));
         assertTrue(data.contains("<pomFile>target/test-pom.xml</pomFile>"));
         assertTrue(data.contains("<!-- Configuration comment -->"));
         fileInputStream.close();
@@ -321,8 +321,7 @@ public class CleanMojoTest {
     public void testSyncListAddProperties() throws Exception {
 
         final File defaultPom = new File("src/test/resources/net/trajano/mojo/cleanpom/synclist-pom.xml");
-        final File testPom = new File(
-                "src/test/resources/net/trajano/mojo/cleanpom/old-archetype-pom-no-properties.xml");
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/old-archetype-pom-no-properties.xml");
         final File tempPom = new File("target/test-pom.xml");
         FileUtils.copyFile(testPom, tempPom);
         assertTrue(tempPom.exists());
@@ -334,8 +333,7 @@ public class CleanMojoTest {
         final FileInputStream fileInputStream = new FileInputStream(tempPom);
         final String data = IOUtils.toString(fileInputStream);
         fileInputStream.close();
-        assertTrue("Missing schema location", data.contains(
-                "xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\""));
+        assertTrue("Missing schema location", data.contains("xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\""));
         assertTrue(data.contains("<jdk.version>1.6</jdk.version>"));
         assertFalse(data.contains("coding-standards.version"));
         assertFalse(data.contains("cobertura-maven-plugin"));

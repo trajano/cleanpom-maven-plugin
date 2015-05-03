@@ -40,7 +40,7 @@ public class EolNormalizingStream extends FilterOutputStream {
      *            line separator string
      */
     public EolNormalizingStream(final OutputStream os,
-            final String lineSeparator) {
+        final String lineSeparator) {
 
         super(os);
         lineSeparatorBytes = lineSeparator.getBytes();
@@ -57,7 +57,8 @@ public class EolNormalizingStream extends FilterOutputStream {
      *             I/O error
      */
     @Override
-    public void write(final int b) throws IOException {
+    public void write(final int b)
+        throws IOException {
 
         if (b == 10) {
             for (final byte lb : lineSeparatorBytes) {
