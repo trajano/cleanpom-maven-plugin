@@ -85,8 +85,8 @@ public class CleanMojo extends AbstractMojo {
     private TransformerHandler buildHandlerChain(
         final SAXTransformerFactory tf,
         final OutputStream outputStream)
-            throws IOException,
-            TransformerException {
+        throws IOException,
+        TransformerException {
 
         TransformerHandler handler = null;
         TransformerHandler lastHandler = null;
@@ -164,7 +164,7 @@ public class CleanMojo extends AbstractMojo {
      */
     private void transform(final File sourceFile,
         final File targetFile)
-            throws MojoExecutionException {
+        throws MojoExecutionException {
 
         try {
             final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();

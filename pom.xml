@@ -87,10 +87,14 @@
                         </dependency>
                     </dependencies>
                     <configuration>
+                        <linkXRef>true</linkXRef>
                         <configLocation>config/checkstyle-configuration.xml</configLocation>
                         <includes>**/*.java,**/*.properties</includes>
                         <excludes>target/**,src/test/**</excludes>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -307,12 +311,6 @@
         <plugins>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <linkXRef>true</linkXRef>
-                    <configLocation>config/checkstyle-configuration.xml</configLocation>
-                    <includes>**/*.java,**/*.properties</includes>
-                    <excludes>target/**,src/test/**</excludes>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>

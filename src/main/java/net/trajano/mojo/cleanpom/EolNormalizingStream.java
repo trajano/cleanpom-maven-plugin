@@ -12,7 +12,17 @@ import java.io.OutputStream;
  *
  * @author Archimedes Trajano
  */
-public class EolNormalizingStream extends FilterOutputStream {
+public final class EolNormalizingStream extends FilterOutputStream {
+
+    /**
+     * Carriage return.
+     */
+    private static final int CR = 13;
+
+    /**
+     * Line feed.
+     */
+    private static final int LF = 10;
 
     /**
      * Line separator byte sequence.
@@ -60,11 +70,11 @@ public class EolNormalizingStream extends FilterOutputStream {
     public void write(final int b)
         throws IOException {
 
-        if (b == 10) {
+        if (b == LF) {
             for (final byte lb : lineSeparatorBytes) {
                 super.write(lb);
             }
-        } else if (b != 13) {
+        } else if (b != CR) {
             super.write(b);
         }
     }
