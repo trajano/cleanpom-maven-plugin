@@ -1,5 +1,6 @@
 package net.trajano.mojo.cleanpom.test;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -76,7 +77,6 @@ public class CleanMojoTest {
         final FileInputStream fileInputStream = new FileInputStream(temp);
         final String data = IOUtils.toString(fileInputStream);
         fileInputStream.close();
-        System.out.println(data);
     }
 
     /**

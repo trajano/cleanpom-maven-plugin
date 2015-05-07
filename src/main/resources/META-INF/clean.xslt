@@ -13,6 +13,10 @@
     <!-- Root document structure with prologue and epilogue comments -->
     <xsl:template match="/">
         <xsl:value-of select="$nl" disable-output-escaping="no"/>
+        <xsl:for-each select="processing-instruction()">
+            <xsl:copy-of select="."/>
+            <xsl:value-of select="$nl" disable-output-escaping="no"/>
+        </xsl:for-each>
         <xsl:for-each select="*/preceding-sibling::comment()">
             <xsl:comment>
                 <xsl:value-of select="."/>
