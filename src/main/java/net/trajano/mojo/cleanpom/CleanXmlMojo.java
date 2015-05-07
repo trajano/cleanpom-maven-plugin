@@ -32,6 +32,9 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import net.trajano.mojo.cleanpom.internal.DtdResolver;
+import net.trajano.mojo.cleanpom.internal.EolNormalizingStream;
+
 /**
  * Cleans XML sources in general. Tied to the {@link LifecyclePhase#INITIALIZE}
  * so sources are cleaned up before doing anything else.

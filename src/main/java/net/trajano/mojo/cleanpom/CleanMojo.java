@@ -27,6 +27,8 @@ import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.plexus.build.incremental.BuildContext;
 
+import net.trajano.mojo.cleanpom.internal.EolNormalizingStream;
+
 /**
  * Cleans the POM.
  */

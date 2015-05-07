@@ -1,4 +1,4 @@
-package net.trajano.mojo.cleanpom;
+package net.trajano.mojo.cleanpom.internal;
 
 import java.io.IOException;
 
