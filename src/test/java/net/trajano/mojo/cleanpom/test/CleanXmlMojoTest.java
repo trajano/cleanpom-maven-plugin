@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.model.FileSet;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.testing.MojoRule;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.Rule;
@@ -23,6 +24,31 @@ public class CleanXmlMojoTest {
 
     @Rule
     public MojoRule rule = new MojoRule();
+
+    @Test(expected = MojoExecutionException.class)
+    public void testFailWithTwoDTD() throws Exception {
+
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
+        final File xml = new File("src/test/resources/net/trajano/mojo/cleanpom/dual-doctype.xml");
+        final File temp = File.createTempFile("dirty", "");
+        temp.delete();
+        temp.mkdirs();
+        FileUtils.copyFile(xml, new File(temp, "dirty1.xml"));
+
+        final CleanXmlMojo mojo = (CleanXmlMojo) rule.lookupMojo("clean-xml", testPom);
+        final FileSet xmlFiles = new FileSet();
+        xmlFiles.setDirectory(temp.getAbsolutePath());
+        xmlFiles.addInclude("**/*.xml");
+        rule.setVariableValueToObject(mojo, "xmlFileSets", new FileSet[] {
+            xmlFiles
+        });
+        assertNotNull(mojo);
+        try {
+            mojo.execute();
+        } finally {
+            FileUtils.deleteDirectory(temp);
+        }
+    }
 
     /**
      * Tests general cleaning.
@@ -148,5 +174,4 @@ public class CleanXmlMojoTest {
         }
         FileUtils.deleteDirectory(temp);
     }
-
 }

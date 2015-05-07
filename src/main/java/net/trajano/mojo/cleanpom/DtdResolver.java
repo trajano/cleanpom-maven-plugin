@@ -17,6 +17,12 @@ public class DtdResolver implements
     ContentHandler {
 
     /**
+     * Document locator.
+     */
+    @SuppressWarnings("unused")
+    private Locator documentLocator;
+
+    /**
      * Name of the document element.
      */
     private String name;
@@ -155,15 +161,17 @@ public class DtdResolver implements
 
         publicId = doctypePublicId;
         systemId = doctypeSystemId;
+
         return null;
     }
 
     /**
-     * Does nothing. {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setDocumentLocator(final Locator locator) {
 
+        documentLocator = locator;
     }
 
     /**
