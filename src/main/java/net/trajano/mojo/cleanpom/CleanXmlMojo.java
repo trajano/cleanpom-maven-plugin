@@ -1,5 +1,6 @@
 package net.trajano.mojo.cleanpom;
 
+
 import static java.lang.String.format;
 
 import java.io.File;
@@ -34,6 +35,7 @@ import org.xml.sax.XMLReader;
 
 import net.trajano.mojo.cleanpom.internal.DtdResolver;
 import net.trajano.mojo.cleanpom.internal.EolNormalizingStream;
+import net.trajano.mojo.cleanpom.internal.Messages;
 
 /**
  * Cleans XML sources in general. Tied to the {@link LifecyclePhase#INITIALIZE}
@@ -153,13 +155,13 @@ public class CleanXmlMojo extends AbstractMojo {
             sourceFile.delete();
             outputStream.close();
         } catch (final SAXException e) {
-            throw new MojoExecutionException(format(R.getString("transformfail"), targetFile), e);
+            throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);
         } catch (final TransformerException e) {
-            throw new MojoExecutionException(format(R.getString("transformfail"), targetFile), e);
+            throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);
         } catch (final IOException e) {
-            throw new MojoExecutionException(format(R.getString("transformfailio"), targetFile), e);
+            throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL_IO, targetFile), e);
         } catch (final ParserConfigurationException e) {
-            throw new MojoExecutionException(format(R.getString("transformfail"), targetFile), e);
+            throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);
         }
     }
 }
