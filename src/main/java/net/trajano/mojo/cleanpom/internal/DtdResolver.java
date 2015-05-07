@@ -1,5 +1,6 @@
 package net.trajano.mojo.cleanpom.internal;
 
+
 import java.io.IOException;
 
 import org.xml.sax.Attributes;
@@ -19,13 +20,17 @@ public class DtdResolver implements
     /**
      * Document locator.
      */
-    @SuppressWarnings("unused")
     private Locator documentLocator;
 
     /**
      * Name of the document element.
      */
     private String name;
+
+    /**
+     * Flag to indicate that a processing instruction was found.
+     */
+    private boolean processingInstructionFound;
 
     /**
      * Public ID.
@@ -44,7 +49,7 @@ public class DtdResolver implements
     public void characters(final char[] ch,
         final int start,
         final int length)
-        throws SAXException {
+            throws SAXException {
 
         // does nothing
     }
@@ -66,7 +71,7 @@ public class DtdResolver implements
     public void endElement(final String uri,
         final String localName,
         final String qName)
-        throws SAXException {
+            throws SAXException {
 
         // does nothing
     }
@@ -79,6 +84,16 @@ public class DtdResolver implements
         throws SAXException {
 
         // does nothing
+    }
+
+    /**
+     * Gets the document locator used to track the progress in the XML file.
+     * 
+     * @return the document locator.
+     */
+    public Locator getDocumentLocator() {
+
+        return documentLocator;
     }
 
     /**
@@ -118,7 +133,7 @@ public class DtdResolver implements
     public void ignorableWhitespace(final char[] ch,
         final int start,
         final int length)
-        throws SAXException {
+            throws SAXException {
 
         // does nothing
     }
@@ -134,14 +149,25 @@ public class DtdResolver implements
     }
 
     /**
-     * Does nothing. {@inheritDoc}
+     * Checks if a processing instruction has been found so far.
+     * 
+     * @return <code>true</code> if a processing instruction has been found so
+     *         far.
+     */
+    public boolean isProcessingInstructionFound() {
+
+        return processingInstructionFound;
+    }
+
+    /**
+     * Tracks that a processing instruction is found. {@inheritDoc}
      */
     @Override
     public void processingInstruction(final String target,
         final String data)
-        throws SAXException {
+            throws SAXException {
 
-        // does nothing
+        processingInstructionFound = true;
     }
 
     /**
@@ -156,8 +182,8 @@ public class DtdResolver implements
     @Override
     public InputSource resolveEntity(final String doctypePublicId,
         final String doctypeSystemId)
-        throws SAXException,
-        IOException {
+            throws SAXException,
+            IOException {
 
         publicId = doctypePublicId;
         systemId = doctypeSystemId;
@@ -212,7 +238,7 @@ public class DtdResolver implements
         final String localName,
         final String qName,
         final Attributes atts)
-        throws SAXException {
+            throws SAXException {
 
         if (name == null) {
             name = localName;
@@ -226,7 +252,7 @@ public class DtdResolver implements
     @Override
     public void startPrefixMapping(final String prefix,
         final String uri)
-        throws SAXException {
+            throws SAXException {
 
         //does nothing
     }

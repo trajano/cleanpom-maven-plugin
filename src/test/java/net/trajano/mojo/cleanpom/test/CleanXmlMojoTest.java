@@ -177,6 +177,36 @@ public class CleanXmlMojoTest {
     }
 
     @Test
+    public void testWithDTDAndPI() throws Exception {
+
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
+        final File xml = new File("src/test/resources/net/trajano/mojo/cleanpom/checkstyle-configuration-with-pi.xml");
+        final File temp = File.createTempFile("dirty", "");
+        temp.delete();
+        temp.mkdirs();
+        FileUtils.copyFile(xml, new File(temp, "dirty1.xml"));
+
+        final CleanXmlMojo mojo = (CleanXmlMojo) rule.lookupMojo("clean-xml", testPom);
+        final FileSet xmlFiles = new FileSet();
+        xmlFiles.setDirectory(temp.getAbsolutePath());
+        xmlFiles.addInclude("**/*.xml");
+        rule.setVariableValueToObject(mojo, "xmlFileSets", new FileSet[] {
+            xmlFiles
+        });
+        assertNotNull(mojo);
+        try {
+            mojo.execute();
+            final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
+            final String data = IOUtils.toString(fileInputStream);
+            fileInputStream.close();
+            System.out.println(data);
+        } finally {
+            FileUtils.deleteDirectory(temp);
+        }
+
+    }
+
+    @Test
     public void testWithPI() throws Exception {
 
         final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
@@ -199,7 +229,6 @@ public class CleanXmlMojoTest {
             final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
             final String data = IOUtils.toString(fileInputStream);
             fileInputStream.close();
-            System.out.println(data);
         } finally {
             FileUtils.deleteDirectory(temp);
         }
