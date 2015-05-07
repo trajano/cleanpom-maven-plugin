@@ -77,23 +77,6 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>2.15</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>net.trajano</groupId>
-                            <artifactId>coding-standards</artifactId>
-                            <version>2.0.2-SNAPSHOT</version>
-                        </dependency>
-                    </dependencies>
-                    <configuration>
-                        <linkXRef>true</linkXRef>
-                        <configLocation>config/checkstyle-configuration.xml</configLocation>
-                        <includes>**/*.java,**/*.properties</includes>
-                        <excludes>target/**,src/test/**</excludes>
-                    </configuration>
-                </plugin>
-                <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.1</version>
                     <configuration>
@@ -243,6 +226,23 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.15</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.trajano</groupId>
+                        <artifactId>coding-standards</artifactId>
+                        <version>2.0.2-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <linkXRef>true</linkXRef>
+                    <configLocation>config/checkstyle-configuration.xml</configLocation>
+                    <includes>**/*.java,**/*.properties</includes>
+                    <excludes>target/**,src/test/**</excludes>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
