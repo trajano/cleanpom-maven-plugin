@@ -229,6 +229,7 @@ public class CleanXmlMojoTest {
             final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
             final String data = IOUtils.toString(fileInputStream);
             fileInputStream.close();
+            assertTrue(data.contains("<?xml-stylesheet type=\"text/xsl\" href=\"style.xsl\"?>"));
         } finally {
             FileUtils.deleteDirectory(temp);
         }

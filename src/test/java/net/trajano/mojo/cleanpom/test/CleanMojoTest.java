@@ -77,6 +77,8 @@ public class CleanMojoTest {
         final FileInputStream fileInputStream = new FileInputStream(temp);
         final String data = IOUtils.toString(fileInputStream);
         fileInputStream.close();
+        assertTrue(data.contains("<notapom>"));
+        assertTrue(data.contains("<!-- prolog-->"));
     }
 
     /**
