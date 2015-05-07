@@ -1,6 +1,5 @@
 package net.trajano.mojo.cleanpom.internal;
 
-
 import java.util.ResourceBundle;
 
 /**

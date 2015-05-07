@@ -1,6 +1,5 @@
 package net.trajano.mojo.cleanpom.test;
 
-
 import org.junit.Assert;
 import org.junit.Test;
 

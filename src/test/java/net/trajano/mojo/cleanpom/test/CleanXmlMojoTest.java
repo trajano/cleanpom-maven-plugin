@@ -1,6 +1,5 @@
 package net.trajano.mojo.cleanpom.test;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -16,7 +15,9 @@ import org.codehaus.plexus.util.FileUtils;
 import org.junit.Rule;
 import org.junit.Test;
 
+import net.trajano.commons.testing.UtilityClassTestUtil;
 import net.trajano.mojo.cleanpom.CleanXmlMojo;
+import net.trajano.mojo.cleanpom.internal.Messages;
 
 /**
  * Tests the {@link CleanXmlMojo}.
@@ -25,6 +26,12 @@ public class CleanXmlMojoTest {
 
     @Rule
     public MojoRule rule = new MojoRule();
+
+    @Test
+    public void coverUtilClasses() {
+
+        UtilityClassTestUtil.assertUtilityClassWellDefined(Messages.class);
+    }
 
     @Test(expected = MojoExecutionException.class)
     public void testFailWithWithDTDs() throws Exception {

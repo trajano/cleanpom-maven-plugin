@@ -1,6 +1,5 @@
 package net.trajano.mojo.cleanpom;
 
-
 import static java.lang.String.format;
 
 import java.io.File;
