@@ -8,7 +8,7 @@
     </parent>
     <groupId>net.trajano.mojo</groupId>
     <artifactId>cleanpom-maven-plugin</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>Clean POM Maven Plugin</name>
     <description>Cleans the POM based on XSLT.</description>
@@ -16,7 +16,7 @@
     <scm>
         <connection>scm:git:https://github.com/trajano/${project.artifactId}</connection>
         <developerConnection>scm:git:ssh://git@github.com/trajano/${project.artifactId}.git</developerConnection>
-        <tag>cleanpom-maven-plugin-1.1.0</tag>
+        <tag>HEAD</tag>
         <url>https://github.com/trajano/${project.artifactId}</url>
     </scm>
     <distributionManagement>
@@ -430,7 +430,7 @@
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
-                                                <execute/>
+                                                <execute />
                                             </action>
                                         </pluginExecution>
                                     </pluginExecutions>
