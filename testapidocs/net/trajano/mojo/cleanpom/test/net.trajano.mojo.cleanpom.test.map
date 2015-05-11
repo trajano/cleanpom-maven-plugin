@@ -1,4 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./CleanMojoTest.html" title="net.trajano.mojo.cleanpom.test.CleanMojoTest" alt="" coords="15,16,124,43"/>
-<area shape="rect" id="node1" href="./CleanMojoTest.html" title="&lt;TABLE&gt;" alt="" coords="4,5,135,53"/>
+<area shape="rect" id="node1_0" href="./DtdResolverTest.html" title="net.trajano.mojo.cleanpom.test.DtdResolverTest" alt="" coords="16,17,135,42"/>
+<area shape="rect" id="node1" href="./DtdResolverTest.html" title="&lt;TABLE&gt;" alt="" coords="5,5,145,53"/>
+<area shape="rect" id="node2_1" href="./CleanMojoTest.html" title="net.trajano.mojo.cleanpom.test.CleanMojoTest" alt="" coords="180,17,288,42"/>
+<area shape="rect" id="node2" href="./CleanMojoTest.html" title="&lt;TABLE&gt;" alt="" coords="169,5,299,53"/>
+<area shape="rect" id="node3_2" href="./CleanXmlMojoTest.html" title="net.trajano.mojo.cleanpom.test.CleanXmlMojoTest" alt="" coords="334,17,465,42"/>
+<area shape="rect" id="node3" href="./CleanXmlMojoTest.html" title="&lt;TABLE&gt;" alt="" coords="323,5,475,53"/>
 </map>

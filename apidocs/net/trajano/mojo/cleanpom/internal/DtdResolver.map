@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./DtdResolver.html" title="net.trajano.mojo.cleanpom.internal.DtdResolver" alt="" coords="99,118,191,143"/>
+<area shape="rect" id="node1" href="./DtdResolver.html" title="&lt;TABLE&gt;" alt="" coords="88,107,201,155"/>
+<area shape="rect" id="node2_1" href="http://java.sun.com/j2se/1.4.2/docs/api/org/xml/sax/EntityResolver.html" title="org.xml.sax.EntityResolver" alt="" coords="16,11,121,53"/>
+<area shape="rect" id="node2" href="http://java.sun.com/j2se/1.4.2/docs/api/org/xml/sax/EntityResolver.html" title="&lt;TABLE&gt;" alt="" coords="5,5,132,59"/>
+<area shape="rect" id="node3_2" href="http://java.sun.com/j2se/1.4.2/docs/api/org/xml/sax/ContentHandler.html" title="org.xml.sax.ContentHandler" alt="" coords="167,11,277,53"/>
+<area shape="rect" id="node3" href="http://java.sun.com/j2se/1.4.2/docs/api/org/xml/sax/ContentHandler.html" title="&lt;TABLE&gt;" alt="" coords="156,5,288,59"/>
+</map>

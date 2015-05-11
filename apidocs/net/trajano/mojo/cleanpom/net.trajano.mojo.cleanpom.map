@@ -1,6 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./CleanMojo.html" title="net.trajano.mojo.cleanpom.CleanMojo" alt="" coords="16,16,99,43"/>
-<area shape="rect" id="node1" href="./CleanMojo.html" title="&lt;TABLE&gt;" alt="" coords="5,5,109,53"/>
-<area shape="rect" id="node2_1" href="./HelpMojo.html" title="net.trajano.mojo.cleanpom.HelpMojo" alt="" coords="145,16,221,43"/>
-<area shape="rect" id="node2" href="./HelpMojo.html" title="&lt;TABLE&gt;" alt="" coords="134,5,231,53"/>
+<area shape="rect" id="node1_0" href="./HelpMojo.html" title="net.trajano.mojo.cleanpom.HelpMojo" alt="" coords="16,17,91,42"/>
+<area shape="rect" id="node1" href="./HelpMojo.html" title="&lt;TABLE&gt;" alt="" coords="5,5,101,53"/>
+<area shape="rect" id="node2_1" href="./CleanXmlMojo.html" title="net.trajano.mojo.cleanpom.CleanXmlMojo" alt="" coords="136,17,240,42"/>
+<area shape="rect" id="node2" href="./CleanXmlMojo.html" title="&lt;TABLE&gt;" alt="" coords="125,5,251,53"/>
+<area shape="rect" id="node3_2" href="./CleanMojo.html" title="net.trajano.mojo.cleanpom.CleanMojo" alt="" coords="286,17,367,42"/>
+<area shape="rect" id="node3" href="./CleanMojo.html" title="&lt;TABLE&gt;" alt="" coords="275,5,378,53"/>
 </map>

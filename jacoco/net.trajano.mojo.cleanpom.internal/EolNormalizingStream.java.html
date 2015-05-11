@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EolNormalizingStream.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Clean POM Maven Plugin</a> &gt; <a href="index.source.html" class="el_package">net.trajano.mojo.cleanpom.internal</a> &gt; <span class="el_source">EolNormalizingStream.java</span></div><h1>EolNormalizingStream.java</h1><pre class="source lang-java linenums">package net.trajano.mojo.cleanpom.internal;
+
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+/**
+ * This ensures that the EOL characters are consistent when writing out the
+ * stream. It will use the platform's EOL by default or a specified EOL
+ * sequence. It simply strips out CR characters. This won't work correctly with
+ * CR line endings, only CRLF or LF line endings will work correctly.
+ *
+ * @author Archimedes Trajano
+ */
+public final class EolNormalizingStream extends FilterOutputStream {
+
+    /**
+     * Carriage return.
+     */
+    private static final int CR = 13;
+
+    /**
+     * Line feed.
+     */
+    private static final int LF = 10;
+
+    /**
+     * Line separator byte sequence.
+     */
+    private final byte[] lineSeparatorBytes;
+
+    /**
+     * Creates the normalizing stream with the system default line separator.
+     *
+     * @param os
+     *            output stream to filter
+     */
+    public EolNormalizingStream(final OutputStream os) {
+
+<span class="fc" id="L40">        this(os, System.getProperty(&quot;line.separator&quot;));</span>
+<span class="fc" id="L41">    }</span>
+
+    /**
+     * Creates the normalizing stream with the specified line separator
+     * sequence.
+     *
+     * @param os
+     *            output stream to filter
+     * @param lineSeparator
+     *            line separator string
+     */
+    public EolNormalizingStream(final OutputStream os,
+        final String lineSeparator) {
+
+<span class="fc" id="L55">        super(os);</span>
+<span class="fc" id="L56">        lineSeparatorBytes = lineSeparator.getBytes();</span>
+<span class="fc" id="L57">    }</span>
+
+    /**
+     * Checks if the &quot;LF&quot; character is received if so it will write the line
+     * separator bytes, if it is CR it will ignore and other cases it will write
+     * the character as-is.
+     *
+     * @param b
+     *            character to write
+     * @throws IOException
+     *             I/O error
+     */
+    @Override
+    public void write(final int b)
+        throws IOException {
+
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (b == LF) {</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">            for (final byte lb : lineSeparatorBytes) {</span>
+<span class="fc" id="L75">                super.write(lb);</span>
+            }
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        } else if (b != CR) {</span>
+<span class="fc" id="L78">            super.write(b);</span>
+        }
+<span class="fc" id="L80">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

@@ -1,3 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Clean POM Maven Plugin,net.trajano.mojo.cleanpom,CleanMojo,51,189,1,11,7,41,1,11,0,6
-Clean POM Maven Plugin,net.trajano.mojo.cleanpom,HelpMojo,875,0,106,0,151,0,69,0,16,0
+Clean POM Maven Plugin,net.trajano.mojo.cleanpom.internal,DtdResolver,10,52,1,7,4,21,5,18,4,15
+Clean POM Maven Plugin,net.trajano.mojo.cleanpom.internal,EolNormalizingStream,0,45,1,5,0,11,1,5,0,3
+Clean POM Maven Plugin,net.trajano.mojo.cleanpom.internal,Messages,0,15,0,0,0,5,0,2,0,2
+Clean POM Maven Plugin,net.trajano.mojo.cleanpom,CleanMojo,51,192,1,11,7,41,1,11,0,6
+Clean POM Maven Plugin,net.trajano.mojo.cleanpom,HelpMojo,905,0,110,0,156,0,71,0,16,0
+Clean POM Maven Plugin,net.trajano.mojo.cleanpom,CleanXmlMojo,125,218,2,8,20,43,2,7,0,4

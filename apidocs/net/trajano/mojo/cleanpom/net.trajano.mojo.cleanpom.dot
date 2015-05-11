@@ -9,17 +9,23 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// net.trajano.mojo.cleanpom.CleanMojo
-	c0 [label=<<table title="net.trajano.mojo.cleanpom.CleanMojo" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CleanMojo.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> CleanMojo </td></tr>
-		</table></td></tr>
-		</table>>, URL="./CleanMojo.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// net.trajano.mojo.cleanpom.HelpMojo
-	c1 [label=<<table title="net.trajano.mojo.cleanpom.HelpMojo" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HelpMojo.html">
+	c0 [label=<<table title="net.trajano.mojo.cleanpom.HelpMojo" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HelpMojo.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HelpMojo </td></tr>
 		</table></td></tr>
 		</table>>, URL="./HelpMojo.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// net.trajano.mojo.cleanpom.CleanXmlMojo
+	c1 [label=<<table title="net.trajano.mojo.cleanpom.CleanXmlMojo" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CleanXmlMojo.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CleanXmlMojo </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CleanXmlMojo.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// net.trajano.mojo.cleanpom.CleanMojo
+	c2 [label=<<table title="net.trajano.mojo.cleanpom.CleanMojo" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./CleanMojo.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> CleanMojo </td></tr>
+		</table></td></tr>
+		</table>>, URL="./CleanMojo.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

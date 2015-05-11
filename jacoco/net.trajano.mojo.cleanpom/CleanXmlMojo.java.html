@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CleanXmlMojo.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Clean POM Maven Plugin</a> &gt; <a href="index.source.html" class="el_package">net.trajano.mojo.cleanpom</a> &gt; <span class="el_source">CleanXmlMojo.java</span></div><h1>CleanXmlMojo.java</h1><pre class="source lang-java linenums">package net.trajano.mojo.cleanpom;
+
+import static java.lang.String.format;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ResourceBundle;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+
+import org.apache.maven.model.FileSet;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.Scanner;
+import org.sonatype.plexus.build.incremental.BuildContext;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
+import net.trajano.mojo.cleanpom.internal.DtdResolver;
+import net.trajano.mojo.cleanpom.internal.EolNormalizingStream;
+import net.trajano.mojo.cleanpom.internal.Messages;
+
+/**
+ * Cleans XML sources in general. Tied to the {@link LifecyclePhase#INITIALIZE}
+ * so sources are cleaned up before doing anything else.
+ */
+@Mojo(name = &quot;clean-xml&quot;,
+    defaultPhase = LifecyclePhase.INITIALIZE,
+    threadSafe = true)
+<span class="fc" id="L46">public class CleanXmlMojo extends AbstractMojo {</span>
+
+    /**
+     * Resource bundle.
+     */
+<span class="fc" id="L51">    private static final ResourceBundle R = ResourceBundle.getBundle(&quot;META-INF/Messages&quot;);</span>
+
+    /**
+     * Build context.
+     */
+    @Component
+    private BuildContext buildContext;
+
+    /**
+     * List of XML filesets to process. This defaults to
+     * &lt;code&gt;src/main/*.[xml|xsd|xslt]&lt;/code&gt; and &lt;code&gt;src/site/*.xml&lt;/code&gt; .
+     */
+    @Parameter(required = false)
+    private FileSet[] xmlFileSets;
+
+    /**
+     * Performs the cleanup.
+     *
+     * @throws MojoExecutionException
+     *             problem with the execution.
+     */
+    @Override
+    public void execute() throws MojoExecutionException {
+
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (xmlFileSets == null) {</span>
+<span class="nc" id="L76">            xmlFileSets = new FileSet[2];</span>
+<span class="nc" id="L77">            xmlFileSets[0] = new FileSet();</span>
+<span class="nc" id="L78">            xmlFileSets[0].setDirectory(&quot;src/main&quot;);</span>
+<span class="nc" id="L79">            xmlFileSets[0].addInclude(&quot;**/*.xml&quot;);</span>
+<span class="nc" id="L80">            xmlFileSets[0].addInclude(&quot;**/*.xsd&quot;);</span>
+<span class="nc" id="L81">            xmlFileSets[0].addInclude(&quot;**/*.xslt&quot;);</span>
+<span class="nc" id="L82">            xmlFileSets[1] = new FileSet();</span>
+<span class="nc" id="L83">            xmlFileSets[1].setDirectory(&quot;src/site&quot;);</span>
+<span class="nc" id="L84">            xmlFileSets[1].addInclude(&quot;**/*.xml&quot;);</span>
+        }
+
+        final File tempFile;
+        try {
+<span class="fc" id="L89">            tempFile = File.createTempFile(&quot;temp&quot;, &quot;xml&quot;);</span>
+<span class="nc" id="L90">        } catch (final IOException e) {</span>
+<span class="nc" id="L91">            throw new MojoExecutionException(e.getMessage(), e);</span>
+<span class="fc" id="L92">        }</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (final FileSet xmlFiles : xmlFileSets) {</span>
+<span class="fc" id="L94">            final File dir = new File(xmlFiles.getDirectory());</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">            if (!dir.exists()) {</span>
+<span class="nc" id="L96">                continue;</span>
+            }
+<span class="fc" id="L98">            final Scanner scanner = buildContext.newScanner(dir, false);</span>
+<span class="fc" id="L99">            scanner.setIncludes(xmlFiles.getIncludes().toArray(new String[0]));</span>
+<span class="fc" id="L100">            scanner.scan();</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            for (final String includedFile : scanner.getIncludedFiles()) {</span>
+<span class="fc" id="L102">                final File file = new File(scanner.getBasedir(), includedFile);</span>
+
+                try {
+<span class="fc" id="L105">                    FileUtils.copyFile(file, tempFile);</span>
+<span class="fc" id="L106">                    transform(tempFile, file);</span>
+<span class="nc" id="L107">                } catch (final IOException e) {</span>
+<span class="nc" id="L108">                    throw new MojoExecutionException(format(R.getString(&quot;copyfail&quot;), file, tempFile), e);</span>
+<span class="fc" id="L109">                }</span>
+
+            }
+        }
+<span class="fc" id="L113">        tempFile.delete();</span>
+<span class="fc" id="L114">    }</span>
+
+    /**
+     * Performs the transformation.
+     *
+     * @param sourceFile
+     *            source file
+     * @param targetFile
+     *            target file
+     * @throws MojoExecutionException
+     *             problem with the execution.
+     */
+    private void transform(final File sourceFile,
+        final File targetFile) throws MojoExecutionException {
+
+        try {
+<span class="fc" id="L130">            final SAXParserFactory spf = SAXParserFactory.newInstance();</span>
+<span class="fc" id="L131">            spf.setNamespaceAware(true);</span>
+<span class="fc" id="L132">            final XMLReader xmlReader = spf.newSAXParser().getXMLReader();</span>
+<span class="fc" id="L133">            final DtdResolver resolver = new DtdResolver();</span>
+<span class="fc" id="L134">            xmlReader.setEntityResolver(resolver);</span>
+<span class="fc" id="L135">            xmlReader.setContentHandler(resolver);</span>
+
+<span class="fc" id="L137">            final FileInputStream source = new FileInputStream(sourceFile);</span>
+<span class="fc" id="L138">            xmlReader.parse(new InputSource(source));</span>
+<span class="fc" id="L139">            source.close();</span>
+
+<span class="fc" id="L141">            final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();</span>
+<span class="fc" id="L142">            final OutputStream outputStream = buildContext.newFileOutputStream(targetFile);</span>
+            final Transformer transformer;
+<span class="fc bfc" id="L144" title="All 2 branches covered.">            if (resolver.isDtdPresent()) {</span>
+<span class="fc" id="L145">                transformer = tf.newTransformer(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(&quot;META-INF/clean-with-dtd.xslt&quot;)));</span>
+<span class="fc" id="L146">                transformer.setOutputProperty(&quot;{http://xml.apache.org/xalan}line-separator&quot;, &quot;\n&quot;);</span>
+<span class="fc" id="L147">                transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, resolver.getPublicId());</span>
+<span class="fc" id="L148">                transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, resolver.getSystemId());</span>
+            } else {
+<span class="fc" id="L150">                transformer = tf.newTransformer(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(&quot;META-INF/clean.xslt&quot;)));</span>
+            }
+<span class="fc" id="L152">            transformer.transform(new StreamSource(sourceFile), new StreamResult(new EolNormalizingStream(outputStream)));</span>
+<span class="fc" id="L153">            getLog().debug(format(R.getString(&quot;donecleaning&quot;), targetFile));</span>
+<span class="fc" id="L154">            sourceFile.delete();</span>
+<span class="fc" id="L155">            outputStream.close();</span>
+<span class="fc" id="L156">        } catch (final SAXException e) {</span>
+<span class="fc" id="L157">            throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);</span>
+<span class="nc" id="L158">        } catch (final TransformerException e) {</span>
+<span class="nc" id="L159">            throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);</span>
+<span class="nc" id="L160">        } catch (final IOException e) {</span>
+<span class="nc" id="L161">            throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL_IO, targetFile), e);</span>
+<span class="nc" id="L162">        } catch (final ParserConfigurationException e) {</span>
+<span class="nc" id="L163">            throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);</span>
+<span class="fc" id="L164">        }</span>
+<span class="fc" id="L165">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
