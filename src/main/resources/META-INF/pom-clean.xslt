@@ -200,6 +200,13 @@
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
+    <xsl:template match="m:exclusion">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="m:groupId"/>
+            <xsl:apply-templates select="m:artifactId"/>
+        </xsl:copy>
+    </xsl:template>
     <xsl:template match="m:pluginManagement/m:plugins">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
