@@ -191,6 +191,15 @@
             <xsl:apply-templates select="m:optional"/>
         </xsl:copy>
     </xsl:template>
+    <xsl:template match="m:exclusions">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="m:exclusion">
+                <xsl:sort select="m:groupId"/>
+                <xsl:sort select="m:artifactId"/>
+            </xsl:apply-templates>
+        </xsl:copy>
+    </xsl:template>
     <xsl:template match="m:pluginManagement/m:plugins">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
