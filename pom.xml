@@ -4,7 +4,7 @@
     <parent>
         <groupId>net.trajano</groupId>
         <artifactId>trajano</artifactId>
-        <version>11.1</version>
+        <version>12</version>
     </parent>
     <groupId>net.trajano.mojo</groupId>
     <artifactId>cleanpom-maven-plugin</artifactId>
@@ -29,7 +29,7 @@
     <properties>
         <coding-standards.version>2.1.0</coding-standards.version>
         <jdk.version>1.6</jdk.version>
-        <maven.version>3.3.1</maven.version>
+        <maven.version>3.3.3</maven.version>
         <surefire.version>2.18.1</surefire.version>
     </properties>
     <dependencies>
@@ -430,7 +430,7 @@
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
-                                                <execute />
+                                                <execute/>
                                             </action>
                                         </pluginExecution>
                                     </pluginExecutions>

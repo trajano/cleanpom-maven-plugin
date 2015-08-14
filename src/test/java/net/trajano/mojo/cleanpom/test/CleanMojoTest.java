@@ -81,11 +81,13 @@ public class CleanMojoTest {
     }
 
     /**
-     * Tests POMs that have an import dependency.
+     * Tests POMs that have an import dependency an exclusions.
+     * <a href="https://github.com/trajano/cleanpom-maven-plugin/issues/1">
+     * trajano/cleanpom-maven-plugin#1</a>.
+     * <a href="https://github.com/trajano/cleanpom-maven-plugin/issues/2">
+     * trajano/cleanpom-maven-plugin#2</a>.
      *
      * @throws Exception
-     * @see <a href="https://github.com/trajano/cleanpom-maven-plugin/issues/1">
-     *      trajano/cleanpom-maven-plugin#1</a>
      */
     @Test
     public void testImportDependency() throws Exception {
@@ -106,6 +108,8 @@ public class CleanMojoTest {
         assertEquals(2, StringUtils.countMatches(data, "<scope>import</scope>"));
         assertTrue(data.indexOf("dependencyManagement-test") > data.indexOf("dependencyManagement-import"));
         assertTrue(data.indexOf("dependency-test") > data.indexOf("dependency-import"));
+        assertTrue(data.indexOf("exclusion-3") > data.indexOf("exclusion-2"));
+        assertTrue(data.indexOf("exclusion-2") > data.indexOf("exclusion-1"));
     }
 
     /**
