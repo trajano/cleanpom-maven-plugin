@@ -37,13 +37,27 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-			<groupId>dependencyManagement-test</groupId>
+				<groupId>dependencyManagement-test</groupId>
 				<artifactId>coding-standards</artifactId>
 				<version>1.1.0</version>
 				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<artifactId>exclusion-3</artifactId>
+						<groupId>exclusion-b</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>exclusion-2</artifactId>
+						<groupId>exclusion-b</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>exclusion-1</artifactId>
+						<groupId>exclusion-a</groupId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
-			<groupId>dependencyManagement-imported</groupId>
+				<groupId>dependencyManagement-imported</groupId>
 				<artifactId>coding-standards</artifactId>
 				<version>1.1.0</version>
 				<scope>import</scope>
