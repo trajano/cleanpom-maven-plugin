@@ -121,6 +121,17 @@ public class CleanXmlMojo extends AbstractMojo {
     }
 
     /**
+     * Sets the XML file sets. This method is primarily used for testing.
+     *
+     * @param xmlFileSets
+     *            XML file sets.
+     */
+    public void setXmlFileSets(final FileSet[] xmlFileSets) {
+
+        this.xmlFileSets = xmlFileSets;
+    }
+
+    /**
      * Performs the transformation.
      *
      * @param sourceFile

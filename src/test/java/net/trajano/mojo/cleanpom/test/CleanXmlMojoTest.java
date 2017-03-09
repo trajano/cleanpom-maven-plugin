@@ -58,6 +58,26 @@ public class CleanXmlMojoTest {
         }
     }
 
+    @Test()
+    public void testEmptyXmlFileSets() throws Exception {
+
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
+        final File xml = new File("src/test/resources/net/trajano/mojo/cleanpom/dual-doctype.xml");
+        final File temp = File.createTempFile("dirty", "");
+        temp.delete();
+        temp.mkdirs();
+        FileUtils.copyFile(xml, new File(temp, "dirty1.xml"));
+
+        final CleanXmlMojo mojo = (CleanXmlMojo) rule.lookupMojo("clean-xml", testPom);
+        mojo.setXmlFileSets(new FileSet[0]);
+        assertNotNull(mojo);
+        try {
+            mojo.execute();
+        } finally {
+            FileUtils.deleteDirectory(temp);
+        }
+    }
+
     /**
      * Tests general cleaning.
      *
