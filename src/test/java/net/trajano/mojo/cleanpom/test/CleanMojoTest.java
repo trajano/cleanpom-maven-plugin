@@ -54,6 +54,20 @@ public class CleanMojoTest {
         fileInputStream.close();
     }
 
+    @Test(expected = MojoExecutionException.class)
+    public void testEmptyXsltList() throws Exception {
+
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/default-pom.xml");
+        final File tempPom = new File("target/test-pom.xml");
+        FileUtils.copyFile(testPom, tempPom);
+        assertTrue(tempPom.exists());
+
+        final CleanMojo mojo = (CleanMojo) rule.lookupMojo("clean", tempPom);
+        mojo.setXsltFiles(new String[0]);
+        assertNotNull(mojo);
+        mojo.execute();
+    }
+
     /**
      * Tests general cleaning.
      *

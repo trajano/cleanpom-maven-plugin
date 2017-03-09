@@ -108,8 +108,12 @@ public class CleanMojo extends AbstractMojo {
                 handler = currentHandler;
             }
         }
-        lastHandler.setResult(new StreamResult(outputStream));
-        return handler;
+        if (lastHandler != null) {
+            lastHandler.setResult(new StreamResult(outputStream));
+            return handler;
+        } else {
+            throw new TransformerException("Unable to build handler chain");
+        }
     }
 
     /**
@@ -125,7 +129,6 @@ public class CleanMojo extends AbstractMojo {
         final File tempFile;
         try {
             tempFile = File.createTempFile("pom", "xml");
-            tempFile.delete();
         } catch (final IOException e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
@@ -155,6 +158,18 @@ public class CleanMojo extends AbstractMojo {
     }
 
     /**
+     * Sets the XSLT files being used. This method is primarily used for
+     * testing.
+     *
+     * @param xsltFiles
+     *            XSLT files.
+     */
+    public void setXsltFiles(final String[] xsltFiles) {
+
+        this.xsltFiles = xsltFiles;
+    }
+
+    /**
      * Performs the transformation.
      *
      * @param sourceFile
@@ -168,6 +183,7 @@ public class CleanMojo extends AbstractMojo {
         final File targetFile)
         throws MojoExecutionException {
 
+        OutputStream outputStream = null;
         try {
             final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
 
@@ -180,12 +196,14 @@ public class CleanMojo extends AbstractMojo {
                     };
                 }
             }
-            final OutputStream outputStream = buildContext.newFileOutputStream(targetFile);
+            outputStream = buildContext.newFileOutputStream(targetFile);
             final TransformerHandler handler = buildHandlerChain(tf, new EolNormalizingStream(outputStream));
             final Transformer transformer = tf.newTransformer();
             transformer.transform(new StreamSource(sourceFile), new SAXResult(handler));
             getLog().debug(format(R.getString("donecleaning"), targetFile));
-            sourceFile.delete();
+            if (!sourceFile.delete()) {
+                throw new MojoExecutionException(format(R.getString("unableToDelete"), sourceFile));
+            }
             outputStream.close();
         } catch (final TransformerException e) {
             throw new MojoExecutionException(format(
@@ -193,6 +211,14 @@ public class CleanMojo extends AbstractMojo {
         } catch (final IOException e) {
             throw new MojoExecutionException(format(
                 R.getString("transformfailio"), sourceFile), e);
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (final IOException e) {
+                    getLog().warn(format(R.getString("cannotClose"), targetFile), e);
+                }
+            }
         }
     }
 }

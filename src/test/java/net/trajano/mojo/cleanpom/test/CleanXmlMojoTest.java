@@ -206,7 +206,6 @@ public class CleanXmlMojoTest {
             final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
             final String data = IOUtils.toString(fileInputStream);
             fileInputStream.close();
-            System.out.println(data);
         } finally {
             FileUtils.deleteDirectory(temp);
         }

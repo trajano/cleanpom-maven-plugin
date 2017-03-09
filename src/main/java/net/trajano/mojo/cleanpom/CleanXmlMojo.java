@@ -110,7 +110,9 @@ public class CleanXmlMojo extends AbstractMojo {
 
             }
         }
-        tempFile.delete();
+        if (tempFile.exists() && !tempFile.delete()) {
+            throw new MojoExecutionException(format(R.getString("unableToDelete"), tempFile));
+        }
     }
 
     /**
@@ -126,6 +128,8 @@ public class CleanXmlMojo extends AbstractMojo {
     private void transform(final File sourceFile,
         final File targetFile) throws MojoExecutionException {
 
+        FileInputStream source = null;
+        OutputStream outputStream = null;
         try {
             final SAXParserFactory spf = SAXParserFactory.newInstance();
             spf.setNamespaceAware(true);
@@ -134,12 +138,12 @@ public class CleanXmlMojo extends AbstractMojo {
             xmlReader.setEntityResolver(resolver);
             xmlReader.setContentHandler(resolver);
 
-            final FileInputStream source = new FileInputStream(sourceFile);
+            source = new FileInputStream(sourceFile);
             xmlReader.parse(new InputSource(source));
             source.close();
 
             final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
-            final OutputStream outputStream = buildContext.newFileOutputStream(targetFile);
+            outputStream = buildContext.newFileOutputStream(targetFile);
             final Transformer transformer;
             if (resolver.isDtdPresent()) {
                 transformer = tf.newTransformer(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean-with-dtd.xslt")));
@@ -151,7 +155,9 @@ public class CleanXmlMojo extends AbstractMojo {
             }
             transformer.transform(new StreamSource(sourceFile), new StreamResult(new EolNormalizingStream(outputStream)));
             getLog().debug(format(R.getString("donecleaning"), targetFile));
-            sourceFile.delete();
+            if (!sourceFile.delete()) {
+                throw new MojoExecutionException(format(R.getString("unableToDelete"), sourceFile));
+            }
             outputStream.close();
         } catch (final SAXException e) {
             throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);
@@ -161,6 +167,21 @@ public class CleanXmlMojo extends AbstractMojo {
             throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL_IO, targetFile), e);
         } catch (final ParserConfigurationException e) {
             throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);
+        } finally {
+            if (source != null) {
+                try {
+                    source.close();
+                } catch (final IOException e) {
+                    getLog().warn(format(R.getString("cannotClose"), sourceFile), e);
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (final IOException e) {
+                    getLog().warn(format(R.getString("cannotClose"), targetFile), e);
+                }
+            }
         }
     }
 }
