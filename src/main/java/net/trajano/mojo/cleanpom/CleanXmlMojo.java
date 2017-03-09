@@ -26,6 +26,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.Scanner;
 import org.sonatype.plexus.build.incremental.BuildContext;
 import org.xml.sax.InputSource;
@@ -158,7 +159,6 @@ public class CleanXmlMojo extends AbstractMojo {
             if (!sourceFile.delete()) {
                 throw new MojoExecutionException(format(R.getString("unableToDelete"), sourceFile));
             }
-            outputStream.close();
         } catch (final SAXException e) {
             throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);
         } catch (final TransformerException e) {
@@ -168,20 +168,8 @@ public class CleanXmlMojo extends AbstractMojo {
         } catch (final ParserConfigurationException e) {
             throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);
         } finally {
-            if (source != null) {
-                try {
-                    source.close();
-                } catch (final IOException e) {
-                    getLog().warn(format(R.getString("cannotClose"), sourceFile), e);
-                }
-            }
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (final IOException e) {
-                    getLog().warn(format(R.getString("cannotClose"), targetFile), e);
-                }
-            }
+            IOUtil.close(source);
+            IOUtil.close(outputStream);
         }
     }
 }
