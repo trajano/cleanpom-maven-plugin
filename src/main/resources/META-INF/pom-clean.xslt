@@ -329,4 +329,29 @@
             <xsl:apply-templates select="m:pluginExecutionFilter/m:goals"/>
         </m:pluginExecutionFilter>
     </xsl:template>
+    <xsl:template match="m:reporting">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="m:excludeDefaults"/>
+            <xsl:apply-templates select="m:outputDirectory"/>
+            <xsl:apply-templates select="m:plugins"/>
+        </xsl:copy>
+    </xsl:template>
+    <xsl:template match="m:reportSets">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="m:reportSet">
+                <xsl:sort select="m:id"/>
+            </xsl:apply-templates>
+        </xsl:copy>
+    </xsl:template>
+    <xsl:template match="m:reportSet">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="m:id"/>
+            <xsl:apply-templates select="m:reports"/>
+            <xsl:apply-templates select="m:inherited"/>
+            <xsl:apply-templates select="m:configuration"/>
+        </xsl:copy>
+    </xsl:template>
 </xsl:stylesheet>
