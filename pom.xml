@@ -4,33 +4,41 @@
     <parent>
         <groupId>net.trajano</groupId>
         <artifactId>trajano</artifactId>
-        <version>12</version>
+        <version>13</version>
     </parent>
     <groupId>net.trajano.mojo</groupId>
     <artifactId>cleanpom-maven-plugin</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>Clean POM Maven Plugin</name>
-    <description>Cleans the POM based on XSLT.</description>
+    <description>Cleans the POM and other XML using on XSLT.</description>
     <url>http://site.trajano.net/cleanpom-maven-plugin</url>
     <scm>
-        <connection>scm:git:https://github.com/trajano/${project.artifactId}</connection>
-        <developerConnection>scm:git:ssh://git@github.com/trajano/${project.artifactId}.git</developerConnection>
+        <connection>scm:git:https://github.com/trajano/${repo.id}</connection>
+        <developerConnection>scm:git:ssh://git@github.com/trajano/${repo.id}.git</developerConnection>
         <tag>HEAD</tag>
-        <url>https://github.com/trajano/${project.artifactId}</url>
+        <url>https://github.com/trajano/${repo.id}</url>
     </scm>
     <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
         <site>
-            <id>gh-pages</id>
-            <name>Trajano GitHub Pages</name>
-            <url>github:http://site.trajano.net/${project.artifactId}///</url>
+            <id>trajano-site</id>
+            <name>Trajano Maven Sites</name>
+            <url>sftp://site.trajano.net:6022/s/${repo.id}/</url>
         </site>
-    </distributionManagement>
-    <properties>
-        <coding-standards.version>2.1.0</coding-standards.version>
+    </distributionManagement>    <properties>
+    <repo.id>cleanpom-maven-plugin</repo.id>
         <jdk.version>1.6</jdk.version>
-        <maven.version>3.3.3</maven.version>
-        <surefire.version>2.18.1</surefire.version>
+        <maven.version>3.3.9</maven.version>
     </properties>
     <dependencies>
         <dependency>
@@ -70,7 +78,7 @@
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.4</version>
+            <version>3.5</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -78,120 +86,13 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
-                    <configuration>
-                        <source>${jdk.version}</source>
-                        <target>${jdk.version}</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>${surefire.version}</version>
-                    <executions>
-                        <execution>
-                            <id>integration-test</id>
-                            <goals>
-                                <goal>integration-test</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>verify</id>
-                            <goals>
-                                <goal>verify</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.5</version>
-                    <executions>
-                        <execution>
-                            <id>attach-jar</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>jar</goal>
-                                <goal>test-jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.3</version>
-                    <executions>
-                        <execution>
-                            <id>attach-javadoc</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>jar</goal>
-                                <goal>test-jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <detectJavaApiLink>true</detectJavaApiLink>
-                        <detectLinks>false</detectLinks>
-                        <detectOfflineLinks>false</detectOfflineLinks>
-                        <quiet>true</quiet>
-                        <useStandardDocletOptions>true</useStandardDocletOptions>
-                        <show>private</show>
-                        <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-                        <docletArtifact>
-                            <groupId>org.umlgraph</groupId>
-                            <artifactId>umlgraph</artifactId>
-                            <version>5.6.6</version>
-                        </docletArtifact>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jxr-plugin</artifactId>
-                    <version>2.4</version>
-                </plugin>
-                <plugin>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.4</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.7</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>2.4</version>
-                    <executions>
-                        <execution>
-                            <id>attach-sources</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>jar</goal>
-                                <goal>test-jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${surefire.version}</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-report-plugin</artifactId>
-                    <version>${surefire.version}</version>
+                    <version>3.5</version>
                 </plugin>
                 <plugin>
                     <groupId>net.trajano.mojo</groupId>
                     <artifactId>m2e-codestyle-maven-plugin</artifactId>
-                    <version>2.0.0</version>
-                    <configuration>
-                        <codeStyleBaseUrl>codestyle/</codeStyleBaseUrl>
-                        <javaCleanupProfileXmlUrl>codestyle/eclipse/java-cleanup.xml</javaCleanupProfileXmlUrl>
-                        <javaFormatterProfileXmlUrl>codestyle/eclipse/java-code-formatter.xml</javaFormatterProfileXmlUrl>
-                        <javaTemplatesXmlUrl>codestyle/eclipse/java-templates.xml</javaTemplatesXmlUrl>
-                        <javaScriptCleanupProfileXmlUrl>codestyle/eclipse/javascript-cleanup.xml</javaScriptCleanupProfileXmlUrl>
-                        <javaScriptFormatterProfileXmlUrl>codestyle/eclipse/javascript-code-formatter.xml</javaScriptFormatterProfileXmlUrl>
-                        <javaScriptTemplatesXmlUrl>codestyle/eclipse/javascript-templates.xml</javaScriptTemplatesXmlUrl>
-                    </configuration>
+                    <version>2.1.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
@@ -199,14 +100,9 @@
                     <version>2.4.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>3.0.1</version>
-                </plugin>
-                <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.7.4.201502262128</version>
+                    <version>0.7.9</version>
                     <executions>
                         <execution>
                             <goals>
@@ -218,48 +114,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.4</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.trajano</groupId>
-                        <artifactId>coding-standards</artifactId>
-                        <version>${coding-standards.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <rulesets>
-                        <ruleset>/config/pmd-rules.xml</ruleset>
-                    </rulesets>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.15</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.trajano</groupId>
-                        <artifactId>coding-standards</artifactId>
-                        <version>${coding-standards.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <linkXRef>true</linkXRef>
-                    <configLocation>config/checkstyle-configuration.xml</configLocation>
-                    <includes>**/*.java,**/*.properties</includes>
-                    <excludes>target/**,src/test/**</excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
             <plugin>
                 <artifactId>maven-plugin-plugin</artifactId>
                 <executions>
@@ -302,37 +156,13 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.trajano</groupId>
-                        <artifactId>coding-standards</artifactId>
-                        <version>${coding-standards.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
     <reporting>
         <plugins>
             <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <detectJavaApiLink>true</detectJavaApiLink>
-                    <detectLinks>false</detectLinks>
-                    <detectOfflineLinks>false</detectOfflineLinks>
-                    <quiet>true</quiet>
-                    <useStandardDocletOptions>true</useStandardDocletOptions>
-                    <show>private</show>
-                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-                    <docletArtifact>
-                        <groupId>org.umlgraph</groupId>
-                        <artifactId>umlgraph</artifactId>
-                        <version>5.6.6</version>
-                    </docletArtifact>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-jxr-plugin</artifactId>
@@ -342,9 +172,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-plugin-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-pmd-plugin</artifactId>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-report-plugin</artifactId>
@@ -360,48 +187,6 @@
         </plugins>
     </reporting>
     <profiles>
-        <profile>
-            <id>jdk8</id>
-            <activation>
-                <jdk>1.8</jdk>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <additionalparam>-Xdoclint:none</additionalparam>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>findbugs-maven-plugin</artifactId>
-                        <inherited>false</inherited>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-            <reporting>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <additionalparam>-Xdoclint:none</additionalparam>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>findbugs-maven-plugin</artifactId>
-                        <inherited>false</inherited>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </reporting>
-        </profile>
         <profile>
             <id>m2e</id>
             <activation>
@@ -430,7 +215,7 @@
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>
-                                                <execute />
+                                                <execute/>
                                             </action>
                                         </pluginExecution>
                                     </pluginExecutions>
@@ -440,30 +225,6 @@
                     </plugins>
                 </pluginManagement>
                 <plugins>
-                    <plugin>
-                        <artifactId>maven-checkstyle-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>check</id>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-pmd-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>pmd</id>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
                     <plugin>
                         <groupId>net.trajano.mojo</groupId>
                         <artifactId>m2e-codestyle-maven-plugin</artifactId>
