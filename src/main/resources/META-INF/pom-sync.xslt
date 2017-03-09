@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:m="http://maven.apache.org/POM/4.0.0" xmlns:xalan="http://xml.apache.org/xslt" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" exclude-result-prefixes="m" extension-element-prefixes="xalan">
-    <xsl:output method="xml" indent="yes" encoding="UTF-8" xalan:indent-amount="4"/>
+    <xsl:output method="xml" indent="yes" encoding="UTF-8" xalan:indent-amount="2"/>
     <xsl:strip-space elements="*"/>
     <xsl:variable name="maven-checkstyle-plugin.version">2.12.1</xsl:variable>
     <xsl:variable name="maven-jar-plugin.version">2.4</xsl:variable>

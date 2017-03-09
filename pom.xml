@@ -35,10 +35,11 @@
             <name>Trajano Maven Sites</name>
             <url>sftp://site.trajano.net:6022/s/${repo.id}/</url>
         </site>
-    </distributionManagement>    <properties>
-    <repo.id>cleanpom-maven-plugin</repo.id>
+    </distributionManagement>
+    <properties>
         <jdk.version>1.6</jdk.version>
         <maven.version>3.3.9</maven.version>
+        <repo.id>cleanpom-maven-plugin</repo.id>
     </properties>
     <dependencies>
         <dependency>

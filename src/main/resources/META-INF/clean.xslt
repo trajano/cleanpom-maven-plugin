@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This XSLT is used to clean up XML files in general. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xalan="http://xml.apache.org/xslt" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
-    <xsl:output method="xml" indent="yes" encoding="UTF-8" xalan:line-separator="&#10;" xalan:indent-amount="4"/>
+    <xsl:output method="xml" indent="yes" encoding="UTF-8" xalan:line-separator="&#10;" xalan:indent-amount="2"/>
     <xsl:strip-space elements="*"/>
     <xsl:variable name="nl" select="'&#10;'"/>
     <!-- default copy -->
