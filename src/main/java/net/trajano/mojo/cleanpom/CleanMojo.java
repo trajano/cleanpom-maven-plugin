@@ -202,9 +202,7 @@ public class CleanMojo extends AbstractMojo {
             final Transformer transformer = tf.newTransformer();
             transformer.transform(new StreamSource(sourceFile), new SAXResult(handler));
             getLog().debug(format(R.getString("donecleaning"), targetFile));
-            if (!sourceFile.delete()) {
-                throw new MojoExecutionException(format(R.getString("unableToDelete"), sourceFile));
-            }
+            FileUtils.forceDelete(sourceFile);
         } catch (final TransformerException e) {
             throw new MojoExecutionException(format(
                 R.getString("transformfail"), sourceFile), e);
