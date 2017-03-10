@@ -15,7 +15,7 @@
   <url>http://site.trajano.net/cleanpom-maven-plugin</url>
   <scm>
     <connection>scm:git:https://github.com/trajano/${repo.id}</connection>
-    <developerConnection>scm:git:ssh://git@github.com/trajano/${repo.id}.git</developerConnection>
+    <developerConnection>scm:git:https://github.com/trajano/${repo.id}.git</developerConnection>
     <tag>cleanpom-maven-plugin-1.2.1</tag>
     <url>https://github.com/trajano/${repo.id}</url>
   </scm>
