@@ -1,6 +1,7 @@
 package net.trajano.mojo.cleanpom.internal;
 
 import java.io.IOException;
+import java.io.StringReader;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
@@ -87,7 +88,7 @@ public class DtdResolver implements
 
     /**
      * Gets the document locator used to track the progress in the XML file.
-     * 
+     *
      * @return the document locator.
      */
     public Locator getDocumentLocator() {
@@ -149,7 +150,7 @@ public class DtdResolver implements
 
     /**
      * Checks if a processing instruction has been found so far.
-     * 
+     *
      * @return <code>true</code> if a processing instruction has been found so
      *         far.
      */
@@ -170,13 +171,15 @@ public class DtdResolver implements
     }
 
     /**
-     * Processes a DOCTYPE and extracts the data from it.
+     * Processes a DOCTYPE and extracts the data from it. It returns a new
+     * {@link InputSource} to prevent DTDs from being retrieved from the
+     * Internet.
      *
      * @param doctypePublicId
      *            public ID
      * @param doctypeSystemId
      *            system ID
-     * @return <code>null</code>
+     * @return empty string reader.
      */
     @Override
     public InputSource resolveEntity(final String doctypePublicId,
@@ -187,7 +190,10 @@ public class DtdResolver implements
         publicId = doctypePublicId;
         systemId = doctypeSystemId;
 
-        return null;
+        final InputSource inputSource = new InputSource(new StringReader(""));
+        inputSource.setPublicId(publicId);
+        inputSource.setSystemId(systemId);
+        return inputSource;
     }
 
     /**
