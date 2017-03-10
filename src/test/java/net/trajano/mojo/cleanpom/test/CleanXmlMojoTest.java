@@ -203,6 +203,46 @@ public class CleanXmlMojoTest {
         FileUtils.deleteDirectory(temp);
     }
 
+    /**
+     * This will test with an invalid DTD URL which shoudl be fine because there
+     * is no connection occuring.
+     */
+    @Test
+    public void testWithDTDAndBadUrl() throws Exception {
+
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
+        final File xml = new File("src/test/resources/net/trajano/mojo/cleanpom/checkstyle-configuration-invalid-dtd-url.xml");
+        final File temp = File.createTempFile("dirty", "");
+        temp.delete();
+        temp.mkdirs();
+        FileUtils.copyFile(xml, new File(temp, "dirty1.xml"));
+
+        final CleanXmlMojo mojo = (CleanXmlMojo) rule.lookupMojo("clean-xml", testPom);
+        final FileSet xmlFiles = new FileSet();
+        xmlFiles.setDirectory(temp.getAbsolutePath());
+        xmlFiles.addInclude("**/*.xml");
+        rule.setVariableValueToObject(mojo, "xmlFileSets", new FileSet[] {
+            xmlFiles
+        });
+        assertNotNull(mojo);
+        mojo.execute();
+        final String cleanData;
+        {
+            final FileInputStream fileInputStream = new FileInputStream(xml);
+            cleanData = IOUtils.toString(fileInputStream);
+            fileInputStream.close();
+        }
+        {
+            final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
+            final String data = IOUtils.toString(fileInputStream);
+            fileInputStream.close();
+            assertTrue(data.contains(
+                "<!DOCTYPE module PUBLIC \"-//Puppy Crawl//DTD Check Configuration 1.3//EN\" \"https://trajano.net/that/does/not/exist/dtds/configuration_1_3.dtd\">"));
+            assertEquals(cleanData, data);
+        }
+        FileUtils.deleteDirectory(temp);
+    }
+
     @Test
     public void testWithDTDAndPI() throws Exception {
 

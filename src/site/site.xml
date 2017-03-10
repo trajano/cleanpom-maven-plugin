@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/DECORATION/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd">
-    <skin>
-        <groupId>net.trajano.maven.skins</groupId>
-        <artifactId>twentyfourteen-maven-skin</artifactId>
-    </skin>
-    <body>
-        <menu name="Overview">
-            <item name="Introduction" href="index.html"/>
-            <item name="Goals" href="plugin-info.html"/>
-        </menu>
-        <menu ref="reports" inherit="top"/>
-    </body>
+  <skin>
+    <groupId>net.trajano.maven.skins</groupId>
+    <artifactId>twentyfourteen-maven-skin</artifactId>
+  </skin>
+  <body>
+    <menu name="Overview">
+      <item name="Introduction" href="index.html"/>
+      <item name="Goals" href="plugin-info.html"/>
+    </menu>
+    <menu ref="reports" inherit="top"/>
+  </body>
 </project>

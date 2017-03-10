@@ -14,6 +14,7 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -154,9 +155,12 @@ public class CleanXmlMojo extends AbstractMojo {
             xmlReader.setEntityResolver(resolver);
             xmlReader.setContentHandler(resolver);
 
+            // Read source twice, the first read is to get the DTD information if present
             source = new FileInputStream(sourceFile);
             xmlReader.parse(new InputSource(source));
             source.close();
+
+            source = new FileInputStream(sourceFile);
 
             final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
             outputStream = buildContext.newFileOutputStream(targetFile);
@@ -169,8 +173,9 @@ public class CleanXmlMojo extends AbstractMojo {
             } else {
                 transformer = tf.newTransformer(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean.xslt")));
             }
-            transformer.transform(new StreamSource(sourceFile), new StreamResult(new EolNormalizingStream(outputStream)));
+            transformer.transform(new SAXSource(xmlReader, new InputSource(source)), new StreamResult(new EolNormalizingStream(outputStream)));
             getLog().debug(format(R.getString("donecleaning"), targetFile));
+            IOUtil.close(source);
             FileUtils.forceDelete(sourceFile);
         } catch (final SAXException e) {
             throw new MojoExecutionException(format(Messages.TRANSFORM_FAIL, targetFile), e);
