@@ -20,16 +20,6 @@
     <url>https://github.com/trajano/${repo.id}</url>
   </scm>
   <distributionManagement>
-    <repository>
-      <id>ossrh</id>
-      <name>Nexus Release Repository</name>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <name>Sonatype Nexus Snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
     <site>
       <id>trajano-site</id>
       <name>Trajano Maven Sites</name>
