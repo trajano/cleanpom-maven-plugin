@@ -9,12 +9,14 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
+import org.xml.sax.ext.LexicalHandler;
 
 /**
  * Processes the DOCTYPE tag if present so it can be recreated.
  */
 public class DtdResolver implements
     EntityResolver,
+    LexicalHandler,
     ContentHandler {
 
     /**
@@ -58,10 +60,42 @@ public class DtdResolver implements
      * Does nothing. {@inheritDoc}
      */
     @Override
+    public void comment(final char[] ch,
+        final int start,
+        final int length) throws SAXException {
+
+        // Does nothing
+
+    }
+
+    /**
+     * Does nothing. {@inheritDoc}
+     */
+    @Override
+    public void endCDATA() throws SAXException {
+
+        // Does nothing
+
+    }
+
+    /**
+     * Does nothing. {@inheritDoc}
+     */
+    @Override
     public void endDocument()
         throws SAXException {
 
         // does nothing
+    }
+
+    /**
+     * Does nothing. {@inheritDoc}
+     */
+    @Override
+    public void endDTD() throws SAXException {
+
+        // TODO Auto-generated method stub
+
     }
 
     /**
@@ -74,6 +108,15 @@ public class DtdResolver implements
         throws SAXException {
 
         // does nothing
+    }
+
+    /**
+     * Does nothing. {@inheritDoc}
+     */
+    @Override
+    public void endEntity(final String name) throws SAXException {
+
+        // Does nothing
     }
 
     /**
@@ -139,13 +182,15 @@ public class DtdResolver implements
     }
 
     /**
-     * Checks if the DTD information is present.
+     * Checks if the DTD information is present. Only name is required
+     * especially for HTML5 which defines itself as
+     * <code>&lt;!DOCTYPE html&gt;</code>.
      *
      * @return <code>true</code> if the DTD information is present.
      */
     public boolean isDtdPresent() {
 
-        return name != null && publicId != null && systemId != null;
+        return name != null;
     }
 
     /**
@@ -187,12 +232,10 @@ public class DtdResolver implements
         throws SAXException,
         IOException {
 
-        publicId = doctypePublicId;
-        systemId = doctypeSystemId;
-
         final InputSource inputSource = new InputSource(new StringReader(""));
-        inputSource.setPublicId(publicId);
-        inputSource.setSystemId(systemId);
+
+        inputSource.setPublicId(doctypePublicId);
+        inputSource.setSystemId(doctypeSystemId);
         return inputSource;
     }
 
@@ -219,10 +262,30 @@ public class DtdResolver implements
      * Does nothing. {@inheritDoc}
      */
     @Override
+    public void startCDATA() throws SAXException {
+
+        // does nothing
+    }
+
+    /**
+     * Does nothing. {@inheritDoc}
+     */
+    @Override
     public void startDocument()
         throws SAXException {
 
         //does nothing
+    }
+
+    @Override
+    public void startDTD(final String doctypeName,
+        final String doctypePublicId,
+        final String doctypeSystemId) throws SAXException {
+
+        name = doctypeName;
+        publicId = doctypePublicId;
+        systemId = doctypeSystemId;
+
     }
 
     /**
@@ -244,10 +307,14 @@ public class DtdResolver implements
         final String qName,
         final Attributes atts)
         throws SAXException {
+        // does nothing
 
-        if (name == null) {
-            name = localName;
-        }
+    }
+
+    @Override
+    public void startEntity(final String name) throws SAXException {
+
+        // TODO Auto-generated method stub
 
     }
 

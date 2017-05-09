@@ -33,6 +33,26 @@ public class CleanXmlMojoTest {
         UtilityClassTestUtil.assertUtilityClassWellDefined(Messages.class);
     }
 
+    @Test()
+    public void testEmptyXmlFileSets() throws Exception {
+
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
+        final File xml = new File("src/test/resources/net/trajano/mojo/cleanpom/dual-doctype.xml");
+        final File temp = File.createTempFile("dirty", "");
+        temp.delete();
+        temp.mkdirs();
+        FileUtils.copyFile(xml, new File(temp, "dirty1.xml"));
+
+        final CleanXmlMojo mojo = (CleanXmlMojo) rule.lookupMojo("clean-xml", testPom);
+        mojo.setXmlFileSets(new FileSet[0]);
+        assertNotNull(mojo);
+        try {
+            mojo.execute();
+        } finally {
+            FileUtils.deleteDirectory(temp);
+        }
+    }
+
     @Test(expected = MojoExecutionException.class)
     public void testFailWithWithDTDs() throws Exception {
 
@@ -50,26 +70,6 @@ public class CleanXmlMojoTest {
         rule.setVariableValueToObject(mojo, "xmlFileSets", new FileSet[] {
             xmlFiles
         });
-        assertNotNull(mojo);
-        try {
-            mojo.execute();
-        } finally {
-            FileUtils.deleteDirectory(temp);
-        }
-    }
-
-    @Test()
-    public void testEmptyXmlFileSets() throws Exception {
-
-        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
-        final File xml = new File("src/test/resources/net/trajano/mojo/cleanpom/dual-doctype.xml");
-        final File temp = File.createTempFile("dirty", "");
-        temp.delete();
-        temp.mkdirs();
-        FileUtils.copyFile(xml, new File(temp, "dirty1.xml"));
-
-        final CleanXmlMojo mojo = (CleanXmlMojo) rule.lookupMojo("clean-xml", testPom);
-        mojo.setXmlFileSets(new FileSet[0]);
         assertNotNull(mojo);
         try {
             mojo.execute();
@@ -265,11 +265,52 @@ public class CleanXmlMojoTest {
             mojo.execute();
             final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
             final String data = IOUtils.toString(fileInputStream);
+            assertTrue(data.length() > 10);
             fileInputStream.close();
         } finally {
             FileUtils.deleteDirectory(temp);
         }
 
+    }
+
+    /**
+     * HTML5 DTDs are just <code>&lt;!DOCTYPE html&gt;</code>. No public or
+     * system ID.
+     */
+    @Test
+    public void testWithHtml5DTD() throws Exception {
+
+        final File testPom = new File("src/test/resources/net/trajano/mojo/cleanpom/cleaner-pom.xml");
+        final File xml = new File("src/test/resources/net/trajano/mojo/cleanpom/crud.xhtml");
+        final File temp = File.createTempFile("dirty", "");
+        temp.delete();
+        temp.mkdirs();
+        FileUtils.copyFile(xml, new File(temp, "dirty1.xml"));
+
+        final CleanXmlMojo mojo = (CleanXmlMojo) rule.lookupMojo("clean-xml", testPom);
+        final FileSet xmlFiles = new FileSet();
+        xmlFiles.setDirectory(temp.getAbsolutePath());
+        xmlFiles.addInclude("**/*.xml");
+        rule.setVariableValueToObject(mojo, "xmlFileSets", new FileSet[] {
+            xmlFiles
+        });
+        assertNotNull(mojo);
+        mojo.execute();
+        final String cleanData;
+        {
+            final FileInputStream fileInputStream = new FileInputStream(xml);
+            cleanData = IOUtils.toString(fileInputStream);
+            fileInputStream.close();
+        }
+        {
+            final FileInputStream fileInputStream = new FileInputStream(new File(temp, "dirty1.xml"));
+            final String data = IOUtils.toString(fileInputStream);
+            fileInputStream.close();
+            assertTrue(data.contains(
+                "<!DOCTYPE html>"));
+            assertEquals(cleanData, data);
+        }
+        FileUtils.deleteDirectory(temp);
     }
 
     @Test

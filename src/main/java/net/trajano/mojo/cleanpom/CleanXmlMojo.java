@@ -154,12 +154,12 @@ public class CleanXmlMojo extends AbstractMojo {
             final DtdResolver resolver = new DtdResolver();
             xmlReader.setEntityResolver(resolver);
             xmlReader.setContentHandler(resolver);
+            xmlReader.setProperty("http://xml.org/sax/properties/lexical-handler", resolver);
 
             // Read source twice, the first read is to get the DTD information if present
             source = new FileInputStream(sourceFile);
             xmlReader.parse(new InputSource(source));
             source.close();
-
             source = new FileInputStream(sourceFile);
 
             final SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
@@ -168,8 +168,11 @@ public class CleanXmlMojo extends AbstractMojo {
             if (resolver.isDtdPresent()) {
                 transformer = tf.newTransformer(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean-with-dtd.xslt")));
                 transformer.setOutputProperty("{http://xml.apache.org/xalan}line-separator", "\n");
-                transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, resolver.getPublicId());
-                transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, resolver.getSystemId());
+                transformer.setParameter("dtdname", resolver.getName());
+                if (resolver.getPublicId() != null) {
+                    transformer.setParameter(OutputKeys.DOCTYPE_PUBLIC, resolver.getPublicId());
+                    transformer.setParameter(OutputKeys.DOCTYPE_SYSTEM, resolver.getSystemId());
+                }
             } else {
                 transformer = tf.newTransformer(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/clean.xslt")));
             }

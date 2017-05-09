@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+  <h:head>
+    <title>Really simple CRUD</title>
+  </h:head>
+  <h:body>
+    <h3>List items</h3>
+    <h:form rendered="#{not empty participantBean.list}">
+      <p:dataTable value="#{participantBean.list}" var="item">
+        <p:column headerText="SIN">
+          <h:outputText value="#{item.sin}"/>
+        </p:column>
+        <p:column>
+          <f:facet name="header">Name</f:facet>#{item.name}</p:column>
+        <p:column>
+          <p:commandButton value="edit" action="#{participantBean.edit(item)}" update="@all"/>
+          <p:commandButton value="delete" action="#{participantBean.delete(item)}" update="@form"/>
+        </p:column>
+        <f:facet name="footer">
+        In total there are #{fn:length(participantBean.list)} participants.
+    </f:facet>
+      </p:dataTable>
+      <h:panelGroup rendered="#{participantBean.inEdit}"/>
+    </h:form>
+    <h:panelGroup rendered="#{empty participantBean.list}">
+      <p>Table is empty! Please add new items.</p>
+    </h:panelGroup>
+    <h:panelGroup rendered="#{!participantBean.inEdit}">
+      <h3>Add Participant</h3>
+      <h:form>
+        <p:messages/>
+        <p>
+          <p:outputLabel value="Name:" for="addParticipantName"/>
+          <p:inputText id="addParticipantName" value="#{participantBean.participant.name}" required="true"/>
+          <p:message for="addParticipantName"/>
+        </p>
+        <p>
+          <p:outputLabel value="Gender at birth:" for="addGender"/>
+          <p:selectOneMenu id="addGender" value="#{participantBean.genderAtBirthInput}" required="true">
+            <f:selectItem itemValue="#{null}" itemLabel="--select--" noSelectionOption="true" itemDisabled="true"/>
+            <f:selectItems value="#{enumBean.gender}" var="e" itemLabel="#{e.name()}"/>
+          </p:selectOneMenu>
+          <p:message for="addGender"/>
+        </p>
+        <p>
+          <p:outputLabel value="E-mail" for="addEmail"/>
+          <p:inputText id="addEmail" value="#{participantBean.participant.email}" required="true"/>
+          <p:message for="addEmail"/>
+        </p>
+        <p>
+          <p:outputLabel value="Social Insurance Number" for="addSin"/>
+          <p:inputText id="addSin" value="#{participantBean.participantSinInput}" required="true"/> #{participantBean.generatedSin}
+          <p:message for="addSin"/>
+        </p>
+        <p>
+          <p:commandButton value="add" action="#{participantBean.add}" update="@all"/>
+        </p>
+      </h:form>
+    </h:panelGroup>
+    <h:panelGroup rendered="#{participantBean.inEdit}">
+      <h:form>
+        <h3>Edit Participant #{participantBean.participant.id}</h3>
+        <p>Name: <p:inputText value="#{participantBean.participant.name}"/>
+        </p>
+        <p>Gender at birth: <p:selectOneMenu value="#{participantBean.genderAtBirthInput}">
+            <f:selectItems value="#{enumBean.gender}"/>
+          </p:selectOneMenu>
+        </p>
+        <p>
+          <p:commandButton value="save" action="#{participantBean.saveParticipant}" process="@all" update="@all"/>
+        </p>
+      </h:form>
+    </h:panelGroup>
+  </h:body>
+</html>
