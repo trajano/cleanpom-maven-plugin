@@ -3,21 +3,15 @@ package net.trajano.mojo.cleanpom.internal;
 import java.io.IOException;
 import java.io.StringReader;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
-import org.xml.sax.ext.LexicalHandler;
+import org.xml.sax.ext.DefaultHandler2;
 
 /**
  * Processes the DOCTYPE tag if present so it can be recreated.
  */
-public class DtdResolver implements
-    EntityResolver,
-    LexicalHandler,
-    ContentHandler {
+public class DtdResolver extends DefaultHandler2 {
 
     /**
      * Document locator.
@@ -43,91 +37,6 @@ public class DtdResolver implements
      * System ID.
      */
     private String systemId;
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void characters(final char[] ch,
-        final int start,
-        final int length)
-        throws SAXException {
-
-        // does nothing
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void comment(final char[] ch,
-        final int start,
-        final int length) throws SAXException {
-
-        // Does nothing
-
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void endCDATA() throws SAXException {
-
-        // Does nothing
-
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void endDocument()
-        throws SAXException {
-
-        // does nothing
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void endDTD() throws SAXException {
-
-        // TODO Auto-generated method stub
-
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void endElement(final String uri,
-        final String localName,
-        final String qName)
-        throws SAXException {
-
-        // does nothing
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void endEntity(final String name) throws SAXException {
-
-        // Does nothing
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void endPrefixMapping(final String prefix)
-        throws SAXException {
-
-        // does nothing
-    }
 
     /**
      * Gets the document locator used to track the progress in the XML file.
@@ -170,18 +79,6 @@ public class DtdResolver implements
     }
 
     /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void ignorableWhitespace(final char[] ch,
-        final int start,
-        final int length)
-        throws SAXException {
-
-        // does nothing
-    }
-
-    /**
      * Checks if the DTD information is present. Only name is required
      * especially for HTML5 which defines itself as
      * <code>&lt;!DOCTYPE html&gt;</code>.
@@ -218,8 +115,8 @@ public class DtdResolver implements
     /**
      * Processes a DOCTYPE and extracts the data from it. It returns a new
      * {@link InputSource} to prevent DTDs from being retrieved from the
-     * Internet.
-     *
+     * Internet. {@inheritDoc}
+     * 
      * @param doctypePublicId
      *            public ID
      * @param doctypeSystemId
@@ -227,9 +124,10 @@ public class DtdResolver implements
      * @return empty string reader.
      */
     @Override
-    public InputSource resolveEntity(final String doctypePublicId,
-        final String doctypeSystemId)
-        throws SAXException,
+    public InputSource resolveEntity(final String name,
+        final String doctypePublicId,
+        final String baseURI,
+        final String doctypeSystemId) throws SAXException,
         IOException {
 
         final InputSource inputSource = new InputSource(new StringReader(""));
@@ -249,34 +147,8 @@ public class DtdResolver implements
     }
 
     /**
-     * Does nothing. {@inheritDoc}
+     * Read the DTD information and store it for later. {@inheritDoc}
      */
-    @Override
-    public void skippedEntity(final String localName)
-        throws SAXException {
-
-        //does nothing
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void startCDATA() throws SAXException {
-
-        // does nothing
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void startDocument()
-        throws SAXException {
-
-        //does nothing
-    }
-
     @Override
     public void startDTD(final String doctypeName,
         final String doctypePublicId,
@@ -286,47 +158,6 @@ public class DtdResolver implements
         publicId = doctypePublicId;
         systemId = doctypeSystemId;
 
-    }
-
-    /**
-     * Extracts local name the root element. Once it is determined this method
-     * does nothing.
-     *
-     * @param uri
-     *            URI
-     * @param localName
-     *            local name
-     * @param qName
-     *            qualified name
-     * @param atts
-     *            attributes
-     */
-    @Override
-    public void startElement(final String uri,
-        final String localName,
-        final String qName,
-        final Attributes atts)
-        throws SAXException {
-        // does nothing
-
-    }
-
-    @Override
-    public void startEntity(final String name) throws SAXException {
-
-        // TODO Auto-generated method stub
-
-    }
-
-    /**
-     * Does nothing. {@inheritDoc}
-     */
-    @Override
-    public void startPrefixMapping(final String prefix,
-        final String uri)
-        throws SAXException {
-
-        //does nothing
     }
 
 }
